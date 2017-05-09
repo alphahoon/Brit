@@ -69,29 +69,50 @@ let participant = {
     <div>
         <input v-model=name></input>
         <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+            <button @click="onClick" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="true">
-        Dropdown
-        <span class="caret"></span>
-        </button>
+            Dropdown
+            <span class="caret"></span>
+            </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><a href="#">Beginner</a></li>
                 <li><a href="#">Int.</a></li>
                 <li><a href="#">Expert</a></li>
             </ul>
         </div>
-        {{name}}
+        
     </div>`,
+    methods: {
+        onClick: function () {
+            console.log('onclick')
+            console.log(name)
+            console.log(this.name)
+            this.$emit('nameset', this.name)
+        }
+    }
 }
 
 let participants = {
     components: {
         'participant': participant
     },
+    data: function () {
+        return {
+            name: ''
+        }
+    },
     template: `
     <div>
-    <participant></participant>
+    <participant v-on:nameset="onNameSet"></participant>
+    {{name}}
     </div>`
+    ,
+    methods: {
+        onNameSet: function (n) {
+            console.log(n)
+            this.name = n
+        }
+    }
 }
 
 
