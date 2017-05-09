@@ -58,21 +58,24 @@ Vue.component('menu-main', {
 	props: ['title', 'imageLink', 'amount'],
 	template: `<div>
 		<div><h4>{{title}}</h4></div>
-		<div><img v-bind:src=imageLink width='100' height='60'></div>
-		<div><button v-on:click="reduceAmount">-</button> {{amount}} <button v-on:click="addAmount">+</button>명이 먹을거에요!</div>
-		</div>`,
-		methods: {
-	   reduceAmount: function() {
-			 if (app2.numPeople > 1) {
-			 	app2.numPeople--;
+		<div><img v-bind:src=imageLink width='280' height='180'>
+		<button v-on:click="reduceAmount" class="glyphicon glyphicon-minus" aria-hidden="true"/>
+		 {{amount}}
+		<button v-on:click="addAmount" class="glyphicon glyphicon-plus" aria-hidden="true"/>
+		명이 먹을거에요!</div>
+	</div>`,
+	methods: {
+	  reduceAmount: function() {
+			if (app2.numPeople > 1) {
+			 app2.numPeople--;
 			}
-		 },
-		 addAmount: function() {
-			 if (app2.numPeople < 10){
-				 app2.numPeople++;
-			 }
-		 }
+		},
+		addAmount: function() {
+			if (app2.numPeople < 10){
+				app2.numPeople++;
+			}
 		}
+	}
 });
 
 Vue.component('tool', {
@@ -87,28 +90,43 @@ Vue.component('maining', {
 
 Vue.component('subing', {
   props: ['info', 'amount'],
-  template: '<div>{{ info.name }} {{info.amount * amount}}{{ info.unit }}<input type="checkbox"/></div>'
+  template: '<div>{{ info.name }} {{info.amount * amount}}{{ info.unit }} <input type="checkbox"/></div>'
 });
 
 Vue.component('tool-list', {
 	props: [ 'tools' ],
-	template: `<div>
-			<tool v-for="item in tools" v-bind:name="item"></tool>
-	</div>`
+	template: `<div class="panel panel-warning">
+		  <div class="panel-heading">
+		    <span class="glyphicon glyphicon-cutlery" aria-hidden="true">도구</span>
+		  </div>
+		  <div class="panel-body">
+		    <tool v-for="item in tools" v-bind:name="item"></tool>
+		  </div>
+		</div>`
 });
 
 Vue.component('main-ing-list', {
 	props: ['main_ings', 'amount'],
-	template: `	<div>
-			<maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount"></maining>
-		</div>`
+	template: `<div class="panel panel-success">
+	  <div class="panel-heading">
+			<span class="glyphicon glyphicon-apple" aria-hidden="true">주재료</span>
+		</div>
+	  <div class="panel-body">
+	    <maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount"></maining>
+	  </div>
+	</div>`
 });
 
 Vue.component('sub-ing-list', {
 	props: ['sub_ings', 'amount'],
-	template: `	<div>
-			<subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount"></subing>
-		</div>`
+	template: `<div class="panel panel-info">
+	  <div class="panel-heading">
+			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true">추가재료</span>
+		</div>
+	  <div class="panel-body">
+	    <subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount"></subing>
+	  </div>
+	</div>`
 });
 
 
@@ -121,6 +139,7 @@ var app2 = new Vue({
 	template: `
 	<div>
 		<menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
+		<br/>
 		<tool-list v-bind:tools=recipe.tools></tool-list>
 		<main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
 		<sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
