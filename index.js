@@ -7,9 +7,15 @@ Vue.component('menu-main', {
 		</div>`,
 		methods: {
 	   reduceAmount: function() {
-		  },
-		  addAmount: function() {
-		  }
+			 if (app2.numPeople > 1) {
+			 	app2.numPeople--;
+			}
+		 },
+		 addAmount: function() {
+			 if (app2.numPeople < 10){
+				 app2.numPeople++;
+			 }
+		 }
 		}
 });
 
@@ -58,10 +64,10 @@ var app2 = new Vue({
 	},
 	template: `
 	<div>
-	<menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
-	<tool-list v-bind:tools=recipe.tools></tool-list>
-	<main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
-	<sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
+		<menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
+		<tool-list v-bind:tools=recipe.tools></tool-list>
+		<main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
+		<sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
 	</div>
 	`
 });
