@@ -59,12 +59,54 @@ var app2 = new Vue({
     }
 })
 
-var app3 = new Vue({
+let participant = {
+    data: function () {
+        return {
+            name: ''
+        }
+    },
+    template: `
+    <div>
+        <input v-model=name></input>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true">
+        Dropdown
+        <span class="caret"></span>
+        </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Beginner</a></li>
+                <li><a href="#">Int.</a></li>
+                <li><a href="#">Expert</a></li>
+            </ul>
+        </div>
+        {{name}}
+    </div>`,
+}
+
+let participants = {
+    components: {
+        'participant': participant
+    },
+    template: `
+    <div>
+    <participant></participant>
+    </div>`
+}
+
+
+let app3 = new Vue({
     el: '#app-3',
-    data: {
-        message: 'Third Page'
-    }
+    components: {
+        'participants': participants
+    },
+    template: `
+    <div>
+    <participants></participants>
+    </div>`       
+
 })
+
 
 var app4 = new Vue({
     el: '#app-4',
