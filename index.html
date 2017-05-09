@@ -13,25 +13,8 @@
     <script type="text/javascript" src="recipe.js"></script>
 </head>
 
-<body>
-
-
-      <div id="menu_main">
-        <div><h4>{{title}}</h4></div>
-        <div><img v-bind:src="imageLink" width='100' height='60'></div>
-        <div>
-          <button v-on:click="reduceAmount">-</button> {{amount}} <button v-on:click="addAmount">+</button>명이 먹을거에요!</div>
-      </div>
-
-      <div id="tool_list">
-          <tool v-for="item in tools" v-bind:name="item"></tool>
-      </div>
-      <div id="main_ing_list">
-        <maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount"></mainIng>
-      </div>
-      <div id="sub_ing_list">
-        <subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount"></subIng>
-      </div>
+<body  style="margin:30px">
+  <div id="app2"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
