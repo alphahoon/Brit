@@ -42,7 +42,7 @@ nav {
 }
 
 #cooky_back:hover {
-    color: red;
+    color: orange;
 }
 
 #cooky_next {
@@ -55,11 +55,11 @@ nav {
 }
 
 #cooky_next:hover {
-    color: red;
+    color: orange;
 }
 
 .sarajo {
-    opacity: 0.1;
+    opacity: 0;
 }
 
 .app {

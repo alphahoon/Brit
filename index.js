@@ -82,8 +82,8 @@ let searchbox = {
         onInputChange: function(input) {
             this.$emit('queryChange', input)
         },
-        onDifficultyChange: function(newLevel) {
-            this.$emit('difficultyChange', newLevel)
+        onDifficultyChange: function(newDifficulty) {
+            this.$emit('difficultyChange', newDifficulty)
         }
     }
 }
@@ -252,7 +252,7 @@ let thirdPage = {
 let fourthPage = {
     data: function() {
         return {
-            message: "Hello World!! 4"
+            message: "Distribute View"
         }
     },
     template: `
@@ -264,7 +264,7 @@ let fourthPage = {
 let fifthPage = {
     data: function() {
         return {
-            message: "Hello World!! 5"
+            message: "Result View"
         }
     },
     template: `
@@ -315,7 +315,16 @@ let app = new Vue({
             }
         },
         onStepChange: function(i) {
+            /*
             if (i > 0 && i < 6) {
+                this.pageCursor = i
+            }
+            */
+            if (i < this.pageCursor)
+                this.pageCursor -= 1
+            else if (i > this.pageCursor)
+                this.pageCursor += 1
+            else {
                 this.pageCursor = i
             }
         },
