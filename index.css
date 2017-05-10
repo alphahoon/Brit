@@ -49,6 +49,10 @@ nav {
     color: red;
 }
 
+.sarajo {
+    opacity: 0.1;
+}
+
 footer {
     text-align: right;
     padding-top: 1em;
@@ -57,4 +61,23 @@ footer {
     right: 0;
     bottom: 0;
     left: 0;
+}
+
+header {
+    padding-bottom: 1em;
+}
+
+.participant{
+    font-size: 2em;
+    padding-left: 10%;
+    padding-top: 1em;
+}
+
+#addParticipant {
+    float: right;
+}
+
+#progress-buttons {
+    align-content: center;
+    vertical-align: center;
 }

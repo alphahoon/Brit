@@ -104,15 +104,15 @@ let participant = {
         }
     },
     template: `
-    <div class="row">
-        <span>
-            {{idx}}
+    <div class="row participant">
+        <span class="col-md-12">
+            {{idx + 1}}
             <span class="glyphicon glyphicon-user"></span>
             <input @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
             <div class="btn-group" role="group">
-                <button class="btn" v-bind:class="person.level == 0 ? 'btn-primary' : ''" @click="onLevelChange(0)">Beginner</button>
-                <button class="btn" v-bind:class="person.level == 1 ? 'btn-primary' : ''" @click="onLevelChange(1)">Intermediate</button>
-                <button class="btn" v-bind:class="person.level == 2 ? 'btn-primary' : ''" @click="onLevelChange(2)">Expert</button>
+                <button class="btn " v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Beginner</button>
+                <button class="btn " v-bind:class="person.level == 1 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(1)">Intermediate</button>
+                <button class="btn " v-bind:class="person.level == 2 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(2)">Expert</button>
             </div>
             <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button> 
         </span>
@@ -142,9 +142,12 @@ let participants = {
     },
     template: `
     <div>
-        <participant v-for="person in participants" :person="person" :key="person.key" :idx="participants.indexOf(person)" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
-        <button class="btn btn-default" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-        <span v-for="person in participants">{{person.name}}</span>
+        <participant v-for="(person, idx) in participants" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
+        <div class="row">
+            <div class="col-md-12">
+                <button id="addParticipant" class="btn btn-default" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            </div>
+        </div>
     </div>`
 
     ,
@@ -207,6 +210,20 @@ let fifthPage = {
     </div>`
 }
 
+let progressBar = {
+    props: ['pageCursor'],
+    template: `
+    <div class="btn-group">
+        <button v-for="i in 5" class="btn" :class="pageCursor == i ? 'btn-primary' : 'btn-default'" :id="'step'+i" @click="onStepClick(i)">Step {{i}}</button>
+    </div>
+    `,
+    methods: {
+        onStepClick: function (i) {
+            this.$emit('stepChange', i)
+        }
+    }
+}
+
 let app = new Vue({
     el: '#app',
     data: function () {
@@ -219,17 +236,23 @@ let app = new Vue({
         'second-page': secondPage,
         'third-page': thirdPage,
         'fourth-page': fourthPage,
-        'fifth-page': fifthPage
+        'fifth-page': fifthPage,
+        'progress-bar': progressBar
     },
     methods: {
         onPrevClick: function () {
-            if (this.pageCursor > 0) {
+            if (this.pageCursor > 1) {
                 this.pageCursor -= 1
             }
         },
         onNextClick: function () {
             if (this.pageCursor < 5) {
                 this.pageCursor += 1
+            }
+        },
+        onStepChange: function (i) {
+            if (i > 0 && i < 6) {
+                this.pageCursor = i
             }
         }
     },
@@ -240,9 +263,9 @@ let app = new Vue({
                 <a id="cooky_logo" href="#">Cooky</a>
             </nav>
             <div id="progress_bar">
-                <a id="cooky_back" v-if="pageCursor > 1" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
-                <span>여기에 프로그레스 표시 들어가면 됨</span>
-                <a id="cooky_next" v-if="pageCursor < 5" @click="onNextClick"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+                <a id="cooky_back" v-bind:class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+                <span id="progress-buttons"><progress-bar :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar></span>
+                <a id="cooky_next" v-bind:class="pageCursor < 5? '': 'sarajo'" @click="onNextClick"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
             </div>
         </header>
     <!-- Section -->
