@@ -304,6 +304,9 @@ let app = new Vue({
         'progress-bar': progressBar
     },
     methods: {
+        onLogoClick: function() {
+            location.reload()
+        },
         onPrevClick: function() {
             if (this.pageCursor > 1) {
                 this.pageCursor -= 1
@@ -336,7 +339,7 @@ let app = new Vue({
     <div class="app">
         <header>
             <nav>
-                <a id="cooky_logo" href="#">Cooky</a>
+                <a id="cooky_logo" href="#" @click="onLogoClick">Cooky</a>
             </nav>
             <div id="progress_bar">
             <span>
