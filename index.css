@@ -1,5 +1,13 @@
 /** CSS Styles */
 
+html, body {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
 nav {
     width: 100%;
     text-align: center;
@@ -53,14 +61,26 @@ nav {
     opacity: 0.1;
 }
 
+.app {
+    min-height: 100%;
+}
+
 footer {
+    clear: both;
+    position: relative;
+    height: 3em;
+    margin-top: -3em;
     text-align: right;
     padding-top: 1em;
     padding-right: 10%;
-    position: absolute;
     right: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
+}
+
+.container {
+    position:relative;
+    padding-bottom: 3em;
 }
 
 header {
