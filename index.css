@@ -81,3 +81,7 @@ header {
     align-content: center;
     vertical-align: center;
 }
+
+.timeStr {
+    text-align: right;
+}

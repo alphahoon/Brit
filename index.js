@@ -45,13 +45,33 @@
 // 		$('#cooky_next').show();
 // }
 let foodCard = {
-    props: ['imgURL', 'foodName'],
+    props: ['food'],
+    computed: {
+        timeStr: function () {
+            let hour = this.food.time / 60
+            let min = this.food.time % 60
+            let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
+            return str
+        },
+        difficulty: function () {
+            if (this.food.level == 1) {
+                return 'easy'
+            } else if (this.food.level == 2) {
+                return 'medium'
+            } else if (this.food.level == 3) {
+                return 'hard'
+            }
+        }
+    },
     template: `
     <div class="col-md-4">
         <div class="thumbnail">
-            <img v-bind:src="imgURL" v-bind:alt="foodName">
+            <img v-bind:src="food.imgURL" v-bind:alt="food.foodName">
             <div class="caption">
-                <h5>Thumbnail Label</h5>
+                <h6>{{food.foodName}}</h6>
+            </div>
+            <div class="cardContent">
+            {{difficulty}} <div class="timeStr"><span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
             </div>
         </div>
     </div>`
@@ -63,22 +83,39 @@ let foodList = {
         'food-card': foodCard
     },
     template: `
-    <div class="row">
-        <food-card v-for="food in foodList" :imgURL="food.imgURL" :foodName="food.foodName" :key="food.foodName"></food-card>
+    <div class="col-md-9">
+        <div class="row">
+            <food-card v-for="food in foodList" :food="food" :key="food.foodName"></food-card>
+        </div>
     </div>`
 }
-
+let searchbox = {
+    template: `
+    <div class="col-md-3">
+        <input></input>
+    </div>
+    `
+}
 let firstPage = {
     data: function () {
         return {
-            foodList: [{imgURL: '', foodName: 'BS'}, {imgURL: '', foodName: 'BS'}, {imgURL: '', foodName: 'BS'}, {imgURL: '', foodName: 'BS'}, {imgURL: '', foodName: 'BS'}]
+            foodList: [{ imgURL: '', foodName: 'BS', level: 2, time: 30 },
+            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
+            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
+            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
+            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
+            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
+            { imgURL: '', foodName: 'BS', level: 2, time: 30 }
+            ]
         }    
     },
     components: {
-        'food-list': foodList
+        'food-list': foodList,
+        'searchbox': searchbox
     },
     template: `
-    <div>
+    <div class="row">
+        <searchbox></searchbox>
         <food-list :foodList="foodList"></food-list>
     </div>
     `
@@ -263,9 +300,11 @@ let app = new Vue({
                 <a id="cooky_logo" href="#">Cooky</a>
             </nav>
             <div id="progress_bar">
+            <span>
                 <a id="cooky_back" v-bind:class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
                 <span id="progress-buttons"><progress-bar :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar></span>
                 <a id="cooky_next" v-bind:class="pageCursor < 5? '': 'sarajo'" @click="onNextClick"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+            </span>
             </div>
         </header>
     <!-- Section -->
