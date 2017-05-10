@@ -116,7 +116,14 @@ header {
 
 *, *:before, *:after {box-sizing:  border-box !important;}
 
+#page1 {
+    padding-top: 1em;
+}
 
+#searchbox {
+    display: inline-block;
+    border: 3px #000000;
+}
 /*.row .inner {
  -moz-column-width: 18em;
  -webkit-column-width: 18em;
@@ -128,4 +135,8 @@ header {
 .thumbnail {
     position:relative;
     display: block;
+}
+
+#filterButtons{
+    padding-top:1em;
 }

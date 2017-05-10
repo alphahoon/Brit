@@ -8,11 +8,11 @@ let foodCard = {
             return str
         },
         difficulty: function () {
-            if (this.food.level == 1) {
+            if (this.food.level == 0) {
                 return 'easy'
-            } else if (this.food.level == 2) {
+            } else if (this.food.level == 1) {
                 return 'medium'
-            } else if (this.food.level == 3) {
+            } else if (this.food.level == 2) {
                 return 'hard'
             }
         }
@@ -56,33 +56,47 @@ let foodList = {
 let searchbox = {
     template: `
     <div class="col-md-3">
-        <input @input="onInputChange($event.target.value)"></input>
+        <div id="searchbox">
+            <input v-bind:value="query" placeholder="Search" @input="onInputChange($event.target.value)"></input>
+            <div class="btn-group " id="filterButtons" role="group">
+                <button class="btn btn-sm" v-bind:class="level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Easy</button>
+                <button class="btn btn-sm" v-bind:class="level == 1 ? 'btn-warning ' : 'btn-default'" @click="onLevelChange(1)">Medium</button>
+                <button class="btn btn-sm" v-bind:class="level == 2 ? 'btn-danger ' : 'btn-default'" @click="onLevelChange(2)">Hard</button>
+            </div>
+        </div>
     </div>
     `,
+
+    props:['level', 'query', 'time'],
     methods: {
         onInputChange: function (input) {
-            this.$emit('search', input)
+            this.$emit('queryChange', input)
+        },
+        onLevelChange: function (newLevel) {
+            this.$emit('levelChange', newLevel)
         }
     }
 }
 let firstPage = {
     data: function () {
         return {
-            foodList: [{ imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
-            { imgURL: './img/o.jpg', foodName: 'Omelet with Rice', level: 2, time: 30 },
-            { imgURL: './img/s.jpg', foodName: 'Samgyetang', level: 3, time: 70 },
+            foodList: [{ imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 1, time: 30 },
+            { imgURL: './img/o.jpg', foodName: 'Omelet with Rice', level: 1, time: 30 },
+            { imgURL: './img/s.jpg', foodName: 'Samgyetang', level: 2, time: 70 },
             { imgURL: './img/w2.jpg', foodName: 'Spring Roll', level: 2, time: 30 },
             { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
             { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
             { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 }
             ],
-            query: ''
+            query: '',
+            queryLevel: 2,
+            queryTime: 120,
         }    
     },
     computed: {
         filteredList: function () {
             let newList = this.foodList.filter(function (food) {
-                return food.foodName.includes(this.query)
+                return (food.foodName.includes(this.query)) && (food.level <= this.queryLevel) && (food.time <= this.queryTime)
             }.bind(this))
             console.log(newList)
             return newList
@@ -96,15 +110,21 @@ let firstPage = {
         onFoodClick: function (food) {
             this.$emit('foodClick', food)
         },
-        onSearch: function (query) {
+        onQueryChange: function (query) {
             console.log(query)
             this.query = query
+        },
+        onLevelChange: function (level) {
+            this.queryLevel = level 
         }
     },
     template: `
-    <div class="row">
-        <searchbox @search="onSearch"></searchbox>
-        <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
+    <div>
+    <h5 style="text-align:center">What do you want to have today? </h5>
+        <div class="row" id="page1">
+            <searchbox @queryChange="onQueryChange" @levelChange="onLevelChange" :level="queryLevel" :query="query"></searchbox>
+            <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
+        </div>
     </div>
     `
 }
@@ -142,8 +162,8 @@ let participant = {
             <input style="width: 55%" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
             <div class="btn-group" role="group">
                 <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Beginner</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(1)">Intermediate</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(2)">Expert</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click="onLevelChange(1)">Intermediate</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click="onLevelChange(2)">Expert</button>
             </div>
             <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button> 
             </form>
