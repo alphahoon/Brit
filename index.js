@@ -45,11 +45,46 @@ function displayBackNext() {
 		$('#cooky_next').show();
 }
 
+
+let foodCard = {
+    props: [imgURL, foodName],
+    template: `
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img v-bind:src="imgURL" v-bind:alt="foodName">
+            <div class="caption">
+                <h3>Thumbnail Label</h3>
+            </div>
+        </div>
+    </div>`
+}
+
+let foodList = {
+    props: [foodList],
+    components: {
+        'food-card': foodCard
+    },
+    template: `
+    <div>
+        <food-card v-for:"food in foodList" :imgURL="food.imgURL" :foodName="food.foodName"></food-card>
+    </div>`
+}
+
 var app1 = new Vue({
     el: '#app-1',
-    data: {
-        message: 'First Page'
-    }
+    data: function () {
+        return {
+            foodList: [{imgURL: '', foodName: 'BS'}]
+        }    
+    },
+    components: {
+        'food-list': foodList
+    },
+    template: `
+    <div>
+        <food-list :foodList="foodList"></food-list>
+    </div>
+    `
 })
 
 var app2 = new Vue({
@@ -58,6 +93,7 @@ var app2 = new Vue({
         message: 'Second Page'
     }
 })
+
 
 let participant = {
     data: function () {
