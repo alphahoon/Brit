@@ -56,9 +56,14 @@ let foodList = {
 let searchbox = {
     template: `
     <div class="col-md-3">
-        <input></input>
+        <input @input="onInputChange($event.target.value)"></input>
     </div>
-    `
+    `,
+    methods: {
+        onInputChange: function (input) {
+            this.$emit('search', input)
+        }
+    }
 }
 let firstPage = {
     data: function () {
@@ -70,8 +75,18 @@ let firstPage = {
             { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
             { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
             { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 }
-            ]
+            ],
+            query: ''
         }    
+    },
+    computed: {
+        filteredList: function () {
+            let newList = this.foodList.filter(function (food) {
+                return food.foodName.includes(this.query)
+            }.bind(this))
+            console.log(newList)
+            return newList
+        }
     },
     components: {
         'food-list': foodList,
@@ -80,12 +95,16 @@ let firstPage = {
     methods: {
         onFoodClick: function (food) {
             this.$emit('foodClick', food)
+        },
+        onSearch: function (query) {
+            console.log(query)
+            this.query = query
         }
     },
     template: `
     <div class="row">
-        <searchbox></searchbox>
-        <food-list :foodList="foodList" @foodClick="onFoodClick"></food-list>
+        <searchbox @search="onSearch"></searchbox>
+        <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
     </div>
     `
 }
@@ -117,15 +136,17 @@ let participant = {
     template: `
     <div class="row participant">
         <span class="col-md-12">
+            <form class="form-inline">
             {{idx + 1}}
             <span class="glyphicon glyphicon-user"></span>
-            <input @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
+            <input style="width: 55%" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
             <div class="btn-group" role="group">
-                <button class="btn " v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Beginner</button>
-                <button class="btn " v-bind:class="person.level == 1 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(1)">Intermediate</button>
-                <button class="btn " v-bind:class="person.level == 2 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(2)">Expert</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Beginner</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(1)">Intermediate</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(2)">Expert</button>
             </div>
             <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button> 
+            </form>
         </span>
     </div>`,
     methods: {
