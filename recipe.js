@@ -1,6 +1,6 @@
 var recipe = {
   "title": "까르보나라",
-  "imageLink": "src/carbonara.png",
+  "imageLink": "./img/carbonara.png",
   "tools": [
     "오븐", "뒤집개", "김치부침개"
   ],
