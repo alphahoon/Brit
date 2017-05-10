@@ -1,21 +1,21 @@
 var recipe = {
-  "title": "까르보나라",
+  "title": "Carbonara",
   "imageLink": "./img/carbonara.png",
   "tools": [
-    "오븐", "뒤집개", "김치부침개"
+    "Pot", "Frying Pan", "Strainer", "Whisk"
   ],
   "main" : [
-    {"name": "링귀네", "amount": 70, "unit": "g"},
-    {"name": "베이컨", "amount": 28, "unit": "g"},
-    {"name": "달걀", "amount": 0.5, "unit": "개"},
-    {"name": "우유", "amount": 100, "unit": "ml"},
-    {"name": "마늘", "amount": 1, "unit": "개"},
-    {"name": "생크림", "amount": 100, "unit": "ml"},
-    {"name": "올리브유", "amount": 1, "unit": "숟가락"}
+    {"name": "Linguine", "amount": 70, "unit": "g"},
+    {"name": "Bacon", "amount": 28, "unit": "g"},
+    {"name": "Egg", "amount": 0.5, "unit": ""},
+    {"name": "Milk", "amount": 100, "unit": "ml"},
+    {"name": "Garlic", "amount": 1, "unit": ""},
+    {"name": "Cream", "amount": 100, "unit": "ml"},
+    {"name": "Olive Oil", "amount": 1, "unit": "table spoon"}
   ],
   "sub" :[
-    {"name": "양파", "amount": 0.25 , "unit": "개"},
-    {"name": "파프리카", "amount": 0.25, "unit": "개"},
-    {"name": "새우", "amount": 6, "unit": "마리"}
+    {"name": "Onion", "amount": 0.25 , "unit": ""},
+    {"name": "Paprika", "amount": 0.25, "unit": ""},
+    {"name": "Shrimp", "amount": 6, "unit": ""}
   ]
 };

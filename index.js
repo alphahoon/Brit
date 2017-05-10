@@ -1,24 +1,24 @@
 let foodCard = {
     props: ['food'],
     computed: {
-        timeStr: function () {
+        timeStr: function() {
             let hour = this.food.time / 60
             let min = this.food.time % 60
             let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
             return str
         },
-        difficulty: function () {
-            if (this.food.level == 0) {
+        difficulty: function() {
+            if (this.food.difficulty == 0) {
                 return 'easy'
-            } else if (this.food.level == 1) {
+            } else if (this.food.difficulty == 1) {
                 return 'medium'
-            } else if (this.food.level == 2) {
+            } else if (this.food.difficulty == 2) {
                 return 'hard'
             }
         }
     },
     methods: {
-        onFoodClick: function () {
+        onFoodClick: function() {
             this.$emit('foodClick', this.food)
         }
     },
@@ -42,7 +42,7 @@ let foodList = {
         'food-card': foodCard
     },
     methods: {
-        onFoodClick: function (food) {
+        onFoodClick: function(food) {
             this.$emit('foodClick', food)
         }
     },
@@ -57,46 +57,56 @@ let searchbox = {
     template: `
     <div class="col-md-3">
         <div id="searchbox">
-            <input v-bind:value="query" placeholder="Search" @input="onInputChange($event.target.value)"></input>
-            <div class="btn-group " id="filterButtons" role="group">
-                <button class="btn btn-sm" v-bind:class="level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Easy</button>
-                <button class="btn btn-sm" v-bind:class="level == 1 ? 'btn-warning ' : 'btn-default'" @click="onLevelChange(1)">Medium</button>
-                <button class="btn btn-sm" v-bind:class="level == 2 ? 'btn-danger ' : 'btn-default'" @click="onLevelChange(2)">Hard</button>
+            <div class="row" style="font-weight:bold;text-align:left">
+                <span>Search</span>
+            </div>
+            <div class="row">
+                <input v-bind:value="query" placeholder="Search" @input="onInputChange($event.target.value)"></input>
+            </div>
+            <div class="row" style="font-weight:bold;text-align:left;margin-top:10px">
+                <span>Difficulty</span>
+            </div>
+            <div class="row" style="text-align:left">
+                <div class="btn-group " id="filterButtons" role="group">
+                    <button class="btn btn-sm" v-bind:class="difficulty == 0 ? 'btn-primary ' : 'btn-default'" @click="onDifficultyChange(0)">Easy</button>
+                    <button class="btn btn-sm" v-bind:class="difficulty == 1 ? 'btn-warning ' : 'btn-default'" @click="onDifficultyChange(1)">Medium</button>
+                    <button class="btn btn-sm" v-bind:class="difficulty == 2 ? 'btn-danger ' : 'btn-default'" @click="onDifficultyChange(2)">Hard</button>
+                </div>
             </div>
         </div>
     </div>
     `,
 
-    props:['level', 'query', 'time'],
+    props: ['difficulty', 'query', 'time'],
     methods: {
-        onInputChange: function (input) {
+        onInputChange: function(input) {
             this.$emit('queryChange', input)
         },
-        onLevelChange: function (newLevel) {
-            this.$emit('levelChange', newLevel)
+        onDifficultyChange: function(newLevel) {
+            this.$emit('difficultyChange', newLevel)
         }
     }
 }
 let firstPage = {
-    data: function () {
+    data: function() {
         return {
-            foodList: [{ imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 1, time: 30 },
-            { imgURL: './img/o.jpg', foodName: 'Omelet with Rice', level: 1, time: 30 },
-            { imgURL: './img/s.jpg', foodName: 'Samgyetang', level: 2, time: 70 },
-            { imgURL: './img/w2.jpg', foodName: 'Spring Roll', level: 2, time: 30 },
-            { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
-            { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
-            { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 }
+            foodList: [{ imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 1, time: 30 },
+                { imgURL: './img/o.jpg', foodName: 'Omelet with Rice', difficulty: 1, time: 30 },
+                { imgURL: './img/s.jpg', foodName: 'Samgyetang', difficulty: 2, time: 70 },
+                { imgURL: './img/w2.jpg', foodName: 'Spring Roll', difficulty: 2, time: 30 },
+                { imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 2, time: 30 },
+                { imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 2, time: 30 },
+                { imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 2, time: 30 }
             ],
             query: '',
-            queryLevel: 2,
+            queryDifficulty: 2,
             queryTime: 120,
-        }    
+        }
     },
     computed: {
-        filteredList: function () {
-            let newList = this.foodList.filter(function (food) {
-                return (food.foodName.includes(this.query)) && (food.level <= this.queryLevel) && (food.time <= this.queryTime)
+        filteredList: function() {
+            let newList = this.foodList.filter(function(food) {
+                return (food.foodName.includes(this.query)) && (food.difficulty <= this.queryDifficulty) && (food.time <= this.queryTime)
             }.bind(this))
             console.log(newList)
             return newList
@@ -107,22 +117,22 @@ let firstPage = {
         'searchbox': searchbox
     },
     methods: {
-        onFoodClick: function (food) {
+        onFoodClick: function(food) {
             this.$emit('foodClick', food)
         },
-        onQueryChange: function (query) {
+        onQueryChange: function(query) {
             console.log(query)
             this.query = query
         },
-        onLevelChange: function (level) {
-            this.queryLevel = level 
+        onDifficultyChange: function(difficulty) {
+            this.queryDifficulty = difficulty
         }
     },
     template: `
     <div>
     <h5 style="text-align:center">What do you want to have today? </h5>
         <div class="row" id="page1">
-            <searchbox @queryChange="onQueryChange" @levelChange="onLevelChange" :level="queryLevel" :query="query"></searchbox>
+            <searchbox @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" :difficulty="queryDifficulty" :query="query"></searchbox>
             <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
         </div>
     </div>
@@ -131,24 +141,25 @@ let firstPage = {
 
 let secondPage = {
     props: ['numPeople'],
-    data: function () {
+    data: function() {
         return {
             recipe: recipe
         };
     },
-        template: `
+    template: `
         <div>
             <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
-            <br/>
-            <tool-list v-bind:tools=recipe.tools></tool-list>
-            <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
-            <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
+            <div class="row" style="height:300px;margin-top: 20px;padding-left:10%">
+                <tool-list v-bind:tools=recipe.tools></tool-list>
+                <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
+                <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
+            </div>
         </div>`
 };
 
 let participant = {
-    props:['person', 'idx'],
-    data: function () {
+    props: ['person', 'idx'],
+    data: function() {
         return {
             name: ''
         }
@@ -157,10 +168,10 @@ let participant = {
     <div class="row participant">
         <span class="col-md-12">
             <form class="form-inline">
-            {{idx + 1}}
-            <span class="glyphicon glyphicon-user"></span>
-            <input style="width: 55%" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
-            <div class="btn-group" role="group">
+            <span style="font-size:1.5em;">{{idx + 1}} </span>
+            <span class="glyphicon glyphicon-user" style="font-size:1.5em;"> </span>
+            <input style="width: 40%; margin-left:10px; margin-right:10px;padding-left:10px;padding-right:10px" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
+            <div class="btn-group " role="group">
                 <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Beginner</button>
                 <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click="onLevelChange(1)">Intermediate</button>
                 <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click="onLevelChange(2)">Expert</button>
@@ -170,13 +181,13 @@ let participant = {
         </span>
     </div>`,
     methods: {
-        onNameChange: function (name) {
+        onNameChange: function(name) {
             this.$emit('nameChange', name, this.person)
         },
-        onLevelChange: function (level) {
+        onLevelChange: function(level) {
             this.$emit('levelChange', level, this.person)
         },
-        onRemove: function () {
+        onRemove: function() {
             this.$emit('remove', this.person)
         }
     }
@@ -186,39 +197,39 @@ let participants = {
     components: {
         'participant': participant
     },
-    data: function () {
+    data: function() {
         return {
             currentKey: 1,
-            participants: [{name: '', level: 0, key: 0}]
+            participants: [{ name: '', level: 0, key: 0 }]
         }
     },
     template: `
     <div>
         <participant v-for="(person, idx) in participants" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
         <div class="row">
-            <div class="col-md-12">
-                <button id="addParticipant" class="btn btn-default" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <div class="col-md-12" style="margin-top: 20px;text-align: center;">
+                <button v-if="participants.length < 4" currentKeyid="addParticipant" class="btn btn-default btn-lg" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>`
 
     ,
     methods: {
-        onNameSet: function (n) {
+        onNameSet: function(n) {
             console.log(n)
             this.name = n
         },
-        onAddParticipant: function () {
+        onAddParticipant: function() {
             this.participants.push({ name: '', level: 0, key: this.currentKey })
             this.currentKey += 1
         },
-        onNameChange: function (name, person) {
+        onNameChange: function(name, person) {
             person.name = name
         },
-        onLevelChange: function (level, person) {
+        onLevelChange: function(level, person) {
             person.level = level
         },
-        onRemove: function (person) {
+        onRemove: function(person) {
             let idx = this.participants.indexOf(person)
             this.participants.splice(idx, 1)
         }
@@ -232,14 +243,14 @@ let thirdPage = {
     },
     template: `
     <div>
-    <participants></participants>
-    </div>`       
+        <participants></participants>
+    </div>`
 
 }
 
 
 let fourthPage = {
-    data: function () {
+    data: function() {
         return {
             message: "Hello World!! 4"
         }
@@ -251,7 +262,7 @@ let fourthPage = {
 }
 
 let fifthPage = {
-    data: function () {
+    data: function() {
         return {
             message: "Hello World!! 5"
         }
@@ -270,7 +281,7 @@ let progressBar = {
     </div>
     `,
     methods: {
-        onStepClick: function (i) {
+        onStepClick: function(i) {
             this.$emit('stepChange', i)
         }
     }
@@ -278,7 +289,7 @@ let progressBar = {
 
 let app = new Vue({
     el: '#app',
-    data: function () {
+    data: function() {
         return {
             pageCursor: 1,
             numPeople: 1
@@ -293,23 +304,23 @@ let app = new Vue({
         'progress-bar': progressBar
     },
     methods: {
-        onPrevClick: function () {
+        onPrevClick: function() {
             if (this.pageCursor > 1) {
                 this.pageCursor -= 1
             }
         },
-        onNextClick: function () {
+        onNextClick: function() {
             if (this.pageCursor < 5) {
                 this.pageCursor += 1
             }
         },
-        onStepChange: function (i) {
+        onStepChange: function(i) {
             if (i > 0 && i < 6) {
                 this.pageCursor = i
             }
         },
-        onFoodClick: function (food) {
-           this.pageCursor += 1
+        onFoodClick: function(food) {
+            this.pageCursor += 1
         }
     },
     template: `
@@ -342,22 +353,28 @@ let app = new Vue({
 // sketch2
 Vue.component('menu-main', {
     props: ['title', 'imageLink', 'amount'],
-    template: `<div>
-        <div><h4>{{title}}</h4></div>
-        <div><img v-bind:src=imageLink width='280' height='180'>
-        <button v-on:click="reduceAmount" class="glyphicon glyphicon-minus" aria-hidden="true"/>
-         {{amount}}
-        <button v-on:click="addAmount" class="glyphicon glyphicon-plus" aria-hidden="true"/>
-        명이 먹을거에요!</div>
+    template: `<div style="text-align:center">
+        <div class="row">
+            <h3>{{title}}</h3>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <img v-bind:src=imageLink width='220' height='150'>
+        </div>
+        <div class="row">
+            <span style="font-size:1.5em"> Serving Amount : </span>
+            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus" aria-hidden="true"/>
+            <span style="font-weight:bold;font-size:1.5em"> {{amount}} </span>
+            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus" aria-hidden="true"/>
+        </div>
     </div>`,
     methods: {
-      reduceAmount: function() {
+        reduceAmount: function() {
             if (app.numPeople > 1) {
-             app.numPeople--;
+                app.numPeople--;
             }
         },
         addAmount: function() {
-            if (app.numPeople < 10){
+            if (app.numPeople < 10) {
                 app.numPeople++;
             }
         }
@@ -365,25 +382,25 @@ Vue.component('menu-main', {
 });
 
 Vue.component('tool', {
-  props: ['name'],
-  template: '<div>{{ name }}</div>'
+    props: ['name'],
+    template: '<div>{{ name }}</div>'
 });
 
 Vue.component('maining', {
-  props: ['info', 'amount'],
-  template: '<div>{{ info.name }} {{info.amount * amount}}{{ info.unit }}</div>'
+    props: ['info', 'amount'],
+    template: '<div>{{ info.name }} {{info.amount * amount}}{{ info.unit }}</div>'
 });
 
 Vue.component('subing', {
-  props: ['info', 'amount'],
-  template: '<div>{{ info.name }} {{info.amount * amount}}{{ info.unit }} <input type="checkbox"/></div>'
+    props: ['info', 'amount'],
+    template: '<div><input type="checkbox" style="margin-right:10px"/>{{ info.name }} {{info.amount * amount}}{{ info.unit }}</div>'
 });
 
 Vue.component('tool-list', {
-    props: [ 'tools' ],
-    template: `<div class="panel panel-warning">
+    props: ['tools'],
+    template: `<div class="col-sm-3 panel panel-warning">
           <div class="panel-heading">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true">도구</span>
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="margin-left:10px"> Cooking Tools</span>
           </div>
           <div class="panel-body">
             <tool v-for="item in tools" v-bind:name="item"></tool>
@@ -393,9 +410,9 @@ Vue.component('tool-list', {
 
 Vue.component('main-ing-list', {
     props: ['main_ings', 'amount'],
-    template: `<div class="panel panel-success">
+    template: `<div class="col-sm-4 panel panel-success">
       <div class="panel-heading">
-            <span class="glyphicon glyphicon-apple" aria-hidden="true">주재료</span>
+            <span class="glyphicon glyphicon-apple" aria-hidden="true" style="margin-left:10px"> Main Ingredients</span>
         </div>
       <div class="panel-body">
         <maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount"></maining>
@@ -406,9 +423,9 @@ Vue.component('main-ing-list', {
 
 Vue.component('sub-ing-list', {
     props: ['sub_ings', 'amount'],
-    template: `<div class="panel panel-info">
+    template: `<div class="col-sm-3 panel panel-info">
       <div class="panel-heading">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true">추가재료</span>
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="margin-left:10px"> Extra Ingredients</span>
         </div>
       <div class="panel-body">
         <subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount"></subing>
