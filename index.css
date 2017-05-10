@@ -103,5 +103,29 @@ header {
 }
 
 .timeStr {
-    text-align: right;
+    float: right;
+}
+
+#foodCard{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    display: inline-block; 
+    padding: .25rem;
+    width:  33%; 
+}
+
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+
+/*.row .inner {
+ -moz-column-width: 18em;
+ -webkit-column-width: 18em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap:1em; 
+  
+}*/
+
+.thumbnail {
+    position:relative;
+    display: block;
 }

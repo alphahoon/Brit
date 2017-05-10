@@ -17,12 +17,17 @@ let foodCard = {
             }
         }
     },
+    methods: {
+        onFoodClick: function () {
+            this.$emit('foodClick', this.food)
+        }
+    },
     template: `
-    <div class="col-md-4">
+    <div id="foodCard">
         <div class="thumbnail">
             <img v-bind:src="food.imgURL" v-bind:alt="food.foodName">
             <div class="caption">
-                <h6>{{food.foodName}}</h6>
+                <a href="#" @click="onFoodClick"><h6>{{food.foodName}}</h6></a>
             </div>
             <div class="cardContent">
             {{difficulty}} <div class="timeStr"><span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
@@ -36,10 +41,15 @@ let foodList = {
     components: {
         'food-card': foodCard
     },
+    methods: {
+        onFoodClick: function (food) {
+            this.$emit('foodClick', food)
+        }
+    },
     template: `
     <div class="col-md-9">
-        <div class="row">
-            <food-card v-for="food in foodList" :food="food" :key="food.foodName"></food-card>
+        <div class="row inner">
+            <food-card v-for="food in foodList" :food="food" :key="food.foodName" @foodClick="onFoodClick"></food-card>
         </div>
     </div>`
 }
@@ -53,13 +63,13 @@ let searchbox = {
 let firstPage = {
     data: function () {
         return {
-            foodList: [{ imgURL: '', foodName: 'BS', level: 2, time: 30 },
-            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
-            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
-            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
-            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
-            { imgURL: '', foodName: 'BS', level: 2, time: 30 },
-            { imgURL: '', foodName: 'BS', level: 2, time: 30 }
+            foodList: [{ imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
+            { imgURL: './img/o.jpg', foodName: 'Omelet with Rice', level: 2, time: 30 },
+            { imgURL: './img/s.jpg', foodName: 'Samgyetang', level: 3, time: 70 },
+            { imgURL: './img/w2.jpg', foodName: 'Spring Roll', level: 2, time: 30 },
+            { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
+            { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 },
+            { imgURL: './img/carbonara.png', foodName: 'Carbonara', level: 2, time: 30 }
             ]
         }    
     },
@@ -67,10 +77,15 @@ let firstPage = {
         'food-list': foodList,
         'searchbox': searchbox
     },
+    methods: {
+        onFoodClick: function (food) {
+            this.$emit('foodClick', food)
+        }
+    },
     template: `
     <div class="row">
         <searchbox></searchbox>
-        <food-list :foodList="foodList"></food-list>
+        <food-list :foodList="foodList" @foodClick="onFoodClick"></food-list>
     </div>
     `
 }
@@ -251,6 +266,9 @@ let app = new Vue({
             if (i > 0 && i < 6) {
                 this.pageCursor = i
             }
+        },
+        onFoodClick: function (food) {
+           this.pageCursor += 1
         }
     },
     template: `
@@ -271,7 +289,7 @@ let app = new Vue({
         <!-- Container -->
         <div class="container">
 
-            <first-page v-if="pageCursor == 1"></first-page>
+            <first-page v-if="pageCursor == 1" @foodClick="onFoodClick"></first-page>
             <second-page v-else-if="pageCursor == 2" v-bind:numPeople=numPeople></second-page>
             <third-page v-else-if="pageCursor == 3"></third-page>
             <fourth-page v-else-if="pageCursor == 4"></fourth-page>
