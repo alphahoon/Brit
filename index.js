@@ -172,9 +172,9 @@ let participant = {
             <span class="glyphicon glyphicon-user" style="font-size:1.5em;"> </span>
             <input style="width: 40%; margin-left:10px; margin-right:10px;padding-left:10px;padding-right:10px" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
             <div class="btn-group " role="group">
-                <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click="onLevelChange(0)">Beginner</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click="onLevelChange(1)">Intermediate</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click="onLevelChange(2)">Expert</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click.prevent="onLevelChange(0)">Beginner</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click.prevent="onLevelChange(1)">Intermediate</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click.prevent="onLevelChange(2)">Expert</button>
             </div>
             <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button> 
             </form>
@@ -182,13 +182,14 @@ let participant = {
     </div>`,
     methods: {
         onNameChange: function(name) {
-            this.$emit('nameChange', name, this.person)
+            this.$emit('nameChange', name, this.idx)
         },
         onLevelChange: function(level) {
-            this.$emit('levelChange', level, this.person)
+            console.log('onLevelChange')
+            this.$emit('levelChange', level, this.idx)
         },
         onRemove: function() {
-            this.$emit('remove', this.person)
+            this.$emit('remove', this.idx)
         }
     }
 }
@@ -223,14 +224,14 @@ let participants = {
             this.participants.push({ name: '', level: 0, key: this.currentKey })
             this.currentKey += 1
         },
-        onNameChange: function(name, person) {
-            person.name = name
+        onNameChange: function(name, idx) {
+            this.participants[idx].name = name
         },
-        onLevelChange: function(level, person) {
-            person.level = level
+        onLevelChange: function(level, idx) {
+            this.participants[idx].level = level
         },
-        onRemove: function(person) {
-            let idx = this.participants.indexOf(person)
+        onRemove: function(idx) {
+            // let idx = this.participants.indexOf(person)
             this.participants.splice(idx, 1)
         }
     }
@@ -318,21 +319,21 @@ let app = new Vue({
             }
         },
         onStepChange: function(i) {
-            /*
+            
             if (i > 0 && i < 6) {
                 this.pageCursor = i
             }
-            */
-            if (i < this.pageCursor)
-                this.pageCursor -= 1
-            else if (i > this.pageCursor)
-                this.pageCursor += 1
-            else {
-                this.pageCursor = i
-            }
+            
+            // if (i < this.pageCursor)
+            //     this.pageCursor -= 1
+            // else if (i > this.pageCursor)
+            //     this.pageCursor += 1
+            // else {
+            //     this.pageCursor = i
+            // }
         },
         onFoodClick: function(food) {
-            this.pageCursor += 1
+            this.pageCursor = 2
         }
     },
     template: `
