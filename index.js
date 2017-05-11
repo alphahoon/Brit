@@ -9,11 +9,11 @@ let foodCard = {
         },
         difficulty: function() {
             if (this.food.difficulty == 0) {
-                return 'easy'
+                return 'Easy'
             } else if (this.food.difficulty == 1) {
-                return 'medium'
+                return 'Medium'
             } else if (this.food.difficulty == 2) {
-                return 'hard'
+                return 'Hard'
             }
         }
     },
@@ -130,7 +130,7 @@ let firstPage = {
     },
     template: `
     <div>
-    <h5 style="text-align:center">What do you want to have today? </h5>
+    <h3 style="text-align:center">What do you want to have today? </h3>
         <div class="row" id="page1">
             <searchbox @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" :difficulty="queryDifficulty" :query="query"></searchbox>
             <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
@@ -210,6 +210,7 @@ let participants = {
         <div class="row">
             <div class="col-md-12" style="margin-top: 20px;text-align: center;">
                 <button v-if="participants.length < 4" currentKeyid="addParticipant" class="btn btn-default btn-lg" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button v-if="participants.length == 4" class="btn btn-default btn-lg btn-primary" style="font-weight:bold;" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" style="margin-left:10px"></span></button>
             </div>
         </div>
     </div>`
@@ -233,6 +234,9 @@ let participants = {
         onRemove: function(idx) {
             // let idx = this.participants.indexOf(person)
             this.participants.splice(idx, 1)
+        },
+        onNextClick: function() {
+            this.$emit('nextClick')
         }
     }
 }
@@ -244,9 +248,13 @@ let thirdPage = {
     },
     template: `
     <div>
-        <participants></participants>
-    </div>`
-
+        <participants @nextClick="onNextClick"></participants>
+    </div>`,
+    methods: {
+        onNextClick: function() {
+            this.$emit('nextClick')
+        }
+    }
 }
 
 
@@ -319,11 +327,11 @@ let app = new Vue({
             }
         },
         onStepChange: function(i) {
-            
+
             if (i > 0 && i < 6) {
                 this.pageCursor = i
             }
-            
+
             // if (i < this.pageCursor)
             //     this.pageCursor -= 1
             // else if (i > this.pageCursor)
@@ -356,7 +364,7 @@ let app = new Vue({
 
             <first-page v-if="pageCursor == 1" @foodClick="onFoodClick"></first-page>
             <second-page v-else-if="pageCursor == 2" v-bind:numPeople=numPeople></second-page>
-            <third-page v-else-if="pageCursor == 3"></third-page>
+            <third-page v-else-if="pageCursor == 3" @nextClick="onNextClick"></third-page>
             <fourth-page v-else-if="pageCursor == 4"></fourth-page>
             <fifth-page v-else-if="pageCursor == 5"></fifth-page>
         </div>
@@ -371,13 +379,13 @@ Vue.component('menu-main', {
             <h3>{{title}}</h3>
         </div>
         <div class="row" style="margin-bottom: 10px;">
-            <img v-bind:src=imageLink width='220' height='150'>
+            <img v-bind:src=imageLink width='300' height='200'>
         </div>
         <div class="row">
-            <span style="font-size:1.5em"> Serving Amount : </span>
-            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus" aria-hidden="true"/>
+            <span style="font-size:1.5em; font-weight:bold"> Serving Amount : </span>
+            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true"/>
             <span style="font-weight:bold;font-size:1.5em"> {{amount}} </span>
-            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus" aria-hidden="true"/>
+            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true"/>
         </div>
     </div>`,
     methods: {
@@ -401,12 +409,12 @@ Vue.component('tool', {
 
 Vue.component('maining', {
     props: ['info', 'amount'],
-    template: '<div>{{ info.name }} {{info.amount * amount}}{{ info.unit }}</div>'
+    template: '<div><span>{{ info.name }}</span> <span style="color:#8BC34A">{{info.amount * amount}}{{ info.unit }}</span></div>'
 });
 
 Vue.component('subing', {
     props: ['info', 'amount'],
-    template: '<div><input type="checkbox" style="margin-right:10px"/>{{ info.name }} {{info.amount * amount}}{{ info.unit }}</div>'
+    template: '<div><input type="checkbox" style="margin-right:10px"/>{{ info.name }} <span style="color:#00BCD4">{{info.amount * amount}}{{ info.unit }}</span></div>'
 });
 
 Vue.component('tool-list', {
