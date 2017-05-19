@@ -142,7 +142,8 @@ let app = new Vue({
         }
     },
     computed: Vuex.mapState({
-        pageCursor: state => state.pageCursor
+        pageCursor: state => state.pageCursor,
+        currentMenu: state => state.currentMenu
     }),
     components: {
         'first-page': firstPage,
@@ -164,7 +165,8 @@ let app = new Vue({
         },
         onStepChange: function (i) {
             if (i > 0 && i < 6) {
-                store.commit('setPageCursor', { pageCursor: i })
+                if(this.currentMenu != null)
+                    store.commit('setPageCursor', { pageCursor: i })
             }
         },
         onFoodClick: function (food) {
