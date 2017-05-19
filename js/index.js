@@ -24,16 +24,15 @@ let foodCard = {
     },
     template: `
     <div id="foodCard">
-        <div class="thumbnail">
-            <img v-bind:src="food.imgURL" v-bind:alt="food.foodName">
-            <div class="caption">
-                <a href="#" @click="onFoodClick"><h6>{{food.foodName}}</h6></a>
-            </div>
-            <div class="cardContent">
-            {{difficulty}} <div class="timeStr"><span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
+        <div class="thumbnail"> <img v-bind:src="food.imgURL" v-bind:alt="food.foodName">
+            <div class="caption"> <a href="#" @click="onFoodClick"><h6>{{food.foodName}}</h6></a> </div>
+            <div class="cardContent"> {{difficulty}}
+                <div class="timeStr">
+                    <span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
             </div>
         </div>
-    </div>`
+    </div>
+    `
 }
 
 let foodList = {
@@ -51,7 +50,8 @@ let foodList = {
         <div class="row inner">
             <food-card v-for="food in foodList" :food="food" :key="food.foodName" @foodClick="onFoodClick"></food-card>
         </div>
-    </div>`
+    </div>
+    `
 }
 let searchbox = {
     template: `
@@ -156,7 +156,7 @@ let firstPage = {
     },
     template: `
     <div>
-    <h3 style="text-align:center">What do you want to have today? </h3>
+        <h3 style="text-align:center">What do you want to have today? </h3>
         <div class="row" id="page1">
             <searchbox @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" :difficulty="queryDifficulty" :query="query"></searchbox>
             <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
@@ -173,14 +173,15 @@ let secondPage = {
         };
     },
     template: `
-        <div>
-            <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
-            <div class="row" style="height:300px;margin-top: 20px;padding-left:10%">
-                <tool-list v-bind:tools=recipe.tools></tool-list>
-                <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
-                <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
-            </div>
-        </div>`
+    <div>
+        <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
+        <div class="row" style="height:300px;margin-top: 20px;padding-left:10%">
+            <tool-list v-bind:tools=recipe.tools></tool-list>
+            <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
+            <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
+        </div>
+    </div>
+    `
 };
 
 let participant = {
@@ -192,20 +193,23 @@ let participant = {
     },
     template: `
     <div class="row participant">
-        <span class="col-md-12">
+        <div class="col-md-12">
             <form class="form-inline">
-            <span style="font-size:1.5em;">{{idx + 1}} </span>
-            <span class="glyphicon glyphicon-user" style="font-size:1.5em;"> </span>
-            <input style="width: 40%; margin-left:10px; margin-right:10px;padding-left:10px;padding-right:10px" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
-            <div class="btn-group " role="group">
-                <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-success ' : 'btn-default'" @click.prevent="onLevelChange(0)">Beginner</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click.prevent="onLevelChange(1)">Intermediate</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click.prevent="onLevelChange(2)">Expert</button>
-            </div>
-            <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button> 
+                <span style="font-size:1.5em;">{{idx + 1}} </span>
+                <span class="glyphicon glyphicon-user" style="font-size:1.5em;"> </span>
+                <input style="width: 40%; margin-left:10px; margin-right:10px;padding-left:10px;padding-right:10px" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
+                <div class="btn-group " role="group">
+                    <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-success ' : 'btn-default'" @click.prevent="onLevelChange(0)">Beginner</button>
+                    <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click.prevent="onLevelChange(1)">Intermediate</button>
+                    <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click.prevent="onLevelChange(2)">Expert</button>
+                </div>
+                <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
             </form>
-        </span>
-    </div>`,
+        </div>
+    </div>
+    `,
     methods: {
         onNameChange: function(name) {
             this.$emit('nameChange', name, this.idx)
@@ -242,9 +246,8 @@ let participants = {
                 <button v-if="participants.length == 4" class="btn btn-default btn-lg btn-success" style="font-weight:bold;" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" style="margin-left:10px"></span></button>
             </div>
         </div>
-    </div>`
-
-    ,
+    </div>
+    `,
     methods: {
         onNameSet: function(n) {
             this.name = n
@@ -264,7 +267,6 @@ let participants = {
             this.participants[idx].level = level
         },
         onRemove: function(idx) {
-            // let idx = this.participants.indexOf(person)
             this.participants.splice(idx, 1)
         },
         onNextClick: function() {
@@ -281,7 +283,8 @@ let thirdPage = {
     template: `
     <div>
         <participants @nextClick="onNextClick"></participants>
-    </div>`,
+    </div>
+    `,
     methods: {
         onNextClick: function() {
             this.$emit('nextClick')
@@ -289,17 +292,82 @@ let thirdPage = {
     }
 }
 
+let workStep = {
+    props: ['work'],
+    computed: {
+        timeCal: function() {
+            let hour = this.work.time / 60
+            let min = this.work.time % 60
+            let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
+            return str
+        },
+        difficulty: function() {
+            if (this.work.difficulty == 0) {
+                return 'Easy'
+            } else if (this.work.difficulty == 1) {
+                return 'Medium'
+            } else if (this.work.difficulty == 2) {
+                return 'Hard'
+            }
+        }
+    },
+    template: `
+    <div class="row">
+        <div id="rowWork" class="col-md-11">
+            <div id="workContent" class="col-sm-6">
+                <div>
+                    <div class="workText"> {{this.work.text}} </div>
+                    <div class="workAttribute col-md-5"> {{difficulty}}
+                        <div class="timeCal"><span class="glyphicon glyphicon-time"></span>{{timeCal}}</div>
+                    </div>
+                </div>
+            </div>
+            <form class="checkBoxGroup">
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=0> </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=1> </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=2> </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=3> </label>
+            </form>
+        </div>
+    </div>
+    `
+}
+
+let workList = {
+    props: ['workList'],
+    components: {
+        'work-step': workStep
+    },
+    template: `
+    <div>
+        <work-step v-for="work in workList" :work="work"></work-step>
+    </div>
+    `
+}
 
 let fourthPage = {
     data: function() {
         return {
-            message: "Distribute View"
+            workList: recipe.steps
         }
+    },
+    components: {
+        'work-list': workList
     },
     template: `
     <div>
-        {{ message }}
-    </div>`
+        <div id="distributeBlock">
+            <h1> Distribute Your Work!</h1>
+            <work-list :workList="workList"></work-list>
+        </div>
+        <div class="graphBlock">
+        </div>
+    </div>
+    `
 }
 
 let fifthPage = {
@@ -309,9 +377,8 @@ let fifthPage = {
         }
     },
     template: `
-    <div>
-        {{ message }}
-    </div>`
+    <div>{{ message }}</div>
+    `
 }
 
 let progressBar = {
@@ -363,14 +430,6 @@ let app = new Vue({
             if (i > 0 && i < 6) {
                 this.pageCursor = i
             }
-
-            // if (i < this.pageCursor)
-            //     this.pageCursor -= 1
-            // else if (i > this.pageCursor)
-            //     this.pageCursor += 1
-            // else {
-            //     this.pageCursor = i
-            // }
         },
         onFoodClick: function(food) {
             this.pageCursor = 2
@@ -383,30 +442,29 @@ let app = new Vue({
                 <a id="cooky_logo" href="#" @click="onLogoClick">Cooky</a>
             </nav>
             <div id="progress_bar">
-            <span>
-                <a id="cooky_back" v-bind:class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+                <span>
+                    <a id="cooky_back" v-bind:class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
                 <span id="progress-buttons"><progress-bar :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar></span>
                 <a id="cooky_next" v-bind:class="pageCursor < 5? '': 'sarajo'" @click="onNextClick"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
-            </span>
+                </span>
             </div>
         </header>
-
-        <!-- Container -->
         <div class="container">
-
             <first-page v-if="pageCursor == 1" @foodClick="onFoodClick"></first-page>
             <second-page v-else-if="pageCursor == 2" v-bind:numPeople=numPeople></second-page>
             <third-page v-else-if="pageCursor == 3" @nextClick="onNextClick"></third-page>
             <fourth-page v-else-if="pageCursor == 4"></fourth-page>
             <fifth-page v-else-if="pageCursor == 5"></fifth-page>
         </div>
-    </div>`
+    </div>
+    `
 });
 
 // sketch2
 Vue.component('menu-main', {
     props: ['title', 'imageLink', 'amount'],
-    template: `<div style="text-align:center">
+    template: `
+    <div style="text-align:center">
         <div class="row">
             <h3>{{title}}</h3>
         </div>
@@ -415,11 +473,12 @@ Vue.component('menu-main', {
         </div>
         <div class="row">
             <span style="font-size:1.5em; font-weight:bold"> Serving Amount : </span>
-            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true"/>
+            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true" />
             <span style="font-weight:bold;font-size:1.5em"> {{amount}} </span>
-            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true"/>
+            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true" />
         </div>
-    </div>`,
+    </div>
+    `,
     methods: {
         reduceAmount: function() {
             if (app.numPeople > 1) {
@@ -436,52 +495,65 @@ Vue.component('menu-main', {
 
 Vue.component('tool', {
     props: ['name'],
-    template: '<div>{{ name }}</div>'
+    template: `
+    <div>{{ name }}</div>
+    `
 });
 
 Vue.component('maining', {
     props: ['info', 'amount'],
-    template: '<div><span>{{ info.name }}</span> <span style="color:#8BC34A">{{info.amount * amount}}{{ info.unit }}</span></div>'
+    template: `
+    <div><span>{{ info.name }}</span> <span style="color:#8BC34A">{{info.amount * amount}}{{ info.unit }}</span></div>
+    `
 });
 
 Vue.component('subing', {
     props: ['info', 'amount'],
-    template: '<div><input type="checkbox" style="margin-right:10px"/>{{ info.name }} <span style="color:#00BCD4">{{info.amount * amount}}{{ info.unit }}</span></div>'
+    template: `
+    <div>
+        <input type="checkbox" style="margin-right:10px" />{{ info.name }} <span style="color:#00BCD4">{{info.amount * amount}}{{ info.unit }}</span></div>
+    `
 });
 
 Vue.component('tool-list', {
     props: ['tools'],
-    template: `<div class="col-sm-3 panel panel-warning">
-          <div class="panel-heading">
+    template: `
+    <div class="col-sm-3 panel panel-warning">
+        <div class="panel-heading">
             <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="margin-left:10px"> Cooking Tools</span>
-          </div>
-          <div class="panel-body">
+        </div>
+        <div class="panel-body">
             <tool v-for="item in tools" v-bind:name="item"></tool>
-          </div>
-        </div>`
+        </div>
+    </div>
+    `
 });
 
 Vue.component('main-ing-list', {
     props: ['main_ings', 'amount'],
-    template: `<div class="col-sm-4 panel panel-success">
-      <div class="panel-heading">
+    template: `
+    <div class="col-sm-4 panel panel-success">
+        <div class="panel-heading">
             <span class="glyphicon glyphicon-apple" aria-hidden="true" style="margin-left:10px"> Main Ingredients</span>
         </div>
-      <div class="panel-body">
-        <maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount"></maining>
-      </div>
-    </div>`
+        <div class="panel-body">
+            <maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount"></maining>
+        </div>
+    </div>
+    `
 });
 
 
 Vue.component('sub-ing-list', {
     props: ['sub_ings', 'amount'],
-    template: `<div class="col-sm-3 panel panel-info">
-      <div class="panel-heading">
+    template: `
+    <div class="col-sm-3 panel panel-info">
+        <div class="panel-heading">
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="margin-left:10px"> Extra Ingredients</span>
         </div>
-      <div class="panel-body">
-        <subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount"></subing>
-      </div>
-    </div>`
+        <div class="panel-body">
+            <subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount"></subing>
+        </div>
+    </div>
+    `
 });
