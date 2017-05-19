@@ -1,13 +1,44 @@
+const store = new Vuex.Store({
+    state: {
+        participants: [{
+            name: '',
+            level: 0,
+            key: 0
+        }],
+        currentMenu: null
+    },
+    mutations: {
+        setCurrentMenu(state, currentMenu) {
+            state.currentMenu = currentMenu
+        },
+        addParticipant(state, participant) {
+            state.participants.push(participant)
+        },
+        changeName(state, payload) {
+            state.participants[payload.idx].name = payload.name
+        },
+        changeLevel(state, payload) {
+            state.participants[payload.idx].level = payload.level
+        },
+        removeParticipant(state, payload) {
+            state.participants.splice(payload.idx, 1)
+        }
+    }
+})
+
+
+let menuList = []
+
 let foodCard = {
     props: ['food'],
     computed: {
-        timeStr: function() {
+        timeStr: function () {
             let hour = this.food.time / 60
             let min = this.food.time % 60
             let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
             return str
         },
-        difficulty: function() {
+        difficulty: function () {
             if (this.food.difficulty == 0) {
                 return 'Easy'
             } else if (this.food.difficulty == 1) {
@@ -18,22 +49,21 @@ let foodCard = {
         }
     },
     methods: {
-        onFoodClick: function() {
+        onFoodClick: function () {
             this.$emit('foodClick', this.food)
         }
     },
     template: `
     <div id="foodCard">
-        <div class="thumbnail">
-            <img v-bind:src="food.imgURL" v-bind:alt="food.foodName">
-            <div class="caption">
-                <a href="#" @click="onFoodClick"><h6>{{food.foodName}}</h6></a>
-            </div>
-            <div class="cardContent">
-            {{difficulty}} <div class="timeStr"><span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
+        <div class="thumbnail"> <img v-bind:src="food.imgURL" v-bind:alt="food.foodName">
+            <div class="caption"> <a href="#" @click="onFoodClick"><h6>{{food.foodName}}</h6></a> </div>
+            <div class="cardContent"> {{difficulty}}
+                <div class="timeStr">
+                    <span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
             </div>
         </div>
-    </div>`
+    </div>
+    `
 }
 
 let foodList = {
@@ -42,7 +72,7 @@ let foodList = {
         'food-card': foodCard
     },
     methods: {
-        onFoodClick: function(food) {
+        onFoodClick: function (food) {
             this.$emit('foodClick', food)
         }
     },
@@ -51,7 +81,8 @@ let foodList = {
         <div class="row inner">
             <food-card v-for="food in foodList" :food="food" :key="food.foodName" @foodClick="onFoodClick"></food-card>
         </div>
-    </div>`
+    </div>
+    `
 }
 let searchbox = {
     template: `
@@ -79,16 +110,16 @@ let searchbox = {
 
     props: ['difficulty', 'query', 'time'],
     methods: {
-        onInputChange: function(input) {
+        onInputChange: function (input) {
             this.$emit('queryChange', input)
         },
-        onDifficultyChange: function(newDifficulty) {
+        onDifficultyChange: function (newDifficulty) {
             this.$emit('difficultyChange', newDifficulty)
         }
     }
 }
 let firstPage = {
-    data: function() {
+    data: function () {
         return {
             foodList: [{
                 imgURL: 'assets/images/carbonara.png',
@@ -132,8 +163,8 @@ let firstPage = {
         }
     },
     computed: {
-        filteredList: function() {
-            let newList = this.foodList.filter(function(food) {
+        filteredList: function () {
+            let newList = this.foodList.filter(function (food) {
                 return (food.foodName.includes(this.query)) && (food.difficulty <= this.queryDifficulty) && (food.time <= this.queryTime)
             }.bind(this))
             return newList
@@ -144,19 +175,19 @@ let firstPage = {
         'searchbox': searchbox
     },
     methods: {
-        onFoodClick: function(food) {
+        onFoodClick: function (food) {
             this.$emit('foodClick', food)
         },
-        onQueryChange: function(query) {
+        onQueryChange: function (query) {
             this.query = query
         },
-        onDifficultyChange: function(difficulty) {
+        onDifficultyChange: function (difficulty) {
             this.queryDifficulty = difficulty
         }
     },
     template: `
     <div>
-    <h3 style="text-align:center">What do you want to have today? </h3>
+        <h3 style="text-align:center">What do you want to have today? </h3>
         <div class="row" id="page1">
             <searchbox @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" :difficulty="queryDifficulty" :query="query"></searchbox>
             <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
@@ -167,53 +198,69 @@ let firstPage = {
 
 let secondPage = {
     props: ['numPeople'],
-    data: function() {
+    data: function () {
         return {
-            recipe: recipe
+            recipe: carbonara,
+            unit_mode: 'p'
         };
     },
     template: `
         <div>
             <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default" v-on:click="p_mode">Precisely</button>
+              <button type="button" class="btn btn-default" v-on:click="r_mode">Roughly</button>
+            </div>
             <div class="row" style="height:300px;margin-top: 20px;padding-left:10%">
                 <tool-list v-bind:tools=recipe.tools></tool-list>
                 <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main v-bind:mode=unit_mode></main-ing-list>
                 <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub v-bind:mode=unit_mode></sub-ing-list>
             </div>
-        </div>`
+        </div>`,
+      method: {
+        p_mode: function() {
+          unit_mode = 'p';
+        },
+        r_mode: function() {
+          unit_mode = 'r'
+        }
+      }
 };
 
 let participant = {
     props: ['person', 'idx'],
-    data: function() {
+    data: function () {
         return {
             name: ''
         }
     },
     template: `
     <div class="row participant">
-        <span class="col-md-12">
+        <div class="col-md-12">
             <form class="form-inline">
-            <span style="font-size:1.5em;">{{idx + 1}} </span>
-            <span class="glyphicon glyphicon-user" style="font-size:1.5em;"> </span>
-            <input style="width: 40%; margin-left:10px; margin-right:10px;padding-left:10px;padding-right:10px" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
-            <div class="btn-group " role="group">
-                <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-success ' : 'btn-default'" @click.prevent="onLevelChange(0)">Beginner</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click.prevent="onLevelChange(1)">Intermediate</button>
-                <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click.prevent="onLevelChange(2)">Expert</button>
-            </div>
-            <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button>
+                <span style="font-size:1.5em;">{{idx + 1}} </span>
+                <span class="glyphicon glyphicon-user" style="font-size:1.5em;"> </span>
+                <input style="width: 40%; margin-left:10px; margin-right:10px;padding-left:10px;padding-right:10px" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
+                <div class="btn-group " role="group">
+                    <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-success ' : 'btn-default'" @click.prevent="onLevelChange(0)">Beginner</button>
+                    <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click.prevent="onLevelChange(1)">Intermediate</button>
+                    <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click.prevent="onLevelChange(2)">Expert</button>
+                </div>
+                <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
             </form>
-        </span>
-    </div>`,
+        </div>
+    </div>
+    `,
     methods: {
-        onNameChange: function(name) {
+        onNameChange: function (name) {
             this.$emit('nameChange', name, this.idx)
         },
-        onLevelChange: function(level) {
+        onLevelChange: function (level) {
             this.$emit('levelChange', level, this.idx)
         },
-        onRemove: function() {
+        onRemove: function () {
             this.$emit('remove', this.idx)
         }
     }
@@ -223,16 +270,14 @@ let participants = {
     components: {
         'participant': participant
     },
-    data: function() {
+    data: function () {
         return {
             currentKey: 1,
-            participants: [{
-                name: '',
-                level: 0,
-                key: 0
-            }]
         }
     },
+    computed: Vuex.mapState({
+        participants: state => state.participants
+    }),
     template: `
     <div>
         <participant v-for="(person, idx) in participants" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
@@ -242,33 +287,37 @@ let participants = {
                 <button v-if="participants.length == 4" class="btn btn-default btn-lg btn-success" style="font-weight:bold;" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" style="margin-left:10px"></span></button>
             </div>
         </div>
-    </div>`
-
-    ,
+    </div>
+    `,
     methods: {
-        onNameSet: function(n) {
-            this.name = n
-        },
-        onAddParticipant: function() {
-            this.participants.push({
+        onAddParticipant: function () {
+            // this.participants.push({
+            //     name: '',
+            //     level: 0,
+            //     key: this.currentKey
+            // })
+            store.commit('addParticipant', {
                 name: '',
                 level: 0,
                 key: this.currentKey
             })
             this.currentKey += 1
         },
-        onNameChange: function(name, idx) {
-            this.participants[idx].name = name
+        onNameChange: function (name, idx) {
+            // this.participants[idx].name = name
+            store.commit('changeName', { idx: idx, name: name })
         },
-        onLevelChange: function(level, idx) {
-            this.participants[idx].level = level
+        onLevelChange: function (level, idx) {
+            // this.participants[idx].level = level
+            store.commit('changeLevel', { idx: idx, level: level })
         },
-        onRemove: function(idx) {
+        onRemove: function (idx) {
             // let idx = this.participants.indexOf(person)
-            this.participants.splice(idx, 1)
+            // this.participants.splice(idx, 1)
+            store.commit('removeParticipant', { idx: idx })
         },
-        onNextClick: function() {
-            this.$emit('nextClick')
+        onNextClick: function () {
+            this.$emit('nextClick', this.participants)
         }
     }
 }
@@ -281,37 +330,110 @@ let thirdPage = {
     template: `
     <div>
         <participants @nextClick="onNextClick"></participants>
-    </div>`,
+    </div>
+    `,
     methods: {
-        onNextClick: function() {
-            this.$emit('nextClick')
+        onNextClick: function (participants) {
+            this.$emit('toFourthPage', participants)
         }
     }
 }
 
-
-let fourthPage = {
-    data: function() {
-        return {
-            message: "Distribute View"
+let workStep = {
+    props: ['work'],
+    computed: {
+        timeCal: function() {
+            let hour = this.work.time / 60
+            let min = this.work.time % 60
+            let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
+            return str
+        },
+        difficulty: function() {
+            if (this.work.difficulty == 0) {
+                return 'Easy'
+            } else if (this.work.difficulty == 1) {
+                return 'Medium'
+            } else if (this.work.difficulty == 2) {
+                return 'Hard'
+            }
         }
     },
     template: `
+    <div class="row">
+        <div id="rowWork" class="col-md-11">
+            <div id="workContent" class="col-sm-6">
+                <div>
+                    <div class="workText"> {{this.work.text}} </div>
+                    <div class="workAttribute col-md-5"> {{difficulty}}
+                        <div class="timeCal"><span class="glyphicon glyphicon-time"></span>{{timeCal}}</div>
+                    </div>
+                </div>
+            </div>
+            <form class="checkBoxGroup">
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=0> </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=1> </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=2> </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value=3> </label>
+            </form>
+        </div>
+    </div>
+    `
+}
+
+let workList = {
+    props: ['workList'],
+    components: {
+        'work-step': workStep
+    },
+    template: `
     <div>
-        {{ message }}
-    </div>`
+        <work-step v-for="work in workList" :work="work"></work-step>
+    </div>
+    `
+}
+
+let fourthPage = {
+    data: function () {
+        return {
+            workList: recipe.steps
+        }
+    },
+    computed: Vuex.mapState({
+        participants: state => state.participants,
+        currentMenu: state => state.currentMenu
+    }),
+    components: {
+        'work-list': workList
+    },
+    template: `
+    <div>
+        <div id="distributeBlock">
+            <h1> Distribute Your Work!</h1>
+            <work-list :workList="workList"></work-list>
+        </div>
+        <div class="graphBlock">
+        </div>
+    </div>
+    `
 }
 
 let fifthPage = {
-    data: function() {
+    data: function () {
         return {
             message: "Result View"
         }
     },
+    computed: Vuex.mapState({
+        participants: state => state.participants,
+        currentMenu: state => state.currentMenu
+    }),
     template: `
-    <div>
-        {{ message }}
-    </div>`
+    <div>{{ message }}</div>
+    `
 }
 
 let progressBar = {
@@ -322,7 +444,7 @@ let progressBar = {
     </div>
     `,
     methods: {
-        onStepClick: function(i) {
+        onStepClick: function (i) {
             this.$emit('stepChange', i)
         }
     }
@@ -330,7 +452,8 @@ let progressBar = {
 
 let app = new Vue({
     el: '#app',
-    data: function() {
+    store,
+    data: function () {
         return {
             pageCursor: 1,
             numPeople: 1
@@ -345,34 +468,26 @@ let app = new Vue({
         'progress-bar': progressBar
     },
     methods: {
-        onLogoClick: function() {
+        onLogoClick: function () {
             location.reload()
         },
-        onPrevClick: function() {
+        onPrevClick: function () {
             if (this.pageCursor > 1) {
                 this.pageCursor -= 1
             }
         },
-        onNextClick: function() {
+        onNextClick: function () {
             if (this.pageCursor < 5) {
                 this.pageCursor += 1
             }
         },
-        onStepChange: function(i) {
-
+        onStepChange: function (i) {
             if (i > 0 && i < 6) {
                 this.pageCursor = i
             }
-
-            // if (i < this.pageCursor)
-            //     this.pageCursor -= 1
-            // else if (i > this.pageCursor)
-            //     this.pageCursor += 1
-            // else {
-            //     this.pageCursor = i
-            // }
         },
-        onFoodClick: function(food) {
+        onFoodClick: function (food) {
+            this.currentFood = food
             this.pageCursor = 2
         }
     },
@@ -383,30 +498,29 @@ let app = new Vue({
                 <a id="cooky_logo" href="#" @click="onLogoClick">Cooky</a>
             </nav>
             <div id="progress_bar">
-            <span>
-                <a id="cooky_back" v-bind:class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+                <span>
+                    <a id="cooky_back" v-bind:class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
                 <span id="progress-buttons"><progress-bar :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar></span>
                 <a id="cooky_next" v-bind:class="pageCursor < 5? '': 'sarajo'" @click="onNextClick"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
-            </span>
+                </span>
             </div>
         </header>
-
-        <!-- Container -->
         <div class="container">
-
             <first-page v-if="pageCursor == 1" @foodClick="onFoodClick"></first-page>
             <second-page v-else-if="pageCursor == 2" v-bind:numPeople=numPeople></second-page>
-            <third-page v-else-if="pageCursor == 3" @nextClick="onNextClick"></third-page>
-            <fourth-page v-else-if="pageCursor == 4"></fourth-page>
+            <third-page v-else-if="pageCursor == 3" @toFourthPage="onFourthPage"></third-page>
+            <fourth-page v-else-if="pageCursor == 4" :participants="participants"></fourth-page>
             <fifth-page v-else-if="pageCursor == 5"></fifth-page>
         </div>
-    </div>`
+    </div>
+    `
 });
 
 // sketch2
 Vue.component('menu-main', {
     props: ['title', 'imageLink', 'amount'],
-    template: `<div style="text-align:center">
+    template: `
+    <div style="text-align:center">
         <div class="row">
             <h3>{{title}}</h3>
         </div>
@@ -415,18 +529,19 @@ Vue.component('menu-main', {
         </div>
         <div class="row">
             <span style="font-size:1.5em; font-weight:bold"> Serving Amount : </span>
-            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true"/>
+            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true" />
             <span style="font-weight:bold;font-size:1.5em"> {{amount}} </span>
-            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true"/>
+            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true" />
         </div>
-    </div>`,
+    </div>
+    `,
     methods: {
-        reduceAmount: function() {
+        reduceAmount: function () {
             if (app.numPeople > 1) {
                 app.numPeople--;
             }
         },
-        addAmount: function() {
+        addAmount: function () {
             if (app.numPeople < 10) {
                 app.numPeople++;
             }
@@ -436,7 +551,9 @@ Vue.component('menu-main', {
 
 Vue.component('tool', {
     props: ['name'],
-    template: '<div>{{ name }}</div>'
+    template: `
+    <div>{{ name }}</div>
+    `
 });
 
 Vue.component('maining', {
@@ -451,14 +568,16 @@ Vue.component('subing', {
 
 Vue.component('tool-list', {
     props: ['tools'],
-    template: `<div class="col-sm-3 panel panel-warning">
-          <div class="panel-heading">
+    template: `
+    <div class="col-sm-3 panel panel-warning">
+        <div class="panel-heading">
             <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="margin-left:10px"> Cooking Tools</span>
-          </div>
-          <div class="panel-body">
+        </div>
+        <div class="panel-body">
             <tool v-for="item in tools" v-bind:name="item"></tool>
-          </div>
-        </div>`
+        </div>
+    </div>
+    `
 });
 
 Vue.component('main-ing-list', {
