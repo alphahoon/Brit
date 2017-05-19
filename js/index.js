@@ -116,6 +116,9 @@ let searchbox = {
                     <button class="btn btn-sm" v-bind:class="difficulty == 2 ? 'btn-danger ' : 'btn-default'" @click="onDifficultyChange(2)">Hard</button>
                     <button class="btn btn-sm" v-bind:class="difficulty == 3 ? 'btn-primary ' : 'btn-default'" @click="onDifficultyChange(3)">See All</button> 
                 </div>
+                <div>
+                    <input type="range" min="5" max="120" :value="time" @input="onTimeChange($event.target.value)"></input>
+                </div>
             </div>
         </div>
     </div>
@@ -128,6 +131,9 @@ let searchbox = {
         },
         onDifficultyChange: function (newDifficulty) {
             this.$emit('difficultyChange', newDifficulty)
+        },
+        onTimeChange: function (newTime) {
+            this.$emit('timeChange', newTime)
         }
     }
 }
@@ -167,13 +173,16 @@ let firstPage = {
         },
         onDifficultyChange: function (difficulty) {
             this.queryDifficulty = difficulty
+        }, 
+        onTimeChange: function (time) {
+            this.queryTime = time
         }
     },
     template: `
     <div>
         <h3 style="text-align:center">What do you want to have today? </h3>
         <div class="row" id="page1">
-            <searchbox @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" :difficulty="queryDifficulty" :query="query"></searchbox>
+            <searchbox @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" @timeChange="onTimeChange" :time="queryTime" :difficulty="queryDifficulty" :query="query"></searchbox>
             <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
         </div>
     </div>
