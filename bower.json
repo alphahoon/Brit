@@ -22,8 +22,6 @@
     "jquery": "^3.2.1",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "normalize-css": "^7.0.0",
-    "vue": "^2.3.3",
-    "vuex": "^2.3.0"
+    "normalize-css": "^7.0.0"
   }
 }
