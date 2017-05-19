@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/alphahoon/Brit#readme",
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "vuex": "^2.3.1"
   }
 }

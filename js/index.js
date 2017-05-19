@@ -1,13 +1,40 @@
+const store = new Vuex.Store({
+    state: {
+        participants: [{
+            name: '',
+            level: 0,
+            key: 0
+        }]
+    },
+    mutations: {
+        addParticipant(state, participant) {
+            state.participants.push(participant)
+        },
+        changeName(state, payload) {
+            state.participants[payload.idx].name = payload.name
+        },
+        changeLevel(state, payload) {
+            state.participants[payload.idx].level = payload.level
+        },
+        removeParticipant(state, payload) {
+            state.participants.splice(payload.idx, 1)
+        }
+    }
+})
+
+
+let menuList = []
+
 let foodCard = {
     props: ['food'],
     computed: {
-        timeStr: function() {
+        timeStr: function () {
             let hour = this.food.time / 60
             let min = this.food.time % 60
             let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
             return str
         },
-        difficulty: function() {
+        difficulty: function () {
             if (this.food.difficulty == 0) {
                 return 'Easy'
             } else if (this.food.difficulty == 1) {
@@ -18,7 +45,7 @@ let foodCard = {
         }
     },
     methods: {
-        onFoodClick: function() {
+        onFoodClick: function () {
             this.$emit('foodClick', this.food)
         }
     },
@@ -42,7 +69,7 @@ let foodList = {
         'food-card': foodCard
     },
     methods: {
-        onFoodClick: function(food) {
+        onFoodClick: function (food) {
             this.$emit('foodClick', food)
         }
     },
@@ -79,16 +106,16 @@ let searchbox = {
 
     props: ['difficulty', 'query', 'time'],
     methods: {
-        onInputChange: function(input) {
+        onInputChange: function (input) {
             this.$emit('queryChange', input)
         },
-        onDifficultyChange: function(newDifficulty) {
+        onDifficultyChange: function (newDifficulty) {
             this.$emit('difficultyChange', newDifficulty)
         }
     }
 }
 let firstPage = {
-    data: function() {
+    data: function () {
         return {
             foodList: [{
                 imgURL: 'assets/images/carbonara.png',
@@ -132,8 +159,8 @@ let firstPage = {
         }
     },
     computed: {
-        filteredList: function() {
-            let newList = this.foodList.filter(function(food) {
+        filteredList: function () {
+            let newList = this.foodList.filter(function (food) {
                 return (food.foodName.includes(this.query)) && (food.difficulty <= this.queryDifficulty) && (food.time <= this.queryTime)
             }.bind(this))
             return newList
@@ -144,13 +171,13 @@ let firstPage = {
         'searchbox': searchbox
     },
     methods: {
-        onFoodClick: function(food) {
+        onFoodClick: function (food) {
             this.$emit('foodClick', food)
         },
-        onQueryChange: function(query) {
+        onQueryChange: function (query) {
             this.query = query
         },
-        onDifficultyChange: function(difficulty) {
+        onDifficultyChange: function (difficulty) {
             this.queryDifficulty = difficulty
         }
     },
@@ -167,7 +194,7 @@ let firstPage = {
 
 let secondPage = {
     props: ['numPeople'],
-    data: function() {
+    data: function () {
         return {
             recipe: recipe
         };
@@ -185,7 +212,7 @@ let secondPage = {
 
 let participant = {
     props: ['person', 'idx'],
-    data: function() {
+    data: function () {
         return {
             name: ''
         }
@@ -207,13 +234,13 @@ let participant = {
         </span>
     </div>`,
     methods: {
-        onNameChange: function(name) {
+        onNameChange: function (name) {
             this.$emit('nameChange', name, this.idx)
         },
-        onLevelChange: function(level) {
+        onLevelChange: function (level) {
             this.$emit('levelChange', level, this.idx)
         },
-        onRemove: function() {
+        onRemove: function () {
             this.$emit('remove', this.idx)
         }
     }
@@ -223,16 +250,14 @@ let participants = {
     components: {
         'participant': participant
     },
-    data: function() {
+    data: function () {
         return {
             currentKey: 1,
-            participants: [{
-                name: '',
-                level: 0,
-                key: 0
-            }]
         }
     },
+    computed: Vuex.mapState({
+        participants: state => state.participants
+    }),
     template: `
     <div>
         <participant v-for="(person, idx) in participants" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
@@ -246,29 +271,34 @@ let participants = {
 
     ,
     methods: {
-        onNameSet: function(n) {
-            this.name = n
-        },
-        onAddParticipant: function() {
-            this.participants.push({
+        onAddParticipant: function () {
+            // this.participants.push({
+            //     name: '',
+            //     level: 0,
+            //     key: this.currentKey
+            // })
+            store.commit('addParticipant', {
                 name: '',
                 level: 0,
                 key: this.currentKey
             })
             this.currentKey += 1
         },
-        onNameChange: function(name, idx) {
-            this.participants[idx].name = name
+        onNameChange: function (name, idx) {
+            // this.participants[idx].name = name
+            store.commit('changeName', { idx: idx, name: name })
         },
-        onLevelChange: function(level, idx) {
-            this.participants[idx].level = level
+        onLevelChange: function (level, idx) {
+            // this.participants[idx].level = level
+            store.commit('changeLevel', { idx: idx, level: level })
         },
-        onRemove: function(idx) {
+        onRemove: function (idx) {
             // let idx = this.participants.indexOf(person)
-            this.participants.splice(idx, 1)
+            // this.participants.splice(idx, 1)
+            store.commit('removeParticipant', { idx: idx })
         },
-        onNextClick: function() {
-            this.$emit('nextClick')
+        onNextClick: function () {
+            this.$emit('nextClick', this.participants)
         }
     }
 }
@@ -283,27 +313,30 @@ let thirdPage = {
         <participants @nextClick="onNextClick"></participants>
     </div>`,
     methods: {
-        onNextClick: function() {
-            this.$emit('nextClick')
+        onNextClick: function (participants) {
+            this.$emit('toFourthPage', participants)
         }
     }
 }
 
 
 let fourthPage = {
-    data: function() {
+    data: function () {
         return {
             message: "Distribute View"
         }
     },
+    computed: Vuex.mapState({
+        participants: state => state.participants
+    }),
     template: `
     <div>
-        {{ message }}
+        {{ participants  }}
     </div>`
 }
 
 let fifthPage = {
-    data: function() {
+    data: function () {
         return {
             message: "Result View"
         }
@@ -322,7 +355,7 @@ let progressBar = {
     </div>
     `,
     methods: {
-        onStepClick: function(i) {
+        onStepClick: function (i) {
             this.$emit('stepChange', i)
         }
     }
@@ -330,10 +363,14 @@ let progressBar = {
 
 let app = new Vue({
     el: '#app',
-    data: function() {
+    store,
+    data: function () {
         return {
             pageCursor: 1,
-            numPeople: 1
+            numPeople: 1,
+            menuList: menuList,
+            currentFood: null,
+            participants: null
         }
     },
     components: {
@@ -345,35 +382,31 @@ let app = new Vue({
         'progress-bar': progressBar
     },
     methods: {
-        onLogoClick: function() {
+        onLogoClick: function () {
             location.reload()
         },
-        onPrevClick: function() {
+        onPrevClick: function () {
             if (this.pageCursor > 1) {
                 this.pageCursor -= 1
             }
         },
-        onNextClick: function() {
+        onNextClick: function () {
             if (this.pageCursor < 5) {
                 this.pageCursor += 1
             }
         },
-        onStepChange: function(i) {
-
+        onStepChange: function (i) {
             if (i > 0 && i < 6) {
                 this.pageCursor = i
             }
-
-            // if (i < this.pageCursor)
-            //     this.pageCursor -= 1
-            // else if (i > this.pageCursor)
-            //     this.pageCursor += 1
-            // else {
-            //     this.pageCursor = i
-            // }
         },
-        onFoodClick: function(food) {
+        onFoodClick: function (food) {
+            this.currentFood = food
             this.pageCursor = 2
+        },
+        onFourthPage: function (participants) {
+            this.participants = participants
+            this.pageCursor = 4
         }
     },
     template: `
@@ -396,8 +429,8 @@ let app = new Vue({
 
             <first-page v-if="pageCursor == 1" @foodClick="onFoodClick"></first-page>
             <second-page v-else-if="pageCursor == 2" v-bind:numPeople=numPeople></second-page>
-            <third-page v-else-if="pageCursor == 3" @nextClick="onNextClick"></third-page>
-            <fourth-page v-else-if="pageCursor == 4"></fourth-page>
+            <third-page v-else-if="pageCursor == 3" @toFourthPage="onFourthPage"></third-page>
+            <fourth-page v-else-if="pageCursor == 4" :participants="participants"></fourth-page>
             <fifth-page v-else-if="pageCursor == 5"></fifth-page>
         </div>
     </div>`
@@ -421,12 +454,12 @@ Vue.component('menu-main', {
         </div>
     </div>`,
     methods: {
-        reduceAmount: function() {
+        reduceAmount: function () {
             if (app.numPeople > 1) {
                 app.numPeople--;
             }
         },
-        addAmount: function() {
+        addAmount: function () {
             if (app.numPeople < 10) {
                 app.numPeople++;
             }
