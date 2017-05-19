@@ -509,7 +509,7 @@ let app = new Vue({
             <first-page v-if="pageCursor == 1" @foodClick="onFoodClick"></first-page>
             <second-page v-else-if="pageCursor == 2" v-bind:numPeople=numPeople></second-page>
             <third-page v-else-if="pageCursor == 3" @toFourthPage="onFourthPage"></third-page>
-            <fourth-page v-else-if="pageCursor == 4" :participants="participants"></fourth-page>
+            <fourth-page v-else-if="pageCursor == 4"></fourth-page>
             <fifth-page v-else-if="pageCursor == 5"></fifth-page>
         </div>
     </div>
