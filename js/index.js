@@ -9,8 +9,22 @@ const store = new Vuex.Store({
         pageCursor: 1
     },
     mutations: {
+        setPageCursor(state, payload) {
+            state.pageCursor = payload.pageCursor
+        },
+        incrementPageCursor(state) {
+            if (state.pageCursor < 5) {
+                state.pageCursor += 1
+            }
+        },
+        decrementPageCursor(state) {
+            if (state.pageCursor > 1) {
+                state.pageCursor -= 1
+            }
+        },
         setCurrentMenu(state, currentMenu) {
             state.currentMenu = currentMenu
+            state.pageCursor = 2
         },
         addParticipant(state, participant) {
             state.participants.push(participant)
@@ -417,10 +431,12 @@ let app = new Vue({
     store,
     data: function () {
         return {
-            pageCursor: 1,
             numPeople: 1
         }
     },
+    computed: Vuex.mapState({
+        pageCursor: state => state.pageCursor
+    }),
     components: {
         'first-page': firstPage,
         'second-page': secondPage,
@@ -434,23 +450,18 @@ let app = new Vue({
             location.reload()
         },
         onPrevClick: function () {
-            if (this.pageCursor > 1) {
-                this.pageCursor -= 1
-            }
+            store.commit('decrementPageCursor')
         },
         onNextClick: function () {
-            if (this.pageCursor < 5) {
-                this.pageCursor += 1
-            }
+            store.commit('incrementPageCursor')
         },
         onStepChange: function (i) {
             if (i > 0 && i < 6) {
-                this.pageCursor = i
+                store.commit('setPageCursor', { pageCursor: i })
             }
         },
         onFoodClick: function (food) {
             store.commit('setCurrentMenu', food)
-            this.pageCursor = 2
         }
     },
     template: `
