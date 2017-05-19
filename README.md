@@ -11,13 +11,14 @@
 Prerequisites: Node, NPM
 
 ##### 1. Install Bower
+
 ```
 $ sudo npm install -g bower
 ```
 
 ##### 2. Install Local Dependency Packages  
 
-In the project root directory:
+In the project root directory, type:
 ```
 $ npm install
 $ bower install
@@ -25,10 +26,10 @@ $ bower install
 
 ### Run
 
-If you want to use [Vue.js devtools](https://goo.gl/a8YYdM) on your Chrome browser, you should run local server.  
-In the project root directory:
+If you want to use [Vue.js devtools](https://goo.gl/a8YYdM) on your Chrome browser, you should run  a local server on your machine.  
+In the project root directory, type:
 ```
 $ npm start
 ```
 
-Then open http://localhost:3000 in your Chrome browser.
+Then open http://localhost:3000 in your Chrome browser.  
