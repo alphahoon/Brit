@@ -68,7 +68,7 @@ let searchbox = {
             </div>
             <div class="row" style="text-align:left">
                 <div class="btn-group " id="filterButtons" role="group">
-                    <button class="btn btn-sm" v-bind:class="difficulty == 0 ? 'btn-primary ' : 'btn-default'" @click="onDifficultyChange(0)">Easy</button>
+                    <button class="btn btn-sm" v-bind:class="difficulty == 0 ? 'btn-success ' : 'btn-default'" @click="onDifficultyChange(0)">Easy</button>
                     <button class="btn btn-sm" v-bind:class="difficulty == 1 ? 'btn-warning ' : 'btn-default'" @click="onDifficultyChange(1)">Medium</button>
                     <button class="btn btn-sm" v-bind:class="difficulty == 2 ? 'btn-danger ' : 'btn-default'" @click="onDifficultyChange(2)">Hard</button>
                 </div>
@@ -90,14 +90,42 @@ let searchbox = {
 let firstPage = {
     data: function() {
         return {
-            foodList: [{ imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 1, time: 30 },
-                { imgURL: './img/o.jpg', foodName: 'Omelet with Rice', difficulty: 1, time: 30 },
-                { imgURL: './img/s.jpg', foodName: 'Samgyetang', difficulty: 2, time: 70 },
-                { imgURL: './img/w2.jpg', foodName: 'Spring Roll', difficulty: 2, time: 30 },
-                { imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 2, time: 30 },
-                { imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 2, time: 30 },
-                { imgURL: './img/carbonara.png', foodName: 'Carbonara', difficulty: 2, time: 30 }
-            ],
+            foodList: [{
+                imgURL: 'assets/images/carbonara.png',
+                foodName: 'Carbonara',
+                difficulty: 1,
+                time: 30
+            }, {
+                imgURL: 'assets/images/o.jpg',
+                foodName: 'Omelet with Rice',
+                difficulty: 1,
+                time: 30
+            }, {
+                imgURL: 'assets/images/s.jpg',
+                foodName: 'Samgyetang',
+                difficulty: 2,
+                time: 70
+            }, {
+                imgURL: 'assets/images/w2.jpg',
+                foodName: 'Spring Roll',
+                difficulty: 2,
+                time: 30
+            }, {
+                imgURL: 'assets/images/carbonara.png',
+                foodName: 'Carbonara',
+                difficulty: 2,
+                time: 30
+            }, {
+                imgURL: 'assets/images/carbonara.png',
+                foodName: 'Carbonara',
+                difficulty: 2,
+                time: 30
+            }, {
+                imgURL: 'assets/images/carbonara.png',
+                foodName: 'Carbonara',
+                difficulty: 2,
+                time: 30
+            }],
             query: '',
             queryDifficulty: 2,
             queryTime: 120,
@@ -108,7 +136,6 @@ let firstPage = {
             let newList = this.foodList.filter(function(food) {
                 return (food.foodName.includes(this.query)) && (food.difficulty <= this.queryDifficulty) && (food.time <= this.queryTime)
             }.bind(this))
-            console.log(newList)
             return newList
         }
     },
@@ -121,7 +148,6 @@ let firstPage = {
             this.$emit('foodClick', food)
         },
         onQueryChange: function(query) {
-            console.log(query)
             this.query = query
         },
         onDifficultyChange: function(difficulty) {
@@ -172,7 +198,7 @@ let participant = {
             <span class="glyphicon glyphicon-user" style="font-size:1.5em;"> </span>
             <input style="width: 40%; margin-left:10px; margin-right:10px;padding-left:10px;padding-right:10px" @input="onNameChange($event.target.value)" v-bind:value="person.name" v-bind:placeholder="person.key == 0 ? 'Me' : ''"></input>
             <div class="btn-group " role="group">
-                <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-primary ' : 'btn-default'" @click.prevent="onLevelChange(0)">Beginner</button>
+                <button class="btn btn-lg" v-bind:class="person.level == 0 ? 'btn-success ' : 'btn-default'" @click.prevent="onLevelChange(0)">Beginner</button>
                 <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click.prevent="onLevelChange(1)">Intermediate</button>
                 <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click.prevent="onLevelChange(2)">Expert</button>
             </div>
@@ -185,7 +211,6 @@ let participant = {
             this.$emit('nameChange', name, this.idx)
         },
         onLevelChange: function(level) {
-            console.log('onLevelChange')
             this.$emit('levelChange', level, this.idx)
         },
         onRemove: function() {
@@ -201,7 +226,11 @@ let participants = {
     data: function() {
         return {
             currentKey: 1,
-            participants: [{ name: '', level: 0, key: 0 }]
+            participants: [{
+                name: '',
+                level: 0,
+                key: 0
+            }]
         }
     },
     template: `
@@ -210,7 +239,7 @@ let participants = {
         <div class="row">
             <div class="col-md-12" style="margin-top: 20px;text-align: center;">
                 <button v-if="participants.length < 4" currentKeyid="addParticipant" class="btn btn-default btn-lg" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                <button v-if="participants.length == 4" class="btn btn-default btn-lg btn-primary" style="font-weight:bold;" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" style="margin-left:10px"></span></button>
+                <button v-if="participants.length == 4" class="btn btn-default btn-lg btn-success" style="font-weight:bold;" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" style="margin-left:10px"></span></button>
             </div>
         </div>
     </div>`
@@ -218,11 +247,14 @@ let participants = {
     ,
     methods: {
         onNameSet: function(n) {
-            console.log(n)
             this.name = n
         },
         onAddParticipant: function() {
-            this.participants.push({ name: '', level: 0, key: this.currentKey })
+            this.participants.push({
+                name: '',
+                level: 0,
+                key: this.currentKey
+            })
             this.currentKey += 1
         },
         onNameChange: function(name, idx) {
@@ -286,7 +318,7 @@ let progressBar = {
     props: ['pageCursor'],
     template: `
     <div class="btn-group">
-        <button v-for="i in 5" class="btn" :class="pageCursor == i ? 'btn-primary' : 'btn-default'" :id="'step'+i" @click="onStepClick(i)">Step {{i}}</button>
+        <button v-for="i in 5" class="btn" :class="pageCursor == i ? 'btn-success' : 'btn-default'" :id="'step'+i" @click="onStepClick(i)">Step {{i}}</button>
     </div>
     `,
     methods: {

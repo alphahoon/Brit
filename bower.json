@@ -1,0 +1,28 @@
+{
+  "name": "brit-cooky",
+  "main": "index.html",
+  "homepage": "https://github.com/alphahoon/Brit",
+  "authors": [
+    "Jaehoon Lee <alphahoon@kaist.ac.kr>",
+    "Youngeun Kim <dhdepddl@kaist.ac.kr>",
+    "Hyunwoo Kim <khw0726@kaist.ac.kr>",
+    "Seayeon Lee <syeonlee@kaist.ac.kr>"
+  ],
+  "description": "KAIST CS374 HCI Project",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "normalize-css": "^7.0.0",
+    "vue": "^2.3.3"
+  }
+}
