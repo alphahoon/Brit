@@ -4,9 +4,13 @@ const store = new Vuex.Store({
             name: '',
             level: 0,
             key: 0
-        }]
+        }],
+        currentMenu: null
     },
     mutations: {
+        setCurrentMenu(state, currentMenu) {
+            state.currentMenu = currentMenu
+        },
         addParticipant(state, participant) {
             state.participants.push(participant)
         },
@@ -387,7 +391,8 @@ let fourthPage = {
         }
     },
     computed: Vuex.mapState({
-        participants: state => state.participants
+        participants: state => state.participants,
+        currentMenu: state => state.currentMenu
     }),
     components: {
         'work-list': workList
@@ -410,6 +415,10 @@ let fifthPage = {
             message: "Result View"
         }
     },
+    computed: Vuex.mapState({
+        participants: state => state.participants,
+        currentMenu: state => state.currentMenu
+    }),
     template: `
     <div>{{ message }}</div>
     `
@@ -435,10 +444,7 @@ let app = new Vue({
     data: function () {
         return {
             pageCursor: 1,
-            numPeople: 1,
-            menuList: menuList,
-            currentFood: null,
-            participants: null
+            numPeople: 1
         }
     },
     components: {
