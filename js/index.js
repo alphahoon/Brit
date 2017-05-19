@@ -180,6 +180,19 @@ let secondPage = {
     computed: Vuex.mapState({
         recipe: state => state.currentMenu
     }),
+    data: function() {
+      return {
+        unit_mode: 'p'
+      }
+    },
+    methods: {
+      p_mode: function() {
+        this.unit_mode = 'p';
+      },
+      r_mode: function() {
+        this.unit_mode = 'r'
+      }
+    },
     template: `
         <div>
             <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
@@ -192,15 +205,7 @@ let secondPage = {
                 <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main v-bind:mode=unit_mode></main-ing-list>
                 <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub v-bind:mode=unit_mode></sub-ing-list>
             </div>
-        </div>`,
-      method: {
-        p_mode: function() {
-          unit_mode = 'p';
-        },
-        r_mode: function() {
-          unit_mode = 'r'
-        }
-      }
+        </div>`
 };
 
 let participant = {
