@@ -114,6 +114,7 @@ let searchbox = {
                     <button class="btn btn-sm" v-bind:class="difficulty == 0 ? 'btn-success ' : 'btn-default'" @click="onDifficultyChange(0)">Easy</button>
                     <button class="btn btn-sm" v-bind:class="difficulty == 1 ? 'btn-warning ' : 'btn-default'" @click="onDifficultyChange(1)">Medium</button>
                     <button class="btn btn-sm" v-bind:class="difficulty == 2 ? 'btn-danger ' : 'btn-default'" @click="onDifficultyChange(2)">Hard</button>
+                    <button class="btn btn-sm" v-bind:class="difficulty == 3 ? 'btn-primary ' : 'btn-default'" @click="onDifficultyChange(3)">See All</button> 
                 </div>
             </div>
         </div>
@@ -143,9 +144,13 @@ let firstPage = {
             return recipes
         },
         filteredList: function () {
-            let newList = this.foodList.filter(function (food) {
-                return (food.title.includes(this.query)) && (food.level <= this.queryDifficulty) && (food.time <= this.queryTime)
-            }.bind(this))
+            let newList = this.queryDifficulty == 3 ?
+                this.foodList.filter(function (food) {
+                    return (food.title.includes(this.query)) && (food.time <= this.queryTime)
+                }.bind(this)) :
+                this.foodList.filter(function (food) {
+                    return (food.title.includes(this.query)) && (food.level == this.queryDifficulty) && (food.time <= this.queryTime)
+                }.bind(this))
             return newList
         }
     },
