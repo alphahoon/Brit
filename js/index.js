@@ -5,7 +5,8 @@ const store = new Vuex.Store({
             level: 0,
             key: 0
         }],
-        currentMenu: null
+        currentMenu: null,
+        pageCursor: 1
     },
     mutations: {
         setCurrentMenu(state, currentMenu) {
@@ -26,9 +27,6 @@ const store = new Vuex.Store({
     }
 })
 
-
-let menuList = []
-
 let foodCard = {
     props: ['food'],
     computed: {
@@ -39,11 +37,11 @@ let foodCard = {
             return str
         },
         difficulty: function () {
-            if (this.food.difficulty == 0) {
+            if (this.food.level == 0) {
                 return 'Easy'
-            } else if (this.food.difficulty == 1) {
+            } else if (this.food.level == 1) {
                 return 'Medium'
-            } else if (this.food.difficulty == 2) {
+            } else if (this.food.level == 2) {
                 return 'Hard'
             }
         }
@@ -55,8 +53,8 @@ let foodCard = {
     },
     template: `
     <div id="foodCard">
-        <div class="thumbnail"> <img v-bind:src="food.imgURL" v-bind:alt="food.foodName">
-            <div class="caption"> <a href="#" @click="onFoodClick"><h6>{{food.foodName}}</h6></a> </div>
+        <div class="thumbnail"> <img v-bind:src="food.imageLink" v-bind:alt="food.title">
+            <div class="caption"> <a href="#" @click="onFoodClick"><h6>{{food.title}}</h6></a> </div>
             <div class="cardContent"> {{difficulty}}
                 <div class="timeStr">
                     <span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
@@ -79,7 +77,7 @@ let foodList = {
     template: `
     <div class="col-md-9">
         <div class="row inner">
-            <food-card v-for="food in foodList" :food="food" :key="food.foodName" @foodClick="onFoodClick"></food-card>
+            <food-card v-for="food in foodList" :food="food" :key="food.title" @foodClick="onFoodClick"></food-card>
         </div>
     </div>
     `
@@ -119,53 +117,20 @@ let searchbox = {
     }
 }
 let firstPage = {
-    data: function () {
+    data: function() {
         return {
-            foodList: [{
-                imgURL: 'assets/images/carbonara.png',
-                foodName: 'Carbonara',
-                difficulty: 1,
-                time: 30
-            }, {
-                imgURL: 'assets/images/omelet_rice.jpg',
-                foodName: 'Omelet with Rice',
-                difficulty: 1,
-                time: 30
-            }, {
-                imgURL: 'assets/images/s.jpg',
-                foodName: 'Samgyetang',
-                difficulty: 2,
-                time: 70
-            }, {
-                imgURL: 'assets/images/w2.jpg',
-                foodName: 'Spring Roll',
-                difficulty: 2,
-                time: 30
-            }, {
-                imgURL: 'assets/images/carbonara.png',
-                foodName: 'Carbonara',
-                difficulty: 2,
-                time: 30
-            }, {
-                imgURL: 'assets/images/carbonara.png',
-                foodName: 'Carbonara',
-                difficulty: 2,
-                time: 30
-            }, {
-                imgURL: 'assets/images/carbonara.png',
-                foodName: 'Carbonara',
-                difficulty: 2,
-                time: 30
-            }],
-            query: '',
-            queryDifficulty: 2,
+            queryDifficulty: 3,
             queryTime: 120,
+            query: ''
         }
     },
     computed: {
+        foodList: function () {
+            return recipes
+        },
         filteredList: function () {
             let newList = this.foodList.filter(function (food) {
-                return (food.foodName.includes(this.query)) && (food.difficulty <= this.queryDifficulty) && (food.time <= this.queryTime)
+                return (food.title.includes(this.query)) && (food.level <= this.queryDifficulty) && (food.time <= this.queryTime)
             }.bind(this))
             return newList
         }
@@ -198,12 +163,9 @@ let firstPage = {
 
 let secondPage = {
     props: ['numPeople'],
-    data: function () {
-        return {
-            recipe: carbonara,
-            unit_mode: 'p'
-        };
-    },
+    computed: Vuex.mapState({
+        recipe: state => state.currentMenu
+    }),
     template: `
         <div>
             <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
@@ -487,7 +449,7 @@ let app = new Vue({
             }
         },
         onFoodClick: function (food) {
-            this.currentFood = food
+            store.commit('setCurrentMenu', food)
             this.pageCursor = 2
         }
     },
