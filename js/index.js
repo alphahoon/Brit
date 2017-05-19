@@ -373,14 +373,10 @@ let workList = {
 }
 
 let fourthPage = {
-    data: function () {
-        return {
-            workList: recipe.steps
-        }
-    },
-    computed: Vuex.mapState({
+     computed: Vuex.mapState({
         participants: state => state.participants,
-        currentMenu: state => state.currentMenu
+        currentMenu: state => state.currentMenu,
+        workList: state => state.currentMenu.steps
     }),
     components: {
         'work-list': workList
