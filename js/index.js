@@ -307,7 +307,7 @@ let participants = {
             store.commit('removeParticipant', { idx: idx })
         },
         onNextClick: function () {
-            this.$emit('nextClick', this.participants)
+            store.commit('incrementPageCursor')
         }
     }
 }
@@ -319,14 +319,9 @@ let thirdPage = {
     },
     template: `
     <div>
-        <participants @nextClick="onNextClick"></participants>
+        <participants></participants>
     </div>
-    `,
-    methods: {
-        onNextClick: function (participants) {
-            this.$emit('toFourthPage', participants)
-        }
-    }
+    `
 }
 
 let workStep = {
