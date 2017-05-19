@@ -15,8 +15,33 @@ nav {
     padding-bottom: 1em;
     text-align: center;
     vertical-align: middle;
-    background-color: orange;
+    background-color: #2ecc71;
 }
+
+.btn-success {
+    background: #2ecc71;
+}
+
+.btn-warning {
+    background: #f1c40f;
+}
+
+.btn-danger {
+    background: #e74c3c;
+}
+
+.btn-success:focus {
+    background: #27ae60;
+}
+
+.btn-warning:focus {
+    background: #f39c12;
+}
+
+.btn-danger:focus {
+    background: #c0392b;
+}
+
 
 #cooky_logo {
     color: white;
@@ -25,40 +50,48 @@ nav {
     display: inline-block;
 }
 
+#cooky_logo:hover {
+    text-decoration: none;
+}
+
 #progress_bar {
     width: 100%;
     padding-top: 1em;
     padding-bottom: 1em;
     text-align: center;
     vertical-align: middle;
-    background-color: gray;
+    background-color: #ecf0f1;
     clear: left;
 }
 
 #cooky_back {
-    color: white;
+    color: #2ecc71;
     font-size: 2em;
     font-weight: bold;
     display: inline-block;
     margin-left: 10%;
     float: left;
+    font-size: 2.4em;
 }
 
 #cooky_back:hover {
-    color: orange;
+    color: #27ae60;
+    cursor: pointer;
 }
 
 #cooky_next {
-    color: white;
+    color: #2ecc71;
     font-size: 2em;
     font-weight: bold;
     display: inline-block;
     margin-right: 10%;
     float: right;
+    font-size: 2.4em;
 }
 
 #cooky_next:hover {
-    color: orange;
+    color: #27ae60;
+    cursor: pointer;
 }
 
 .sarajo {
@@ -73,13 +106,13 @@ footer {
     clear: both;
     position: relative;
     height: 3em;
-    background: orange;
+    background: #ecf0f1;
     margin-top: -3em;
     text-align: right;
     margin-top: 2em;
     padding-top: 2em;
     padding-right: 10%;
-    padding-bottom: 4em;
+    padding-bottom: 6em;
     font-weight: bold;
     right: 0;
     left: 0;
