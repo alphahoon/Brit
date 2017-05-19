@@ -96,7 +96,7 @@ let firstPage = {
                 difficulty: 1,
                 time: 30
             }, {
-                imgURL: 'assets/images/o.jpg',
+                imgURL: 'assets/images/omelet_rice.jpg',
                 foodName: 'Omelet with Rice',
                 difficulty: 1,
                 time: 30
@@ -177,8 +177,8 @@ let secondPage = {
             <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
             <div class="row" style="height:300px;margin-top: 20px;padding-left:10%">
                 <tool-list v-bind:tools=recipe.tools></tool-list>
-                <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main></main-ing-list>
-                <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub></sub-ing-list>
+                <main-ing-list v-bind:amount=numPeople v-bind:main_ings=recipe.main v-bind:mode=unit_mode></main-ing-list>
+                <sub-ing-list v-bind:amount=numPeople v-bind:sub_ings=recipe.sub v-bind:mode=unit_mode></sub-ing-list>
             </div>
         </div>`
 };
@@ -202,7 +202,7 @@ let participant = {
                 <button class="btn btn-lg" v-bind:class="person.level == 1 ? 'btn-warning ' : 'btn-default'" @click.prevent="onLevelChange(1)">Intermediate</button>
                 <button class="btn btn-lg" v-bind:class="person.level == 2 ? 'btn-danger ' : 'btn-default'" @click.prevent="onLevelChange(2)">Expert</button>
             </div>
-            <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button> 
+            <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove"><span class="glyphicon glyphicon-remove"></span></button>
             </form>
         </span>
     </div>`,
@@ -440,12 +440,12 @@ Vue.component('tool', {
 });
 
 Vue.component('maining', {
-    props: ['info', 'amount'],
+    props: ['info', 'amount', 'mode'],
     template: '<div><span>{{ info.name }}</span> <span style="color:#8BC34A">{{info.amount * amount}}{{ info.unit }}</span></div>'
 });
 
 Vue.component('subing', {
-    props: ['info', 'amount'],
+    props: ['info', 'amount', 'mode'],
     template: '<div><input type="checkbox" style="margin-right:10px"/>{{ info.name }} <span style="color:#00BCD4">{{info.amount * amount}}{{ info.unit }}</span></div>'
 });
 
@@ -462,26 +462,26 @@ Vue.component('tool-list', {
 });
 
 Vue.component('main-ing-list', {
-    props: ['main_ings', 'amount'],
+    props: ['main_ings', 'amount', 'mode'],
     template: `<div class="col-sm-4 panel panel-success">
       <div class="panel-heading">
             <span class="glyphicon glyphicon-apple" aria-hidden="true" style="margin-left:10px"> Main Ingredients</span>
         </div>
       <div class="panel-body">
-        <maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount"></maining>
+        <maining v-for="item in main_ings" v-bind:info="item" v-bind:amount="amount" v-bind:mode="mode"></maining>
       </div>
     </div>`
 });
 
 
 Vue.component('sub-ing-list', {
-    props: ['sub_ings', 'amount'],
+    props: ['sub_ings', 'amount', 'mode'],
     template: `<div class="col-sm-3 panel panel-info">
       <div class="panel-heading">
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="margin-left:10px"> Extra Ingredients</span>
         </div>
       <div class="panel-body">
-        <subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount"></subing>
+        <subing v-for="item in sub_ings" v-bind:info="item" v-bind:amount="amount" v-bind:mode="mode"></subing>
       </div>
     </div>`
 });
