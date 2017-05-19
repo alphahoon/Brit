@@ -5,3 +5,30 @@
 [2] 20120281, **Youngeun Kim** (*dhdepddl@kaist.ac.kr*), Department of Mathematical Sciences  
 [3] 20130201, **Hyunwoo Kim** (*khw0726@kaist.ac.kr*), Department of Chemistry  
 [4] 20150559, **Seayeon Lee** (*syeonlee@kaist.ac.kr*), School of Computing  
+
+### Developing Environment Setting
+
+Prerequisites: Node, NPM
+
+##### 1. Install Bower
+```
+$ sudo npm install -g bower
+```
+
+##### 2. Install Local Dependency Packages  
+
+In the project root directory:
+```
+$ npm install
+$ bower install
+```
+
+### Run
+
+If you want to use [Vue.js devtools](https://goo.gl/a8YYdM) on your Chrome browser, you should run local server.  
+In the project root directory:
+```
+$ npm start
+```
+
+Then open http://localhost:3000 in your Chrome browser.

@@ -1,0 +1,29 @@
+{
+  "name": "brit-cooky",
+  "version": "1.0.0",
+  "description": "KAIST CS374 HCI Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alphahoon/Brit.git"
+  },
+  "author": "Jaehoon Lee <alphahoon@kaist.ac.kr>",
+  "contributors": [
+    "Jaehoon Lee <alphahoon@kaist.ac.kr>",
+    "Youngeun Kim <dhdepddl@kaist.ac.kr>",
+    "Hyunwoo Kim <khw0726@kaist.ac.kr>",
+    "Seayeon Lee <syeonlee@kaist.ac.kr>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alphahoon/Brit/issues"
+  },
+  "homepage": "https://github.com/alphahoon/Brit#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
