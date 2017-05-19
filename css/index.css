@@ -1,12 +1,12 @@
 /** CSS Styles */
 
-html,
-body {
+html {
     height: 100%;
 }
 
 body {
     min-height: 100%;
+    position: relative;
 }
 
 nav {
@@ -15,7 +15,11 @@ nav {
     padding-bottom: 1em;
     text-align: center;
     vertical-align: middle;
-    background-color: #2ecc71;
+    background-color: #3498db;
+}
+
+.btn-primary {
+    background: #3498db;
 }
 
 .btn-success {
@@ -30,16 +34,52 @@ nav {
     background: #e74c3c;
 }
 
-.btn-success:focus {
+.btn-primary:focus,
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-success:focus,
+.btn-success:hover {
     background: #27ae60;
 }
 
-.btn-warning:focus {
+.btn-warning:focus,
+.btn-warning:hover {
     background: #f39c12;
 }
 
-.btn-danger:focus {
+.btn-danger:focus,
+.btn-danger:hover {
     background: #c0392b;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:active:hover,
+.btn-primary.active:hover {
+    background: #1067A0;
+}
+
+.btn-success:active,
+.btn-success.active,
+.btn-success:active:hover,
+.btn-success.active:hover {
+    background: #0E9547;
+}
+
+.btn-warning:active,
+.btn-warning.active,
+.btn-warning:active:hover,
+.btn-warning.active:hover {
+    background: #DA8300;
+}
+
+.btn-danger:active,
+.btn-danger.active,
+.btn-danger:active:hover,
+.btn-danger.active:hover {
+    background: #A72012;
 }
 
 
@@ -56,8 +96,8 @@ nav {
 
 #progress_bar {
     width: 100%;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
     text-align: center;
     vertical-align: middle;
     background-color: #ecf0f1;
@@ -65,7 +105,7 @@ nav {
 }
 
 #cooky_back {
-    color: #2ecc71;
+    color: #3498db;
     font-size: 2em;
     font-weight: bold;
     display: inline-block;
@@ -74,13 +114,19 @@ nav {
     font-size: 2.4em;
 }
 
+#cooky_back:focus,
 #cooky_back:hover {
-    color: #27ae60;
+    color: #2980b9;
     cursor: pointer;
 }
 
+#cooky_back:active,
+#cooky_back:active:hover {
+    color: #1067A0;
+}
+
 #cooky_next {
-    color: #2ecc71;
+    color: #3498db;
     font-size: 2em;
     font-weight: bold;
     display: inline-block;
@@ -89,9 +135,15 @@ nav {
     font-size: 2.4em;
 }
 
+#cooky_next:focus,
 #cooky_next:hover {
-    color: #27ae60;
+    color: #2980b9;
     cursor: pointer;
+}
+
+#cooky_next:active,
+#cooky_next:active:hover {
+    color: #1067A0;
 }
 
 .sarajo {
@@ -104,12 +156,13 @@ nav {
 
 footer {
     clear: both;
-    position: relative;
+    position: absolute;
     height: 3em;
     background: #ecf0f1;
     margin-top: -3em;
     text-align: right;
     margin-top: 2em;
+    margin-bottom: -6em;
     padding-top: 2em;
     padding-right: 10%;
     padding-bottom: 6em;
