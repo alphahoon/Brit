@@ -33,3 +33,13 @@ $ npm start
 ```
 
 Then open http://localhost:3000 in your Chrome browser.  
+
+### Webpack
+
+```
+$ npm run build
+```
+or
+```
+$ npm run dev
+```

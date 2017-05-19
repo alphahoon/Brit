@@ -21,9 +21,6 @@
     "Seayeon Lee <syeonlee@kaist.ac.kr>"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/alphahoon/Brit/issues"
-  },
   "homepage": "https://github.com/alphahoon/Brit#readme",
   "dependencies": {
     "express": "^4.15.3",
