@@ -295,15 +295,10 @@ let participants = {
             // this.participants[idx].level = level
             store.commit('changeLevel', { idx: idx, level: level })
         },
-<<<<<<< HEAD
         onRemove: function (idx) {
             // let idx = this.participants.indexOf(person)
             // this.participants.splice(idx, 1)
             store.commit('removeParticipant', { idx: idx })
-=======
-        onRemove: function(idx) {
-            this.participants.splice(idx, 1)
->>>>>>> master
         },
         onNextClick: function () {
             this.$emit('nextClick', this.participants)
