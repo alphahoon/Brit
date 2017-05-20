@@ -5,7 +5,7 @@ let secondPage = {
     }),
     data: function() {
         return {
-            unit_mode: 'p'
+            unit_mode: 'r'
         }
     },
     methods: {
@@ -18,7 +18,9 @@ let secondPage = {
     },
     template: `
         <div>
+          <div>
             <menu-main v-bind:title=recipe.title v-bind:amount=numPeople v-bind:imageLink=recipe.imageLink></menu-main>
+          </div>
             <div class="btn-group" role="group" aria-label="...">
               <button type="button" class="btn btn-default" v-on:click="p_mode">Precisely</button>
               <button type="button" class="btn btn-default" v-on:click="r_mode">Roughly</button>
@@ -72,12 +74,24 @@ Vue.component('tool', {
 
 Vue.component('maining', {
     props: ['info', 'amount', 'mode'],
-    template: '<div><span>{{ info.name }}</span> <span style="color:#8BC34A">{{info.amount * amount}}{{ info.unit }}</span></div>'
+    template: `<div v-if="mode === 'r'"><span>{{ info.name }}</span>
+        <span style="color:#8BC34A">{{info.ramount * amount}}{{ info.runit }}</span>
+          </div>
+          <div v-else><span>{{ info.name }}</span>
+              <span style="color:#8BC34A">{{info.pamount * amount}}{{ info.punit }}</span>
+            </div>`
 });
 
 Vue.component('subing', {
     props: ['info', 'amount', 'mode'],
-    template: '<div><input type="checkbox" style="margin-right:10px"/>{{ info.name }} <span style="color:#00BCD4">{{info.amount * amount}}{{ info.unit }}</span></div>'
+    template: `<div v-if="mode === 'r'">
+      <input type="checkbox" style="margin-right:10px"/>{{ info.name }}
+      <span style="color:#00BCD4">{{info.ramount * amount}}{{ info.runit }}</span>
+      </div>
+      <div v-else>
+        <input type="checkbox" style="margin-right:10px"/>{{ info.name }}
+        <span style="color:#00BCD4">{{info.pamount * amount}}{{ info.punit }}</span>
+        </div>`
 });
 
 Vue.component('tool-list', {
