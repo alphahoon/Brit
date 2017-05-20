@@ -24,7 +24,7 @@ let foodCard = {
     },
     template: `
     <div id="foodCard">
-        <div class="thumbnail"> <img v-bind:src="food.imageLink" v-bind:alt="food.title">
+        <div class="thumbnail"> <a href="#" @click="onFoodClick"><img v-bind:src="food.imageLink" v-bind:alt="food.title"></a>
             <div class="caption"> <a href="#" @click="onFoodClick"><h6>{{food.title}}</h6></a> </div>
             <div class="cardContent"> {{difficulty}}
                 <div class="timeStr">
@@ -71,7 +71,7 @@ let searchbox = {
                     <button class="btn btn-sm" v-bind:class="difficulty == 0 ? 'btn-success ' : 'btn-default'" @click="onDifficultyChange(0)">Easy</button>
                     <button class="btn btn-sm" v-bind:class="difficulty == 1 ? 'btn-warning ' : 'btn-default'" @click="onDifficultyChange(1)">Medium</button>
                     <button class="btn btn-sm" v-bind:class="difficulty == 2 ? 'btn-danger ' : 'btn-default'" @click="onDifficultyChange(2)">Hard</button>
-                    <button class="btn btn-sm" v-bind:class="difficulty == 3 ? 'btn-primary ' : 'btn-default'" @click="onDifficultyChange(3)">See All</button> 
+                    <button class="btn btn-sm" v-bind:class="difficulty == 3 ? 'btn-primary ' : 'btn-default'" @click="onDifficultyChange(3)">See All</button>
                 </div>
                 <div>
                     <input type="range" min="5" max="120" :value="time" @input="onTimeChange($event.target.value)"></input>
@@ -130,7 +130,7 @@ let firstPage = {
         },
         onDifficultyChange: function (difficulty) {
             this.queryDifficulty = difficulty
-        }, 
+        },
         onTimeChange: function (time) {
             this.queryTime = time
         }

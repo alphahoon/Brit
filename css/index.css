@@ -228,8 +228,8 @@ header {
  -moz-column-width: 18em;
  -webkit-column-width: 18em;
  -moz-column-gap: 1em;
- -webkit-column-gap:1em; 
-  
+ -webkit-column-gap:1em;
+
 }*/
 
 .thumbnail {
@@ -237,7 +237,7 @@ header {
     display: block;
 }
 
-.thumbnail > img {
+.thumbnail > a > img {
     width: 100%;
     height: 180px;
 }
