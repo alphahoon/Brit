@@ -23,6 +23,7 @@
   "license": "MIT",
   "homepage": "https://github.com/alphahoon/Brit#readme",
   "dependencies": {
+    "chart.js": "^2.5.0",
     "express": "^4.15.3",
     "hchs-vue-charts": "^1.2.8",
     "vue": "^2.2.1",
