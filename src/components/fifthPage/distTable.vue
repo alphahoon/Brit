@@ -7,7 +7,7 @@
         <th class="thirdPerson" v-if="participants.length >= 3">{{participants[2].name}}</th>
         <th class="fourthPerson" v-if="participants.length >= 4">{{participants[3].name}}</th>
     </tr>
-    <distStep v-for="dist in distList" :participants="participants" :dist="dist"></distStep>
+    <distStep v-for="(dist, index) in distList" :participants="participants" :dist="dist" :workList="workList" :index="index" @doneClick="doneClicked"></distStep>
 </table>
 </template>
 
@@ -15,9 +15,15 @@
 import distStep from './distStep.vue'
 
 export default {
-    props: ['participants', 'distList'],
+    props: ['participants', 'distList', 'workList'],
     components: {
         distStep
+    },
+    methods: {
+        doneClicked: function (participantIndex, stepIndex) {
+            console.log(participantIndex, stepIndex)
+
+        }
     }
 }
 </script>
