@@ -4,7 +4,7 @@
         <form class="form-inline">
             <span class="participantIndex">{{idx + 1}} </span>
             <span class="glyphicon glyphicon-user" :class="getColor"> </span>
-            <input ref="nameInput" @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'Me (Please type less than 5 characters)' : '(Please type less than 5 characters)'"></input>
+            <input ref="nameInput" @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'My name' : 'Put your collaborator\'s name'"></input>
             <div class="btn-group " role="group">
                 <button class="btn btn-lg btn-default" :class="person.level == 0 ? 'active ' : ''" @click.prevent="onLevelChange(0)">Beginner</button>
                 <button class="btn btn-lg btn-default" :class="person.level == 1 ? 'active' : ''" @click.prevent="onLevelChange(1)">Intermediate</button>
@@ -26,18 +26,18 @@ export default {
             name: ''
         }
     },
-    mounted: function(){
+    mounted: function () {
         this.$refs.nameInput.focus()
     },
     computed: {
-        getColor: function() {
-            if(this.idx == 0){
+        getColor: function () {
+            if (this.idx == 0) {
                 return 'p-success'
-            } else if(this.idx == 1){
+            } else if (this.idx == 1) {
                 return 'p-primary'
-            } else if(this.idx == 2){
+            } else if (this.idx == 2) {
                 return 'p-warning'
-            } else if(this.idx == 3){
+            } else if (this.idx == 3) {
                 return 'p-danger'
             }
         }
@@ -85,7 +85,7 @@ input {
     color: #e74c3c;
 }
 
-.p-primary{
+.p-primary {
     color: #3498db;
 }
 </style>

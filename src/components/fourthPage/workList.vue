@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="col-md-6">
     <workStep v-for="work in workList" :work="work"></workStep>
 </div>
 </template>

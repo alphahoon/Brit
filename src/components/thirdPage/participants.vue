@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 adjustParticipants">
             <button v-if="participants.length < 4" currentKeyid="addParticipant" class="btn btn-default btn-lg" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-            <button v-if="participants.length == 4" class="btn btn-default btn-lg btn-success fullParticipants" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
+            <!--<button v-if="participants.length == 4" class="btn btn-default btn-lg btn-success fullParticipants" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>-->
         </div>
     </div>
 </div>
@@ -37,9 +37,9 @@ export default {
             })
             this.currentKey += 1
             // this.$refs.participant[0].focus()
-        //     this.$nextTick(() => {
-        //     this.$refs.participant[this.participants.length-1].focus()
-        //   })
+            //     this.$nextTick(() => {
+            //     this.$refs.participant[this.participants.length-1].focus()
+            //   })
         },
         onNameChange: function (name, idx) {
             this.$store.commit('changeName', {

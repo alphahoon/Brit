@@ -1,13 +1,10 @@
 <template>
-<div>
-    <div id="distributeBlock">
-        <h1> Distribute Your Work!</h1>
+<div id="distributeBlock">
+    <h1> Distribute Your Work!</h1>
+    <div class="row">
         <workList :workList="workList"></workList>
-    </div>
-    <div class="graphBlock">
-        <chartjs-line :labels="labels" :data="data" :bind="true"></chartjs-line>
-    </div>
-</div>
+        <chart :participants="participants" :distList="distList" :workList="workList"></chart>
+    </div </div>
 </template>
 
 <script>
@@ -15,15 +12,18 @@ import {
     mapState
 } from 'vuex'
 import workList from './fourthPage/workList.vue'
+import chart from './fourthPage/chart.vue'
 
 export default {
     computed: mapState({
         participants: state => state.participants,
         currentMenu: state => state.currentMenu,
-        workList: state => state.currentMenu.steps
+        workList: state => state.currentMenu.steps,
+        distList: state => state.distribution
     }),
     components: {
-        workList
+        workList,
+        chart
     }
 }
 </script>
