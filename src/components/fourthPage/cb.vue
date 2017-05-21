@@ -24,7 +24,7 @@ export default{
             });
           }
           else {
-            this.$store.commit('emoveDistribution', {
+            this.$store.commit('removeDistribution', {
               step: this.stepIdx,
               participant: this.participant
             });

@@ -9,8 +9,7 @@ export default new Vuex.Store({
     participants: [{
       name: '',
       level: 0,
-      key: 0,
-      distribution: []
+      key: 0
     }],
     recipes: recipes,
     currentMenu: null,
