@@ -5,9 +5,9 @@
                 <span> {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
             </div>
             <div class="panel-body">
-                <div class="col-md-8"> {{this.work.text}} </div>
+                <div> {{this.work.text}} </div>
 
-                <div class="col-md-4" data-toggle="buttons" style="margin-top: 5px;">
+                <div data-toggle="buttons" style="margin-top: 5px;">
                     <!--<label class="btn btn-success" style="margin: 4px;">
                         <input type="checkbox" autocomplete="off" checked>
                         <span class="glyphicon glyphicon-ok"></span>

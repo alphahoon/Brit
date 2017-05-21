@@ -1,9 +1,11 @@
 <template>
     <div class="labelClass">
-        <div class="participantName">{{participant.name.slice(0, 5)}}</div>
-        <label class="btn" :class="bgColor" style="margin: 4px;" v-on:click="checkWork">
+        <div class="participantName">{{participant.name}}</div>
+        <div style="margin: 0 auto;">
+        <label class="btn" :class="bgColor" style="margin: 4px; padding:3px;" v-on:click="checkWork">
             <span v-if="isChecked" class="glyphicon glyphicon-ok"></span>
         </label>
+        </div>
     </div>
 </template>
 
@@ -72,9 +74,15 @@ export default{
 
 .labelClass{
     display:inline-block;
+    padding: 0 1em;
+    align-content: center;
 }
 
 .participantName{
     text-align: center;
+}
+
+.glyphicon{
+    vertical-align: text-top;
 }
 </style>
