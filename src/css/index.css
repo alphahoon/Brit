@@ -284,17 +284,6 @@ img {
     float: right;
 }
 
-#rowWork {
-    margin-bottom: 10px;
-    border: 1px solid #000000;
-}
-
-#workContent {
-    background-color: #FFE4B5;
-    margin: 8px 30px 8px 8px;
-    padding-top: 3px;
-}
-
 #checkbox-inline {
     padding: 3px;
 }
@@ -303,6 +292,5 @@ img {
     margin-top: 10px;
 }
 
-input[type=checkbox] {
-    transform: scale(1.2);
-}
+
+

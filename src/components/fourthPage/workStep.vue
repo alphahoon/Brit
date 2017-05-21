@@ -1,26 +1,35 @@
 <template>
 <div class="row">
-    <div id="rowWork" class="col-md-11">
-        <div id="workContent" class="col-sm-6">
-            <div>
-                <div class="workText"> {{this.work.text}} </div>
-                <div class="workAttribute col-md-5"> {{difficulty}}
-                    <div class="timeCal"><span class="glyphicon glyphicon-time"></span>{{timeCal}}</div>
+        <div class="panel panel-info col-md-6">
+            <div class="panel-heading">
+                <span> {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6"> {{this.work.text}} </div> 
+                
+                <div class="col-sm-6" data-toggle="buttons" style="margin-top: 5px;">    
+                    <label class="btn btn-success" style="margin: 4px;">
+                        <input type="checkbox" autocomplete="off" checked>
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+                    <label class="btn btn-primary"  style="margin: 4px;">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
+                
+                    <label class="btn btn-warning" style="margin: 4px;">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
+                
+                    <label class="btn btn-danger"  style="margin: 4px;">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
                 </div>
             </div>
         </div>
-        <form class="checkBoxGroup">
-            <label class="checkbox-inline">
-                    <input type="checkbox" value=0> </label>
-            <label class="checkbox-inline">
-                    <input type="checkbox" value=1> </label>
-            <label class="checkbox-inline">
-                    <input type="checkbox" value=2> </label>
-            <label class="checkbox-inline">
-                    <input type="checkbox" value=3> </label>
-        </form>
     </div>
-</div>
 </template>
 
 <script>
@@ -47,5 +56,10 @@ export default {
 </script>
 
 <style scoped>
-
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
 </style>
