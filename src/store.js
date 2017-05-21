@@ -9,7 +9,8 @@ export default new Vuex.Store({
     participants: [{
       name: '',
       level: 0,
-      key: 0
+      key: 0,
+      distribution: []
     }],
     recipes: recipes,
     currentMenu: null,
@@ -40,6 +41,11 @@ export default new Vuex.Store({
     },
     setCurrentMenu(state, currentMenu) {
       state.currentMenu = currentMenu
+      var array = [];
+      for(var i=0;i<currentMenu.steps.length;i++){
+        array.push([]);
+      }
+      state.distribution = array;
       state.pageCursor = 2
     },
     addParticipant(state, participant) {
@@ -53,6 +59,19 @@ export default new Vuex.Store({
     },
     removeParticipant(state, payload) {
       state.participants.splice(payload.idx, 1)
+    },
+
+    pushDistribution(state,payload) {
+      state.distribution[payload.step].push(payload.participant)
+    },
+    removeDistribution(state,payload){
+      for(var i=0; i<state.distribution[payload.step].length; i++){
+        if(state.distribution[payload.step][i] == payload.participant){
+          state.distribution[payload.step].splice(i,1);
+          break;
+        }
+      }
     }
+
   }
 })
