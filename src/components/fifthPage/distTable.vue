@@ -22,7 +22,8 @@ export default {
     methods: {
         doneClicked: function (participantIndex, stepIndex) {
             console.log(participantIndex, stepIndex)
-
+            this.distList[stepIndex].splice(this.distList[stepIndex].indexOf(participantIndex), 1)
+            console.log(this.distList)
         }
     }
 }
