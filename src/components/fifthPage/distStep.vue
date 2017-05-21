@@ -1,6 +1,6 @@
 <template>
 <tr :class="[isActive ? activeClass : '', errorClass]">
-    <td class="stepNumber">{{index}}</td>
+    <td class="stepNumber">{{index + 1}}</td>
     <td class="firstPerson" v-if="participants.length >= 1">
         <div class="done" v-if="!oneFinished && isActive" @click="onDoneClicked(0, index)">
             <h3>Done!</h3></div>
