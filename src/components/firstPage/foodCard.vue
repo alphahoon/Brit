@@ -1,10 +1,15 @@
 <template>
 <div id="foodCard">
     <div class="thumbnail"> <a href="#" @click="onFoodClick"><img :src="food.imageLink" :alt="food.title" ></a>
-        <div class="caption"> <a href="#" @click="onFoodClick"><h6>{{food.title}}</h6></a> </div>
-        <div class="cardContent"> {{difficulty}}
+        <div class="caption"> <a href="#" @click="onFoodClick"><h5>{{food.title}}</h5></a> </div>
+        <div class="cardContent"> 
+            <button class="btn btn-sm" :class="bgColor">
+                {{difficulty}}
+            </button>
             <div class="timeStr">
-                <span class="glyphicon glyphicon-time"></span>{{timeStr}}</div>
+                <span class="glyphicon glyphicon-time"></span>
+                {{timeStr}}
+                </div>
         </div>
     </div>
 </div>
@@ -28,6 +33,15 @@ export default {
             } else if (this.food.level == 2) {
                 return 'Hard'
             }
+        },
+        bgColor: function () {
+            if (this.food.level == 0) {
+                return 'btn-success'
+            } else if (this.food.level == 1) {
+                return 'btn-warning'
+            } else if (this.food.level == 2) {
+                return 'btn-danger'
+            }
         }
     },
     methods: {
@@ -39,7 +53,7 @@ export default {
 </script>
 
 <style scoped>
-/*#food-card {
+#food-card {
 	background: #fefefe;
 	border: 2px solid #fcfcfc;
 	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
@@ -63,7 +77,19 @@ export default {
   line-height: 1.5;
 }
 
-div#columns:hover figure:not(:hover) {
-	opacity: 0.4;
-}*/
+.difficulty{
+    color: white;
+
+}
+.bg-success {
+    background: #2ecc71;
+}
+
+.bg-warning {
+    background: #f1c40f;
+}
+
+.bg-danger {
+    background: #e74c3c;
+}
 </style>
