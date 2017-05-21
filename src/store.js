@@ -14,7 +14,8 @@ export default new Vuex.Store({
     }],
     recipes: recipes,
     currentMenu: null,
-    pageCursor: 1
+    pageCursor: 1,
+    distribution: []
   },
   mutations: {
     addAmount(state) {
@@ -62,7 +63,8 @@ export default new Vuex.Store({
     },
 
     pushDistribution(state,payload) {
-      state.distribution[payload.step].push(payload.participant)
+      this.state.distribution[payload.step].push(payload.participant)
+      // state.distribution[payload.step].push(payload.participant)
     },
     removeDistribution(state,payload){
       for(var i=0; i<state.distribution[payload.step].length; i++){
