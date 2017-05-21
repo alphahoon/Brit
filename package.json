@@ -24,6 +24,7 @@
   "homepage": "https://github.com/alphahoon/Brit#readme",
   "dependencies": {
     "express": "^4.15.3",
+    "hchs-vue-charts": "^1.2.8",
     "vue": "^2.2.1",
     "vuex": "^2.3.1"
   },
