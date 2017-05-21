@@ -65,7 +65,7 @@ h3 {
     /*border: 1px solid #333333;*/
     position: fixed;
     top: 240px;
-    width: 20%;
+    width: 25%;
     /*left: 90px;*/
     /*width: 217px;*/
 }
