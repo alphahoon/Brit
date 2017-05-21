@@ -3,9 +3,10 @@
     <div class="thumbnail"> <a href="#" @click="onFoodClick"><img :src="food.imageLink" :alt="food.title" ></a>
         <div class="caption"> <a href="#" @click="onFoodClick"><h5>{{food.title}}</h5></a> </div>
         <div class="cardContent"> 
-            <button class="btn btn-sm" :class="bgColor">
+            <!--<button class="btn btn-sm" :class="bgColor">
                 {{difficulty}}
-            </button>
+            </button>-->
+            <img class="stars" :src="imgSrc" :alt="difficulty"/>
             <div class="timeStr">
                 <span class="glyphicon glyphicon-time"></span>
                 {{timeStr}}
@@ -32,6 +33,15 @@ export default {
                 return 'Medium'
             } else if (this.food.level == 2) {
                 return 'Hard'
+            }
+        },
+        imgSrc: function(){
+            if(this.food.level == 0){
+                return '/assets/level1.png'
+            } else if(this.food.level == 1){
+                return '/assets/level2.png'
+            } else if (this.food.level == 2){
+                return '/assets/level1.png'
             }
         },
         bgColor: function () {
@@ -91,5 +101,10 @@ export default {
 
 .bg-danger {
     background: #e74c3c;
+}
+
+.stars {
+    width: 50px;
+    border: None;
 }
 </style>

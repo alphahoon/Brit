@@ -58,14 +58,14 @@ export default {
     margin-top: 10px
 }
 .search{
-    width: 217px;
+    width: 100%;
 }
 div.searchBtns {
     text-align: left
 }
 
 .time-slider {
-    width: 217px;
+    width: 100%;
 }
 
 </style>

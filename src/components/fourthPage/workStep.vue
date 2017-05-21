@@ -8,7 +8,7 @@
                 <div class="col-md-6"> {{this.work.text}} </div> 
                 
                 <div class="col-sm-6" data-toggle="buttons" style="margin-top: 5px;">    
-                    <label class="btn btn-success" style="margin: 4px;">
+                    <!--<label class="btn btn-success" style="margin: 4px;">
                         <input type="checkbox" autocomplete="off" checked>
                         <span class="glyphicon glyphicon-ok"></span>
                     </label>
@@ -20,12 +20,8 @@
                     <label class="btn btn-warning" style="margin: 4px;">
                         <input type="checkbox" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
-                    </label>			
-                
-                    <label class="btn btn-danger"  style="margin: 4px;">
-                        <input type="checkbox" autocomplete="off">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </label>			
+                    </label>			-->
+                	<cb v-for="participant in participants" :key="participant.name" :participant="participant"></cb>
                 </div>
             </div>
         </div>
@@ -33,9 +29,16 @@
 </template>
 
 <script>
+import cb from './cb.vue'
 export default {
     props: ['work'],
+    components: {
+        'cb': cb
+    },
     computed: {
+        participants: function(){
+            return this.$store.state.participants
+        },
         timeCal: function () {
             let hour = this.work.time / 60
             let min = this.work.time % 60
