@@ -1,6 +1,6 @@
 <template>
 <div id="foodCard">
-    <div class="thumbnail"> <img :src="food.imageLink" :alt="food.title">
+    <div class="thumbnail"> <a href="#" @click="onFoodClick"><img :src="food.imageLink" :alt="food.title" ></a>
         <div class="caption"> <a href="#" @click="onFoodClick"><h6>{{food.title}}</h6></a> </div>
         <div class="cardContent"> {{difficulty}}
             <div class="timeStr">
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style scoped>
-#food-card {
+/*#food-card {
 	background: #fefefe;
 	border: 2px solid #fcfcfc;
 	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
@@ -65,5 +65,5 @@ export default {
 
 div#columns:hover figure:not(:hover) {
 	opacity: 0.4;
-}
+}*/
 </style>

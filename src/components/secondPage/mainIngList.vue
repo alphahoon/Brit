@@ -1,19 +1,19 @@
 <template>
-<div class="col-sm-4 panel panel-success">
-    <div class="panel-heading">
-        <span class="glyphicon glyphicon-apple" aria-hidden="true"> Main Ingredients</span>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+            <span class="glyphicon glyphicon-apple" aria-hidden="true" style="margin-left:10px; font-weight:bold; font-size:1.3em; text-align:left"> Main Ingredients</span>
+        </div>
+      <div class="panel-body">
+        <main-ing v-for="item in mainIngs" v-bind:info="item" v-bind:amount="amount" v-bind:mode="mode"></main-ing>
+      </div>
     </div>
-    <div class="panel-body">
-        <mainIng v-for="item in mainings" :info="item" :amount="amount" :mode="mode"></mainIng>
-    </div>
-</div>
 </template>
 
 <script>
 import mainIng from './mainIng.vue'
 
 export default {
-    props: ['mainings', 'amount', 'mode'],
+    props: ['mainIngs', 'amount', 'mode'],
     components: {
         mainIng
     }

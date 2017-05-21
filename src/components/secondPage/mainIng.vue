@@ -1,5 +1,10 @@
 <template>
-<div><span>{{ info.name }}</span> <span>{{info.amount * amount}}{{ info.unit }}</span></div>
+    <div v-if="mode === 'r'"><span>{{ info.name }}</span>
+        <span style="color:#8BC34A">{{info.ramount * amount}}{{ info.runit }}</span>
+    </div>
+    <div v-else><span>{{ info.name }}</span>
+        <span style="color:#8BC34A">{{info.pamount * amount}}{{ info.punit }}</span>
+    </div>
 </template>
 
 <script>
@@ -9,7 +14,5 @@ export default {
 </script>
 
 <style scoped>
-span {
-    color: #8BC34A;
-}
+
 </style>
