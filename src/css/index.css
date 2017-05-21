@@ -186,8 +186,6 @@ header {
     padding-top: 25px;
 }
 
-#addParticipant {}
-
 #progress-buttons {
     align-content: center;
     display: inline-block;
@@ -223,14 +221,6 @@ header {
     text-align: center;
 }
 
-
-/*.row .inner {
- -moz-column-width: 18em;
- -webkit-column-width: 18em;
- -moz-column-gap: 1em;
- -webkit-column-gap:1em;
-
-}*/
 
 .thumbnail {
     position: relative;

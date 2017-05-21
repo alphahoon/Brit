@@ -38,6 +38,32 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#food-card {
+	background: #fefefe;
+	border: 2px solid #fcfcfc;
+	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+	margin: 0 2px 15px;
+	padding: 15px;
+	padding-bottom: 10px;
+	transition: opacity .4s ease-in-out;
+    display: inline-block;
+}
 
+#food-card thumbnail {
+	width: 100%; height: auto;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 5px;
+}
+
+#food-card caption{
+  font-size: .9rem;
+	color: #444;
+  line-height: 1.5;
+}
+
+div#columns:hover figure:not(:hover) {
+	opacity: 0.4;
+}
 </style>

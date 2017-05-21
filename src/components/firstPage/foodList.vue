@@ -1,6 +1,6 @@
 <template>
 <div class="col-md-9">
-    <div class="row inner">
+    <div class="columns">
         <food-card v-for="food in foodList" :food="food" :key="food.title" @foodClick="onFoodClick"></food-card>
     </div>
 </div>
@@ -22,6 +22,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.columns {
+	column-width: 320px;
+	column-gap: 15px;
+    width: 90%;
+	max-width: 1100px;
+	margin: 50px auto;
+}
 
 </style>
