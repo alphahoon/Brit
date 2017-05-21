@@ -121,7 +121,7 @@ var pork_cutlet = {
       {"name": "butter", "ramount": 2, "runit": "table spoons", "pamount": 50, "punit": "g"},
       {"name": "Green onion", "ramount": 1, "runit": "bunch", "pamount": 200, "punit": "g"}],
     "sub":[{"name": "Onion", "ramount": 1/2, "runit": "", "pamount": 100, "punit": "g"},
-      {"name": "Dill pickles", "ramount": 1/3, "runit": "cup", "pamount": 45, "punit": "g"},
+      {"name": "Dill pickles", "ramount": 1/2, "runit": "cup", "pamount": 45, "punit": "g"},
       {"name": "Jalapeno pepper", "ramount": 1, "runit": "", "pamount": 20, "punit": "g"}],
     "steps": [{
           "step": 0,
