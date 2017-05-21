@@ -10,7 +10,7 @@
             </div>
             <div class="cardContent"> <img :src=levelSrc alt="" class="levelStar">
                 <div class="timeStr">
-                    <h5><span class="glyphicon glyphicon-time"></span> {{time}} min</h5>
+                    <span class="glyphicon glyphicon-time"></span> <span class="lineline">{{time}} min</span>
                 </div>
             </div>
         </div>
@@ -46,12 +46,14 @@ export default {
 
 <style scoped>
 img.levelStar {
-    height: 25px;
+    height: 2em;
     border: None;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 div.menuMain {
-    text-align: center;
+    text-align: middle;
 }
 
 div.imageLink {
@@ -60,10 +62,18 @@ div.imageLink {
 
 
 h3 {
+    margin-left: 10px;
+    font-weight:bold; 
+    font-size:2em; 
+    text-align:left;
     margin-top: 10px;
 }
 
 div.timeStr {
+    display:inline-block;
+    font-size: 1.2em;
     float: right;
+    vertical-align: middle;
+
 }
 </style>

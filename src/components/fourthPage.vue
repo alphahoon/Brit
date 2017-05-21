@@ -5,6 +5,7 @@
         <workList :workList="workList"></workList>
     </div>
     <div class="graphBlock">
+        <chartjs-line :labels="labels" :data="data" :bind="true"></chartjs-line>
     </div>
 </div>
 </template>

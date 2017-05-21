@@ -9,12 +9,12 @@ export default new Vuex.Store({
     participants: [{
       name: '',
       level: 0,
-      key: 0,
-      distribution: []
+      key: 0
     }],
     recipes: recipes,
     currentMenu: null,
-    pageCursor: 1
+    pageCursor: 1,
+    distribution: []
   },
   mutations: {
     addAmount(state) {
@@ -63,6 +63,7 @@ export default new Vuex.Store({
 
     pushDistribution(state,payload) {
       state.distribution[payload.step].push(payload.participant)
+      // state.distribution[payload.step].push(payload.participant)
     },
     removeDistribution(state,payload){
       for(var i=0; i<state.distribution[payload.step].length; i++){

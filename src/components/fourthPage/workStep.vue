@@ -5,9 +5,9 @@
                 <span> {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
             </div>
             <div class="panel-body">
-                <div class="col-md-6"> {{this.work.text}} </div> 
-                
-                <div class="col-sm-6" data-toggle="buttons" style="margin-top: 5px;">    
+                <div class="col-md-6"> {{this.work.text}} </div>
+
+                <div class="col-sm-6" data-toggle="buttons" style="margin-top: 5px;">
                     <!--<label class="btn btn-success" style="margin: 4px;">
                         <input type="checkbox" autocomplete="off" checked>
                         <span class="glyphicon glyphicon-ok"></span>
@@ -15,13 +15,13 @@
                     <label class="btn btn-primary"  style="margin: 4px;">
                         <input type="checkbox" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
-                    </label>			
-                
+                    </label>
+
                     <label class="btn btn-warning" style="margin: 4px;">
                         <input type="checkbox" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
                     </label>			-->
-                	<cb v-for="participant in participants" :key="participant.name" :participant="participant"></cb>
+                	<cb v-for="(participant, idx) in participants" :idx="idx" :key="participant.name" :participant="participant" :stepIdx="work.step"></cb>
                 </div>
             </div>
         </div>
@@ -59,10 +59,10 @@ export default {
 </script>
 
 <style scoped>
-.btn span.glyphicon {    			
-	opacity: 0;				
+.btn span.glyphicon {
+	opacity: 0;
 }
-.btn.active span.glyphicon {				
-	opacity: 1;				
+.btn.active span.glyphicon {
+	opacity: 1;
 }
 </style>
