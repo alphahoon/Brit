@@ -37,11 +37,11 @@ export default {
         },
         imgSrc: function(){
             if(this.food.level == 0){
-                return '/assets/level1.png'
+                return 'assets/level1.png'
             } else if(this.food.level == 1){
-                return '/assets/level2.png'
+                return 'assets/level2.png'
             } else if (this.food.level == 2){
-                return '/assets/level1.png'
+                return 'assets/level3.png'
             }
         },
         bgColor: function () {
