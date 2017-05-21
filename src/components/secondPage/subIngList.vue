@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-info">
       <div class="panel-heading">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="margin-left:10px; font-weight:bold; font-size:1.3em; text-align:left"> Extra Ingredients</span>
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span><span class="header"> Extra Ingredients</span>
         </div>
       <div class="panel-body">
         <sub-ing v-for="item in subIngs" v-bind:info="item" v-bind:amount="amount" v-bind:mode="mode"></sub-ing>
@@ -21,7 +21,10 @@ export default {
 </script>
 
 <style scoped>
-span {
+.header {
     margin-left: 10px;
+    font-weight:bold; 
+    font-size:1.3em; 
+    text-align:left
 }
 </style>

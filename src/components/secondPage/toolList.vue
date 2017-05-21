@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-warning">
         <div class="panel-heading">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="margin-left:10px; font-weight:bold; font-size:1.3em; text-align:left"> Cooking Tools</span>
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span><span class="header">Cooking Tools</span>
         </div>
         <div class="panel-body">
             <tool v-for="info in tools" :info="info"></tool>
@@ -21,7 +21,10 @@ export default {
 </script>
 
 <style scoped>
-span {
+.header {
     margin-left: 10px;
+    font-weight:bold; 
+    font-size:1.3em; 
+    text-align:left
 }
 </style>
