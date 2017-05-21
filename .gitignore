@@ -1,3 +1,5 @@
+dist/
+
 ### Bower ###
 bower_components
 .bower-cache
