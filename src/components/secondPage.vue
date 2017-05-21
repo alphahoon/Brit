@@ -1,16 +1,18 @@
 <template>
-<div>
-    <menuMain :title="recipe.title" :amount="numPeople" :imageLink="recipe.imageLink"></menuMain>
-    <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-default" @click="pMode">Precisely</button>
-        <button type="button" class="btn btn-default" @click="rMode">Roughly</button>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <menu-main v-bind:title="recipe.title" v-bind:amount="numPeople" v-bind:imageLink="recipe.imageLink"></menu-main>
+            <div class="btn-group" role="group" aria-label="..." style="margin: 0 auto">
+                <button type="button" id="r_button" class="btn btn-default" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough</button>
+                <button type="button" class="btn btn-default"  :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise</button>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-8">
+            <tool-list v-bind:tools="recipe.tools"></tool-list>
+            <main-ing-list v-bind:amount="numPeople" v-bind:main-ings="recipe.main" v-bind:mode="unitMode"></main-ing-list>
+            <sub-ing-list v-bind:amount="numPeople" v-bind:sub-ings="recipe.sub" v-bind:mode="unitMode"></sub-ing-list>
+        </div>
     </div>
-    <div class="row ingList">
-        <toolList :tools="recipe.tools"></toolList>
-        <mainIngList :amount="numPeople" :mainings="recipe.main" :mode="unitMode"></mainIngList>
-        <subIngList :amount="numPeople" :subings="recipe.sub" :mode="unitMode"></subIngList>
-    </div>
-</div>
 </template>
 
 <script>
@@ -29,7 +31,7 @@ export default {
     }),
     data: function () {
         return {
-            unitMode: 'p'
+            unitMode: 'r'
         }
     },
     components: {
@@ -39,11 +41,12 @@ export default {
         subIngList
     },
     methods: {
-        pMode: function () {
+        p_mode: function() {
             this.unitMode = 'p';
+            // document.getElementById('r_button').className="btn btn-default";
         },
-        rMode: function () {
-            this.unitMode = 'r'
+        r_mode: function() {
+            this.unitMode = 'r';
         }
     }
 };

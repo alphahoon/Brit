@@ -1,18 +1,18 @@
 <template>
-<div class="menuMain">
-    <div class="row">
-        <h3>{{title}}</h3>
+    <div style="text-align:left; padding-left:20px">
+        <div class="row" style="width: 90%; padding-right: 10px;">
+            <h3>{{title}}</h3>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <img v-bind:src=imageLink style="width: 90%">
+        </div>
+        <div class="row">
+            <span style="font-size:1.2em; font-weight:bold"> Serving Amount : </span>
+            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true" />
+            <span style="font-weight:bold;font-size:1.2em"> {{amount}} </span>
+            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true" />
+        </div>
     </div>
-    <div class="row imageLink">
-        <img :src="imageLink" width="300" height="200">
-    </div>
-    <div class="row">
-        <span class="servingAmountTitle"> Serving Amount : </span>
-        <button @click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true"></button>
-        <span class="servingAmountContents"> {{amount}} </span>
-        <button @click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true"></button>
-    </div>
-</div>
 </template>
 
 <script>
