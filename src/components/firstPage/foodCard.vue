@@ -1,16 +1,18 @@
 <template>
 <div id="foodCard">
     <div class="thumbnail"> <a href="#" @click="onFoodClick"><img :src="food.imageLink" :alt="food.title" ></a>
-        <div class="caption"> <a href="#" @click="onFoodClick"><h5>{{food.title}}</h5></a> </div>
+        <div class="caption"> <a href="#" class="menuname" @click="onFoodClick">{{food.title}}</a> </div>
         <div class="cardContent"> 
             <!--<button class="btn btn-sm" :class="bgColor">
                 {{difficulty}}
             </button>-->
-            <img class="stars" :src="imgSrc" :alt="difficulty"/>
-            <div class="timeStr">
-                <span class="glyphicon glyphicon-time"></span>
-                {{timeStr}}
-                </div>
+            <div class="linelineline">
+                <img class="stars" :src="imgSrc" :alt="difficulty"/>
+                <div class="timeStr">
+                    <span class="glyphicon glyphicon-time"></span>
+                    <span class="lineline">{{timeStr}}</span>
+                    </div>
+            </div>
         </div>
     </div>
 </div>
@@ -63,28 +65,31 @@ export default {
 </script>
 
 <style scoped>
-#food-card {
-	background: #fefefe;
+#foodCard {
+	/*background: #fefefe;
 	border: 2px solid #fcfcfc;
-	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-	margin: 0 2px 15px;
+	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);*/
+	/*margin: 0 2px 15px;
 	padding: 15px;
-	padding-bottom: 10px;
-	transition: opacity .4s ease-in-out;
+	padding-bottom: 10px;*/
+	/*transition: opacity .4s ease-in-out;*/
     display: inline-block;
 }
 
-#food-card thumbnail {
+/*#foodCard .thumbnail {
 	width: 100%; height: auto;
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 15px;
 	margin-bottom: 5px;
-}
+}*/
 
-#food-card caption{
-  font-size: .9rem;
+.menuname{
+    font-size: 1.4rem;
 	color: #444;
-  line-height: 1.5;
+    /*line-height: 1.5;*/
+    /*margin-left: 10px;*/
+    font-weight:bold; 
+    text-align:left
 }
 
 .difficulty{
@@ -106,5 +111,16 @@ export default {
 .stars {
     width: 50px;
     border: None;
+    display:inline-block;
+    vertical-align:middle;
+}
+/*.linelineline{
+    vertical-align: middle;
+}*/
+
+.timeStr {
+    vertical-align:middle;
+    display:inline-block;
+    float: right;
 }
 </style>
