@@ -4,7 +4,7 @@
         <form class="form-inline">
             <span class="participantIndex">{{idx + 1}} </span>
             <span class="glyphicon glyphicon-user" :class="getColor"> </span>
-            <input @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'Me' : ''"></input>
+            <input ref="nameInput" @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'Me (Please type less than 5 characters)' : '(Please type less than 5 characters)'"></input>
             <div class="btn-group " role="group">
                 <button class="btn btn-lg btn-default" :class="person.level == 0 ? 'active ' : ''" @click.prevent="onLevelChange(0)">Beginner</button>
                 <button class="btn btn-lg btn-default" :class="person.level == 1 ? 'active' : ''" @click.prevent="onLevelChange(1)">Intermediate</button>
@@ -25,6 +25,9 @@ export default {
         return {
             name: ''
         }
+    },
+    mounted: function(){
+        this.$refs.nameInput.focus()
     },
     computed: {
         getColor: function() {
