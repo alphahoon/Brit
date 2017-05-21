@@ -21,7 +21,7 @@
                         <input type="checkbox" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
                     </label>			-->
-                	<cb v-for="(person, idx) in participants" :idx="idx" :key="participant.name" :participant="participant" :stepIdx="work.step"></cb>
+                	<cb v-for="(participant, idx) in participants" :idx="idx" :key="participant.name" :participant="participant" :stepIdx="work.step"></cb>
                 </div>
             </div>
         </div>

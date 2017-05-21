@@ -62,7 +62,7 @@ export default new Vuex.Store({
     },
 
     pushDistribution(state,payload) {
-      this.state.distribution[payload.step].push(payload.participant)
+      state.distribution[payload.step].push(payload.participant)
       // state.distribution[payload.step].push(payload.participant)
     },
     removeDistribution(state,payload){

@@ -33,16 +33,17 @@ export default{
           if (this.isChecked) {
             this.$store.commit('pushDistribution', {
               step: this.stepIdx,
-              participant: this.participant
+              participant: this.idx
             });
           }
           else {
             this.$store.commit('removeDistribution', {
               step: this.stepIdx,
-              participant: this.participant
+              participant: this.idx
             });
           }
-          console.log(this.$store.state.participants)
+          console.log(this.$store.state.participant)
+           console.log(this.$store.state.distribution)
         }
     }
 }
@@ -50,8 +51,20 @@ export default{
 </script>
 
 
-<style>
+<style scoped>
 .btn-danger {
+  width: 30px;
+  height: 30px;
+}
+.btn-success {
+  width: 30px;
+  height: 30px;
+}
+.btn-primary {
+  width: 30px;
+  height: 30px;
+}
+.btn-success {
   width: 30px;
   height: 30px;
 }
