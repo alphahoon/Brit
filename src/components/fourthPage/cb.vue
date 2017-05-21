@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="labelClass">
+        <div class="participantName">{{participant.name.slice(0, 5)}}</div>
         <label class="btn" :class="bgColor" style="margin: 4px;" v-on:click="checkWork">
             <span v-if="isChecked" class="glyphicon glyphicon-ok"></span>
         </label>
@@ -64,8 +65,16 @@ export default{
   width: 30px;
   height: 30px;
 }
-.btn-success {
+.btn-warning {
   width: 30px;
   height: 30px;
+}
+
+.labelClass{
+    display:inline-block;
+}
+
+.participantName{
+    text-align: center;
 }
 </style>

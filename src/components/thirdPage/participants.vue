@@ -1,6 +1,6 @@
 <template>
 <div>
-    <participant v-for="(person, idx) in participants" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
+    <participant v-for="(person, idx) in participants" ref="participant" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
     <div class="row">
         <div class="col-md-12 adjustParticipants">
             <button v-if="participants.length < 4" currentKeyid="addParticipant" class="btn btn-default btn-lg" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
@@ -36,6 +36,10 @@ export default {
                 key: this.currentKey
             })
             this.currentKey += 1
+            // this.$refs.participant[0].focus()
+        //     this.$nextTick(() => {
+        //     this.$refs.participant[this.participants.length-1].focus()
+        //   })
         },
         onNameChange: function (name, idx) {
             this.$store.commit('changeName', {
