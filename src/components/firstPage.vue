@@ -2,7 +2,7 @@
 <div>
     <h3>What do you want to have today? </h3>
     <div class="row" id="page1">
-        <searchBox @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" @timeChange="onTimeChange" :time="queryTime" :difficulty="queryDifficulty" :query="query"></searchBox>
+        <search-box class="sbox" @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" @timeChange="onTimeChange" :time="queryTime" :difficulty="queryDifficulty" :query="query"></search-box>
         <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
     </div>
 </div>
@@ -17,7 +17,8 @@ export default {
         return {
             queryDifficulty: 3,
             queryTime: 120,
-            query: ''
+            query: '',
+            scrolled: false
         }
     },
     computed: {
@@ -27,10 +28,10 @@ export default {
         filteredList: function () {
             let newList = this.queryDifficulty == 3 ?
                 this.foodList.filter(function (food) {
-                    return (food.title.includes(this.query)) && (food.time <= this.queryTime)
+                    return (food.title.toLowerCase().includes(this.query.toLowerCase())) && (food.time <= this.queryTime)
                 }.bind(this)) :
                 this.foodList.filter(function (food) {
-                    return (food.title.includes(this.query)) && (food.level == this.queryDifficulty) && (food.time <= this.queryTime)
+                    return (food.title.toLowerCase().includes(this.query.toLowerCase())) && (food.level == this.queryDifficulty) && (food.time <= this.queryTime)
                 }.bind(this))
             return newList
         }
@@ -59,5 +60,13 @@ export default {
 <style scoped>
 h3 {
     text-align: center;
+}
+.sbox {
+    /*border: 1px solid #333333;*/
+    position: fixed;
+    top: 240px;
+    width: 20%;
+    /*left: 90px;*/
+    /*width: 217px;*/
 }
 </style>
