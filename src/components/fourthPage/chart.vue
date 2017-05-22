@@ -136,8 +136,8 @@ h4 {
     font-weight: bold;
     display: flex;
     align-items: center;
-    -webkit-transition: width 2s, -webkit-transform 2s;
-    transition: width 2s;
+    -webkit-transition: width 1s, -webkit-transform 1s;
+    transition: width 1s;
 }
 
 h5 {

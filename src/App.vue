@@ -6,22 +6,15 @@
         </nav>
     </header>
     <div class="container">
-        <first-page v-if="pageCursor == 1" @foodClick="onFoodClick"></first-page>
-        <second-page v-else-if="pageCursor == 2" :numPeople="numPeople"></second-page>
-        <third-page v-else-if="pageCursor == 3"></third-page>
-        <fourth-page v-else-if="pageCursor == 4"></fourth-page>
-        <fifth-page v-else-if="pageCursor == 5"></fifth-page>
+        <first-page v-if="firstPageShow" @foodClick="onFoodClick"></first-page>
+        <second-page v-else-if="secondPageShow" :numPeople="numPeople"></second-page>
+        <third-page v-else-if="thirdPageShow"></third-page>
+        <fourth-page v-else-if="fourthPageShow"></fourth-page>
+        <fifth-page v-else-if="fifthPageShow"></fifth-page>
     </div>
     <!-- Footer -->
     <footer>
-        <div id="progress_bar" class="row">
-            <!--
-            <span>
-            <a id="cooky_back" :class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
-            <span id="progress-buttons"><progress-bar :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar></span>
-            <a id="cooky_next" :class="((pageCursor < 5) && (pageCursor > 1))? '': 'sarajo'" @click="onNextClick"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
-            </span>
-        -->
+        <div id="progress_bar">
             <div class="col-md-3">
                 <div class="prevButton" v-if="pageCursor > 1" :class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick">⬅ Prev</div>
             </div>
@@ -33,6 +26,23 @@
             </div>
         </div>
     </footer>
+    <div id="toast_container">
+        <div v-if="firstPageShow && !toastOneDismissed" class="toast" @click="toastOneDismiss">
+            <span>Page 1 Tooltips (Click to Dismiss this message)</span>
+        </div>
+        <div v-else-if="secondPageShow && !toastTwoDismissed" class="toast" @click="toastTwoDismiss">
+            <span>Page 2 Tooltips (Click to Dismiss this message)</span>
+        </div>
+        <div v-else-if="thirdPageShow && !toastThreeDismissed" class="toast" @click="toastThreeDismiss">
+            <span>Page 3 Tooltips (Click to Dismiss this message)</span>
+        </div>
+        <div v-else-if="fourthPageShow && !toastFourDismissed" class="toast" @click="toastFourDismiss">
+            <span>Page 4 Tooltips (Click to Dismiss this message)</span>
+        </div>
+        <div v-else-if="fifthPageShow && !toastFiveDismissed" class="toast" @click="toastFiveDismiss">
+            <span>Page 5 Tooltips (Click to Dismiss this message)</span>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -49,10 +59,48 @@ import fourthPage from './components/fourthPage.vue'
 import fifthPage from './components/fifthPage.vue'
 
 export default {
-    data: function () {},
+    data: function () {
+        return {
+            toastOneDismissed: false,
+            toastTwoDismissed: false,
+            toastThreeDismissed: false,
+            toastFourDismissed: false,
+            toastFiveDismissed: false
+        }
+    },
     computed: mapState({
         pageCursor: state => state.pageCursor,
-        currentMenu: state => state.currentMenu
+        currentMenu: state => state.currentMenu,
+        firstPageShow: function () {
+            if (this.pageCursor == 1) {
+                return true
+            }
+            return false
+        },
+        secondPageShow: function () {
+            if (this.pageCursor == 2) {
+                return true
+            }
+            return false
+        },
+        thirdPageShow: function () {
+            if (this.pageCursor == 3) {
+                return true
+            }
+            return false
+        },
+        fourthPageShow: function () {
+            if (this.pageCursor == 4) {
+                return true
+            }
+            return false
+        },
+        fifthPageShow: function () {
+            if (this.pageCursor == 5) {
+                return true
+            }
+            return false
+        },
     }),
     components: {
         progressBar,
@@ -82,6 +130,21 @@ export default {
         },
         onFoodClick: function (food) {
             this.$store.commit('setCurrentMenu', food)
+        },
+        toastOneDismiss: function () {
+            this.toastOneDismissed = true;
+        },
+        toastTwoDismiss: function () {
+            this.toastTwoDismissed = true;
+        },
+        toastThreeDismiss: function () {
+            this.toastThreeDismissed = true;
+        },
+        toastFourDismiss: function () {
+            this.toastFourDismissed = true;
+        },
+        toastFiveDismiss: function () {
+            this.toastFiveDismissed = true;
         }
     }
 }
@@ -135,18 +198,6 @@ span#progress-buttons {
     width: 100%;
 }
 
-#progress_bar {
-    /*
-    width: 100%;
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    text-align: center;
-    vertical-align: middle;
-    background-color: #ecf0f1;
-    clear: left;
-    */
-}
-
 footer {
     clear: both;
     position: absolute;
@@ -154,23 +205,23 @@ footer {
     left: 0;
     bottom: 0;
     margin-bottom: -152px;
-    /*
-    clear: both;
-    position: absolute;
-    height: 3em;
-    background: #ecf0f1;
-    margin-top: -3em;
-    text-align: right;
-    margin-top: 2em;
-    margin-bottom: -8em;
-    padding-top: 2em;
-    padding-right: 2em;
-    padding-left: 2em;
-    padding-bottom: 8em;
-    font-weight: bold;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    */
+}
+
+div.toast {
+    position: fixed;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -80%);
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 5rem;
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    z-index: 9;
+    font-size: 2rem;
+    opacity: 0.8;
+    cursor: pointer;
 }
 </style>

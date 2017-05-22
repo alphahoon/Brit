@@ -7,7 +7,8 @@
 [4] 20150559, **Seayeon Lee** (*syeonlee@kaist.ac.kr*), School of Computing  
 
 ### TODO: 고칠거
-1. 이름 validation 해서 Next Button enable / disable 하기  
+1. 이름 validation 해서 Next Button enable / disable  
+2. distribution 할 때, 하나라도 체크 안된 거 있을 시에 Next button disable  
 
 ### Developing Environment Setting
 

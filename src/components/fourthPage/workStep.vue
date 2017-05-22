@@ -5,7 +5,7 @@
             <span> {{work.step + 1}}. Difficulty: {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
         </div>
         <div class="panel-body">
-            <div> {{this.work.text}} </div>
+            <div class="workText"> {{this.work.text}} </div>
             <div data-toggle="buttons" style="margin-top: 5px;">
                 <div class="buttongroup">
                     <cb v-for="(participant, idx) in participants" :idx="idx" :key="participant.name" :participant="participant" :stepIdx="work.step"></cb>
@@ -47,6 +47,10 @@ export default {
 </script>
 
 <style scoped>
+.workText {
+    font-size: 1.4em;
+}
+
 .btn span.glyphicon {
     opacity: 0;
 }

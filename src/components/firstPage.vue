@@ -61,6 +61,7 @@ export default {
 h3 {
     text-align: center;
 }
+
 .sbox {
     /*border: 1px solid #333333;*/
     position: fixed;
