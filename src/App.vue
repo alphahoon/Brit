@@ -28,19 +28,19 @@
     </footer>
     <div id="toast_container">
         <div v-if="firstPageShow && !toastOneDismissed" class="toast" @click="toastOneDismiss">
-            <span>Page 1 Tooltips (Click to Dismiss this message)</span>
+            <span> Welcome to Brit's Cooky! <br> Choose your food to cook together. You can use the filter in the left :) <br>(Click to Dismiss this message)</span>
         </div>
         <div v-else-if="secondPageShow && !toastTwoDismissed" class="toast" @click="toastTwoDismiss">
-            <span>Page 2 Tooltips (Click to Dismiss this message)</span>
+            <span> Choose the serving amount and see the result in a Rough/Precise way.<br> Do not forget to add ingredients in your favor :) <br> (Click to Dismiss this message)</span>
         </div>
         <div v-else-if="thirdPageShow && !toastThreeDismissed" class="toast" @click="toastThreeDismiss">
-            <span>Page 3 Tooltips (Click to Dismiss this message)</span>
+            <span> Input your/collaborator's name and cooking level.<br>Sorry for Max 4 people :(<br>(Click to Dismiss this message)</span>
         </div>
         <div v-else-if="fourthPageShow && !toastFourDismissed" class="toast" @click="toastFourDismiss">
-            <span>Page 4 Tooltips (Click to Dismiss this message)</span>
+            <span>Distribute each cooking step by checking!<br>Current Contribution Chart will show the your distribution.<br>(Click to Dismiss this message)</span>
         </div>
         <div v-else-if="fifthPageShow && !toastFiveDismissed" class="toast" @click="toastFiveDismiss">
-            <span>Page 5 Tooltips (Click to Dismiss this message)</span>
+            <span>Follow the ditributed instruction.<br> If you finish your work, click it :) <br>(Click to Dismiss this message)</span>
         </div>
     </div>
 </div>
@@ -73,35 +73,35 @@ export default {
         currentMenu: state => state.currentMenu,
         firstPageShow: function () {
             if (this.pageCursor == 1) {
-                setTimeout(this.toastOneDismiss, 3000);
+                setTimeout(this.toastOneDismiss, 5000);
                 return true
             }
             return false
         },
         secondPageShow: function () {
             if (this.pageCursor == 2) {
-                setTimeout(this.toastTwoDismiss, 3000);
+                setTimeout(this.toastTwoDismiss, 4000);
                 return true
             }
             return false
         },
         thirdPageShow: function () {
             if (this.pageCursor == 3) {
-                setTimeout(this.toastThreeDismiss, 3000);
+                setTimeout(this.toastThreeDismiss, 4000);
                 return true
             }
             return false
         },
         fourthPageShow: function () {
             if (this.pageCursor == 4) {
-                setTimeout(this.toastFourDismiss, 3000);
+                setTimeout(this.toastFourDismiss, 4000);
                 return true
             }
             return false
         },
         fifthPageShow: function () {
             if (this.pageCursor == 5) {
-                setTimeout(this.toastFiveDismiss, 3000);
+                setTimeout(this.toastFiveDismiss, 4000);
                 return true
             }
             return false
