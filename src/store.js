@@ -23,7 +23,7 @@ export default new Vuex.Store({
             }, true)
         },
         isEveryStep: state => {
-            state.distribution.reduce(function(prevValue, curValue, curIdx, array){
+            return state.distribution.reduce(function (prevValue, curValue, curIdx, array) {
                 return prevValue && (curValue.length > 0)
             }, true)
         }
