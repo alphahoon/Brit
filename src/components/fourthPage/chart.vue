@@ -95,7 +95,7 @@ export default {
 <style scoped>
 h1 {
     position: fixed;
-    top: 22%;
+    top: 14%;
     left: 50%;
     padding-left: 2em;
 }
@@ -103,7 +103,7 @@ h1 {
 .graphArea {
     position: fixed;
     background: #ecf0f1;
-    top: 27%;
+    top: 19%;
     left: 50%;
     width: 45%;
     height: 50%;
@@ -136,6 +136,8 @@ h4 {
     font-weight: bold;
     display: flex;
     align-items: center;
+    -webkit-transition: width 2s, -webkit-transform 2s;
+    transition: width 2s;
 }
 
 h5 {

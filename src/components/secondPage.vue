@@ -1,24 +1,24 @@
 <template>
-    <div class="row">
-        <div class="col-md-4 col-sm-4" id="mainBox">
-            <menu-main v-bind:title="recipe.title" v-bind:amount="numPeople" v-bind:imageLink="recipe.imageLink" :level="recipe.level" :time='recipe.time'></menu-main>
-            <div class="amountSel">
-                <span style="font-size:1.2em; font-weight:bold"> Serving Amount : </span>
-                <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true" />
-                <span style="font-weight:bold;font-size:1.2em"> {{numPeople}} </span>
-                <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true" />
-            </div>
-            <div class="btn-group" role="group" aria-label="..." style="margin: 0 auto">
-                <button type="button" id="r_button" class="btn btn-default" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough</button>
-                <button type="button" class="btn btn-default"  :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise</button>
-            </div>
+<div class="row">
+    <div class="col-md-4 col-sm-4" id="mainBox">
+        <menu-main v-bind:title="recipe.title" v-bind:amount="numPeople" v-bind:imageLink="recipe.imageLink" :level="recipe.level" :time='recipe.time'></menu-main>
+        <div class="amountSel">
+            <span style="font-size:1.2em; font-weight:bold"> Serving Amount : </span>
+            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true" />
+            <span style="font-weight:bold;font-size:1.6em"> {{numPeople}} </span>
+            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true" />
         </div>
-        <div class="col-md-8 col-sm-8">
-            <tool-list v-bind:tools="recipe.tools"></tool-list>
-            <main-ing-list v-bind:amount="numPeople" v-bind:main-ings="recipe.main" v-bind:mode="unitMode"></main-ing-list>
-            <sub-ing-list v-bind:amount="numPeople" v-bind:sub-ings="recipe.sub" v-bind:mode="unitMode"></sub-ing-list>
+        <div class="btn-group" role="group" aria-label="..." style="margin: 0 auto">
+            <button type="button" id="r_button" class="btn btn-default" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough</button>
+            <button type="button" class="btn btn-default" :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise</button>
         </div>
     </div>
+    <div class="col-md-8 col-sm-8">
+        <tool-list v-bind:tools="recipe.tools"></tool-list>
+        <main-ing-list v-bind:amount="numPeople" v-bind:main-ings="recipe.main" v-bind:mode="unitMode"></main-ing-list>
+        <sub-ing-list v-bind:amount="numPeople" v-bind:sub-ings="recipe.sub" v-bind:mode="unitMode"></sub-ing-list>
+    </div>
+</div>
 </template>
 
 <script>
@@ -47,10 +47,10 @@ export default {
         subIngList
     },
     methods: {
-        p_mode: function() {
+        p_mode: function () {
             this.unitMode = 'p';
         },
-        r_mode: function() {
+        r_mode: function () {
             this.unitMode = 'r';
         },
         addAmount: function () {
@@ -71,13 +71,17 @@ div.ingList {
 }
 
 menu-main {
-  text-align: center;
-  align-content: center;
+    text-align: center;
+    align-content: center;
+}
+
+.amountSel {
+    margin-bottom: 10px;
 }
 
 #mainBox {
-  text-align: center;
-  align-content: center;
+    text-align: center;
+    align-content: center;
 }
 
 span.servingAmountTitle {
@@ -91,7 +95,7 @@ span.servingAmountContents {
 }
 
 div.btn-group {
-  float: center;
-  margin-top: 30px;
+    float: center;
+    margin-top: 30px;
 }
 </style>

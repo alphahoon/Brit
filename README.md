@@ -6,6 +6,9 @@
 [3] 20130201, **Hyunwoo Kim** (*khw0726@kaist.ac.kr*), Department of Chemistry  
 [4] 20150559, **Seayeon Lee** (*syeonlee@kaist.ac.kr*), School of Computing  
 
+### TODO: 고칠거
+1. 이름 validation 해서 Next Button enable / disable 하기  
+
 ### Developing Environment Setting
 
 Prerequisites: Node, NPM

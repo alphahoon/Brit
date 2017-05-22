@@ -73,6 +73,13 @@ input {
     padding-right: 10px;
 }
 
+button.btn.btn-lg.btn-default:active,
+button.btn.btn-lg.btn-default.active {
+    background: #3498db;
+    color: white;
+    border-color: #7f8c8d;
+}
+
 .p-success {
     color: #2ecc71;
 }

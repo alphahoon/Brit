@@ -5,7 +5,6 @@ html {
 }
 
 body {
-    min-height: 100%;
     position: relative;
 }
 
@@ -93,16 +92,6 @@ nav {
     text-decoration: none;
 }
 
-#progress_bar {
-    width: 100%;
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    text-align: center;
-    vertical-align: middle;
-    background-color: #ecf0f1;
-    clear: left;
-}
-
 #cooky_back {
     color: #3498db;
     font-size: 2em;
@@ -153,24 +142,6 @@ nav {
     min-height: 100%;
 }
 
-footer {
-    clear: both;
-    position: absolute;
-    height: 3em;
-    background: #ecf0f1;
-    margin-top: -3em;
-    text-align: right;
-    margin-top: 2em;
-    margin-bottom: -6em;
-    padding-top: 2em;
-    padding-right: 10%;
-    padding-bottom: 6em;
-    font-weight: bold;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
 .container {
     position: relative;
     padding-bottom: 3em;
@@ -178,6 +149,7 @@ footer {
 
 header {
     padding-bottom: 1em;
+    margin-bottom: 2em;
 }
 
 .participant {
@@ -185,14 +157,6 @@ header {
     padding-left: 10%;
     padding-top: 25px;
 }
-
-#progress-buttons {
-    align-content: center;
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: 10px;
-}
-
 
 #foodCard {
     padding-top: 1em;
@@ -288,6 +252,3 @@ img {
 .checkBoxGroup {
     margin-top: 10px;
 }
-
-
-
