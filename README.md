@@ -9,6 +9,7 @@
 ### TODO: 고칠거
 1. 이름 validation 해서 Next Button enable / disable  
 2. distribution 할 때, 하나라도 체크 안된 거 있을 시에 Next button disable  
+3. 생각나는거 있으면 적기!  
 
 ### Developing Environment Setting
 
