@@ -103,13 +103,13 @@ h1 {
 .graphArea {
     position: fixed;
     border: 4px solid #ecf0f1;
-    /*background: #ecf0f1;*/
-    top: 19%;
+    background: white top: 19%;
     left: 50%;
     width: 45%;
     height: 55%;
     padding-left: 1em;
     margin: 2em;
+    z-index: 1;
 }
 
 h4 {
