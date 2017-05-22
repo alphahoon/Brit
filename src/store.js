@@ -16,6 +16,18 @@ export default new Vuex.Store({
         pageCursor: 1,
         distribution: []
     },
+    getters: {
+        isEveryName: state => {
+            return state.participants.reduce(function (prevValue, curValue, curIdx, array){
+                return prevValue && (curValue.name !== '')
+            }, true)
+        },
+        isEveryStep: state => {
+            state.distribution.reduce(function(prevValue, curValue, curIdx, array){
+                return prevValue && (curValue.length > 0)
+            }, true)
+        }
+    },
     mutations: {
         addAmount(state) {
             if (state.numPeople < 10)

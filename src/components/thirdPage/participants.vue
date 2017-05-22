@@ -59,7 +59,12 @@ export default {
             })
         },
         onNextClick: function () {
-            this.$store.commit('incrementPageCursor')
+            let isEveryName = this.participants.reduce(function(prevValue, curValue, curIdx, array){
+                return prevValue && (curValue.name !== '')
+            }, true)
+            if(isEveryName){
+                this.$store.commit('incrementPageCursor')
+            }
         }
     }
 }
