@@ -71,6 +71,7 @@ export default {
     computed: mapState({
         pageCursor: state => state.pageCursor,
         currentMenu: state => state.currentMenu,
+        participants: state =>state.participants,
         firstPageShow: function () {
             if (this.pageCursor == 1) {
                 return true
@@ -118,16 +119,43 @@ export default {
             this.$store.commit('decrementPageCursor')
         },
         onNextClick: function () {
-            this.$store.commit('incrementPageCursor')
-        },
-        onStepChange: function (i) {
-            if (i > 0 && i < 6) {
-                if (this.currentMenu != null)
-                    this.$store.commit('setPageCursor', {
-                        pageCursor: i
-                    })
+            if (this.pageCursor == 3) {
+                console.log(this.pageCursor)
+                if (this.$store.getters.isEveryName) {
+                    this.$store.commit('incrementPageCursor')
+                }
+            } else if (this.pageCursor == 4) {
+                if (this.$store.getters.isEveryStep) {
+                    this.$store.commit('incrementPageCursor')
+                }
+            } else {
+                this.$store.commit('incrementPageCursor')
             }
         },
+        // onStepChange: function (i) {
+        //     if (i > 0 && i < 6) {
+        //         if (this.currentMenu != null){
+        //             if(this.pageCursor == 3){
+        //                 console.log(this.pageCursor)
+        //                 if(this.$store.getters.isEveryName){
+        //                     this.$store.commit('setPageCursor', {
+        //                         pageCursor: i
+        //                     })
+        //                 }
+        //             } else if (this.pageCursor == 4){
+        //                 if(this.$store.getters.isEveryStep){
+        //                     this.$store.commit('setPageCursor', {
+        //                         pageCursor: i
+        //                     })
+        //                 }
+        //             } else {
+        //                this.$store.commit('setPageCursor', {
+        //                     pageCursor: i
+        //                 }) 
+        //             }
+        //         }
+        //     }
+        // },
         onFoodClick: function (food) {
             this.$store.commit('setCurrentMenu', food)
         },
