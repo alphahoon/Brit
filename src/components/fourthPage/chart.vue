@@ -102,11 +102,12 @@ h1 {
 
 .graphArea {
     position: fixed;
-    background: #ecf0f1;
+    border: 4px solid #ecf0f1;
+    /*background: #ecf0f1;*/
     top: 19%;
     left: 50%;
     width: 45%;
-    height: 50%;
+    height: 55%;
     padding-left: 1em;
     margin: 2em;
 }
@@ -126,7 +127,8 @@ h4 {
 
 .chart {
     min-width: 45px;
-    height: 40px;
+    height: 45px;
+    border-radius: 45px;
     margin-left: 1em;
     padding-left: 1em;
     padding-right: 1em;
@@ -136,8 +138,8 @@ h4 {
     font-weight: bold;
     display: flex;
     align-items: center;
-    -webkit-transition: width 1s, -webkit-transform 1s;
-    transition: width 1s;
+    -webkit-transition: width 0.5s, -webkit-transform 0.5s;
+    transition: width 0.5s;
 }
 
 h5 {

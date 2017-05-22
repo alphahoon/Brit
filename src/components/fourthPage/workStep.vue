@@ -2,7 +2,7 @@
 <div class="row">
     <div class="panel panel-info">
         <div class="panel-heading">
-            <span> {{work.step + 1}}. Difficulty: {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
+            <span> Step {{work.step + 1}}. Difficulty: {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
         </div>
         <div class="panel-body">
             <div class="workText"> {{this.work.text}} </div>

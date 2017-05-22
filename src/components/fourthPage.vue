@@ -4,7 +4,8 @@
     <div class="row">
         <workList :workList="workList"></workList>
         <chart :participants="participants" :distList="distList" :workList="workList"></chart>
-    </div></div>
+    </div>
+</div>
 </template>
 
 <script>

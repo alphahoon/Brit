@@ -73,30 +73,35 @@ export default {
         currentMenu: state => state.currentMenu,
         firstPageShow: function () {
             if (this.pageCursor == 1) {
+                setTimeout(this.toastOneDismiss, 4000);
                 return true
             }
             return false
         },
         secondPageShow: function () {
             if (this.pageCursor == 2) {
+                setTimeout(this.toastTwoDismiss, 4000);
                 return true
             }
             return false
         },
         thirdPageShow: function () {
             if (this.pageCursor == 3) {
+                setTimeout(this.toastThreeDismiss, 4000);
                 return true
             }
             return false
         },
         fourthPageShow: function () {
             if (this.pageCursor == 4) {
+                setTimeout(this.toastFourDismiss, 4000);
                 return true
             }
             return false
         },
         fifthPageShow: function () {
             if (this.pageCursor == 5) {
+                setTimeout(this.toastFiveDismiss, 4000);
                 return true
             }
             return false
