@@ -103,7 +103,8 @@ h1 {
 .graphArea {
     position: fixed;
     border: 4px solid #ecf0f1;
-    background: white top: 19%;
+    background: white;
+    top: 19%;
     left: 50%;
     width: 45%;
     height: 55%;
