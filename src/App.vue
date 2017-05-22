@@ -130,6 +130,10 @@ export default {
                     this.$store.commit('incrementPageCursor')
                 }
             } else if (this.pageCursor == 4) {
+                // let isEveryStep = this.$store.state.distribution.reduce(function (prevValue, curValue, curIdx, array) {
+                //     console.log(curValue)
+                //     return prevValue && (curValue.length > 0)
+                // }, true)
                 if (this.$store.getters.isEveryStep) {
                     this.$store.commit('incrementPageCursor')
                 }
