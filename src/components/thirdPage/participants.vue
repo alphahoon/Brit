@@ -58,13 +58,8 @@ export default {
                 idx: idx
             })
         },
-        onNextClick: function () {
-            let isEveryName = this.participants.reduce(function(prevValue, curValue, curIdx, array){
-                return prevValue && (curValue.name !== '')
-            }, true)
-            if(isEveryName){
-                this.$store.commit('incrementPageCursor')
-            }
+        onNextClick: function (index) {
+          this.$refs.participant[index].onNextClick()
         }
     }
 }

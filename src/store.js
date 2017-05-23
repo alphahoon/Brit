@@ -22,6 +22,14 @@ export default new Vuex.Store({
                 return prevValue && (curValue.name !== '')
             }, true)
         },
+        emptyIndex: state => {
+          for (var i=0; i<state.participants.length; i++) {
+            if (state.participants[i].name === '') {
+              return i
+            }
+          }
+          return -1
+        },
         isEveryStep: state => {
             return state.distribution.reduce(function (prevValue, curValue, curIdx, array) {
                 return prevValue && (curValue.length > 0)

@@ -8,7 +8,7 @@
     <div class="container">
         <first-page v-if="firstPageShow" @foodClick="onFoodClick"></first-page>
         <second-page v-else-if="secondPageShow" :numPeople="numPeople"></second-page>
-        <third-page v-else-if="thirdPageShow"></third-page>
+        <third-page ref="thirdPage" v-else-if="thirdPageShow"></third-page>
         <fourth-page v-else-if="fourthPageShow"></fourth-page>
         <fifth-page v-else-if="fifthPageShow"></fifth-page>
     </div>
@@ -125,9 +125,11 @@ export default {
         },
         onNextClick: function () {
             if (this.pageCursor == 3) {
-                console.log(this.pageCursor)
                 if (this.$store.getters.isEveryName) {
                     this.$store.commit('incrementPageCursor')
+                }
+                else if (this.$store.getters.emptyIndex != -1){
+                  this.$refs.thirdPage.onNextClick(this.$store.getters.emptyIndex)
                 }
             } else if (this.pageCursor == 4) {
                 // let isEveryStep = this.$store.state.distribution.reduce(function (prevValue, curValue, curIdx, array) {
@@ -160,7 +162,7 @@ export default {
         //             } else {
         //                this.$store.commit('setPageCursor', {
         //                     pageCursor: i
-        //                 }) 
+        //                 })
         //             }
         //         }
         //     }
