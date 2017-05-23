@@ -2,7 +2,7 @@
 <div id="distributeBlock">
     <h1> Distribute Your Work!</h1>
     <div class="row">
-        <workList :workList="workList"></workList>
+        <workList ref="workList" :workList="workList" @moveScroll="moveScroll"></workList>
         <chart :participants="participants" :distList="distList" :workList="workList"></chart>
     </div>
 </div>
@@ -25,6 +25,14 @@ export default {
     components: {
         workList,
         chart
+    },
+    methods: {
+      onNextClick: function(index) {
+        this.$refs.workList.onNextClick(index)
+      },
+      moveScroll: function(top) {
+        this.$emit('moveScroll', top)
+      }
     }
 }
 </script>

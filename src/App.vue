@@ -9,7 +9,7 @@
         <first-page v-if="firstPageShow" @foodClick="onFoodClick"></first-page>
         <second-page v-else-if="secondPageShow" :numPeople="numPeople"></second-page>
         <third-page ref="thirdPage" v-else-if="thirdPageShow"></third-page>
-        <fourth-page v-else-if="fourthPageShow"></fourth-page>
+        <fourth-page ref="fourthPage" v-else-if="fourthPageShow" @moveScroll="moveScroll"></fourth-page>
         <fifth-page v-else-if="fifthPageShow"></fifth-page>
     </div>
     <!-- Footer -->
@@ -139,6 +139,9 @@ export default {
                 if (this.$store.getters.isEveryStep) {
                     this.$store.commit('incrementPageCursor')
                 }
+                else if (this.$store.getters.uncheckedIndex != -1) {
+                  this.$refs.fourthPage.onNextClick(this.$store.getters.uncheckedIndex)
+                }
             } else {
                 this.$store.commit('incrementPageCursor')
             }
@@ -169,6 +172,9 @@ export default {
         // },
         onFoodClick: function (food) {
             this.$store.commit('setCurrentMenu', food)
+        },
+        moveScroll: function(top) {
+          window.scrollTo(0, top)
         },
         toastOneDismiss: function () {
             this.toastOneDismissed = true;

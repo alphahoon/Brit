@@ -34,7 +34,15 @@ export default new Vuex.Store({
             return state.distribution.reduce(function (prevValue, curValue, curIdx, array) {
                 return prevValue && (curValue.length > 0)
             }, true)
-        }
+        },
+        uncheckedIndex: state => {
+          for (var i=0; i<state.distribution.length; i++) {
+            if (state.distribution[i].length === 0) {
+              return i
+            }
+          }
+          return -1
+        },
     },
     mutations: {
         addAmount(state) {

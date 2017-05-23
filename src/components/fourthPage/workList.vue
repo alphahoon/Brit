@@ -1,6 +1,6 @@
 <template>
 <div class="col-md-6">
-    <workStep v-for="work in workList" :work="work"></workStep>
+    <workStep ref="workStep" v-for="work in workList" :work="work" @moveScroll="moveScroll"></workStep>
 </div>
 </template>
 
@@ -11,7 +11,15 @@ export default {
     props: ['workList'],
     components: {
         workStep
-    }
+    },
+    methods: {
+      onNextClick: function(index) {
+        this.$refs.workStep[index].onNextClick()
+      },
+      moveScroll: function(top) {
+        this.$emit('moveScroll', top)
+      }
+  }
 }
 </script>
 

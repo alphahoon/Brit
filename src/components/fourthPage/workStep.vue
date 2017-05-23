@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div class="row" ref="stepBox">
     <div class="panel panel-info">
         <div class="panel-heading">
             <span> Step {{work.step + 1}}. Difficulty: {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
@@ -42,6 +42,11 @@ export default {
                 return 'Hard'
             }
         }
+    },
+    methods: {
+      onNextClick: function() {
+        this.$emit('moveScroll', this.$refs.stepBox.offsetTop+180)
+      }
     }
 }
 </script>
