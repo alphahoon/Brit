@@ -44,8 +44,8 @@ export default {
                     participant: this.idx
                 });
             }
-            console.log(this.$store.state.participant)
-            console.log(this.$store.state.distribution)
+            //console.log(this.$store.state.participant)
+            //console.log(this.$store.state.distribution)
         }
     }
 }

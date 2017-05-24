@@ -1,6 +1,6 @@
 <template>
 <div class="row" ref="stepBox">
-    <div class="panel panel-info">
+    <div class="panel" :class="[isChecked ? panelInfo : panelDanger]">
         <div class="panel-heading">
             <span> Step {{work.step + 1}}. Difficulty: {{difficulty}} <span class="glyphicon glyphicon-time"></span>{{timeCal}} </span>
         </div>
@@ -23,7 +23,21 @@ export default {
     components: {
         'cb': cb
     },
+    data: function () {
+        return {
+            panelInfo: 'panel-info',
+            panelDanger: 'panel-danger'
+        }
+    },
     computed: {
+        isChecked: function () {
+            var dist = this.$store.state.distribution
+            var step = this.work.step
+            if (dist[step].length > 0)
+                return true
+            else
+                return false
+        },
         participants: function () {
             return this.$store.state.participants
         },
@@ -44,14 +58,17 @@ export default {
         }
     },
     methods: {
-      onNextClick: function() {
-        this.$emit('moveScroll', this.$refs.stepBox.offsetTop+180)
-      }
+        onNextClick: function () {
+            this.$emit('moveScroll', this.$refs.stepBox.offsetTop + 180)
+
+        }
     }
 }
 </script>
 
 <style scoped>
+.panel {}
+
 .workText {
     font-size: 1.4em;
 }

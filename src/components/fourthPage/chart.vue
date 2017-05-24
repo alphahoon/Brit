@@ -53,7 +53,7 @@ export default {
                 console.log('.')
                 total += (this.workList[step].difficulty + 1) * this.workList[step].time
             }
-            console.log('totalPoints = ' + total)
+            //console.log('totalPoints = ' + total)
             return total
         },
         contribution: function () {
@@ -65,7 +65,7 @@ export default {
                     values[personIndex] += (this.workList[step].difficulty + 1) * this.workList[step].time
                 }
             }
-            console.log(values);
+            //console.log(values);
             for (var valueIndex in values) {
                 values[valueIndex] = (values[valueIndex] * 100) / this.totalPoints
             }

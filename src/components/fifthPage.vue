@@ -17,18 +17,6 @@ export default {
     components: {
         distTable
     },
-    data: function () {
-        return {
-            /*
-            distList: [
-                [0, 1, 2],
-                [1, 2, 3],
-                [2, 3],
-                [0, 1, 2]
-            ]
-            */
-        }
-    },
     computed: mapState({
         participants: state => state.participants,
         currentMenu: state => state.currentMenu,
