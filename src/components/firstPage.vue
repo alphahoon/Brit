@@ -1,6 +1,5 @@
 <template>
 <div>
-    <!--<h3>What do you want to have today? </h3>-->
     <div class="row" id="page1">
         <search-box class="sbox" @queryChange="onQueryChange" @difficultyChange="onDifficultyChange" @timeChange="onTimeChange" :time="queryTime" :difficulty="queryDifficulty" :query="query"></search-box>
         <food-list :foodList="filteredList" @foodClick="onFoodClick"></food-list>
@@ -59,15 +58,14 @@ export default {
 
 <style scoped>
 h3 {
+    color: #337ab7;
     text-align: center;
+    margin-top: 0px
 }
 
 .sbox {
-    /*border: 1px solid #333333;*/
     position: fixed;
     top: 185px;
     width: 20%;
-    /*left: 90px;*/
-    /*width: 217px;*/
 }
 </style>

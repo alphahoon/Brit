@@ -1,12 +1,12 @@
 <template>
-    <div class="panel panel-info">
-      <div class="panel-heading">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span><span class="header"> Extra Ingredients</span>
-        </div>
-      <div class="panel-body">
-        <sub-ing v-for="item in subIngs" v-bind:info="item" v-bind:amount="amount" v-bind:mode="mode"></sub-ing>
-      </div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span><span class="header"> Extra Ingredients</span>
     </div>
+    <div class="panel-body">
+        <sub-ing v-for="item in subIngs" v-bind:info="item" v-bind:amount="amount" v-bind:mode="mode"></sub-ing>
+    </div>
+</div>
 </template>
 
 <script>
@@ -23,8 +23,12 @@ export default {
 <style scoped>
 .header {
     margin-left: 10px;
-    font-weight:bold; 
-    font-size:1.3em; 
-    text-align:left
+    font-weight: bold;
+    font-size: 1.3em;
+    text-align: left
+}
+
+.panel-body {
+    font-size: 1.2em;
 }
 </style>

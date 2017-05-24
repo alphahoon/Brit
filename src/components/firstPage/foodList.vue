@@ -23,12 +23,5 @@ export default {
 </script>
 
 <style scoped>
-/*.columns {
-	column-width: 33%;
-	column-gap: 15px;
-    width: 90%;
-	max-width: 1100px;
-	margin: 50px auto;
-}*/
 
 </style>

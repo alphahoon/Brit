@@ -1,11 +1,14 @@
 <template>
 <div class="app">
     <header>
-        <nav>
-            <a id="cooky_logo" href="#" @click="onLogoClick">Team Brit's Cooky</a>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <a id="cooky_logo" class="" href="#" @click="onLogoClick">Team Brit's Cooky</a>
+                <progress-bar class="progress-buttons" :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar>
+            </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container mainContents">
         <first-page v-if="firstPageShow" @foodClick="onFoodClick"></first-page>
         <second-page v-else-if="secondPageShow" :numPeople="numPeople"></second-page>
         <third-page ref="thirdPage" v-else-if="thirdPageShow"></third-page>
@@ -15,32 +18,30 @@
     <!-- Footer -->
     <footer>
         <div id="progress_bar">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="prevButton" v-if="pageCursor > 1" :class="pageCursor > 1? '': 'sarajo'" @click="onPrevClick">⬅ Prev</div>
             </div>
-            <div class="progressContainer col-md-6">
-                <span id="progress-buttons"><progress-bar :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar></span>
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
                 <div class="nextButton" v-if="pageCursor < 5 && pageCursor > 1" :class="((pageCursor < 5) && (pageCursor > 1))? '': 'sarajo'" @click="onNextClick">Next ➡</div>
             </div>
         </div>
     </footer>
     <div id="toast_container">
         <div v-if="firstPageShow && !toastOneDismissed" class="toast" @click="toastOneDismiss">
-            <span> Welcome to Brit's Cooky! <br> Choose your food to cook together. You can use the filter in the left :) <br>(Click to Dismiss this message)</span>
+            <span>{{toastOneContents}}</span>
         </div>
         <div v-else-if="secondPageShow && !toastTwoDismissed" class="toast" @click="toastTwoDismiss">
-            <span> Choose the serving amount and see the result in a Rough/Precise way.<br> Do not forget to add ingredients in your favor :) <br> (Click to Dismiss this message)</span>
+            <span>{{toastTwoContents}}</span>
         </div>
         <div v-else-if="thirdPageShow && !toastThreeDismissed" class="toast" @click="toastThreeDismiss">
-            <span> Input your/collaborator's name and cooking level.<br>Sorry for Max 4 people :(<br>(Click to Dismiss this message)</span>
+            <span>{{toastThreeContents}}</span>
         </div>
         <div v-else-if="fourthPageShow && !toastFourDismissed" class="toast" @click="toastFourDismiss">
-            <span>Distribute each cooking step by checking!<br>Current Contribution Chart will show the your distribution.<br>(Click to Dismiss this message)</span>
+            <span>{{toastFourContents}}</span>
         </div>
         <div v-else-if="fifthPageShow && !toastFiveDismissed" class="toast" @click="toastFiveDismiss">
-            <span>Follow the ditributed instruction.<br> If you finish your work, click it :) <br>(Click to Dismiss this message)</span>
+            <span>{{toastFiveContents}}</span>
         </div>
     </div>
 </div>
@@ -65,13 +66,18 @@ export default {
             toastTwoDismissed: false,
             toastThreeDismissed: false,
             toastFourDismissed: false,
-            toastFiveDismissed: false
+            toastFiveDismissed: false,
+            toastOneContents: "Welcome to Brit's Cooky! Choose your food to cook together. You can use the filter in the left :) (Click to Dismiss)",
+            toastTwoContents: "Choose the serving amount and see the result in a Rough/Precise way. Do not forget to add ingredients in your favor :) (Click to Dismiss)",
+            toastThreeContents: "Input your/collaborator's name and cooking level. You can list up to 4 participants (Click to Dismiss)",
+            toastFourContents: "Distribute each cooking step by checking! Current Contribution Chart will show the your distribution. (Click to Dismiss)",
+            toastFiveContents: "Follow the ditributed instruction. If you finish your work, click it :) (Click to Dismiss)"
         }
     },
     computed: mapState({
         pageCursor: state => state.pageCursor,
         currentMenu: state => state.currentMenu,
-        participants: state =>state.participants,
+        participants: state => state.participants,
         firstPageShow: function () {
             if (this.pageCursor == 1) {
                 setTimeout(this.toastOneDismiss, 5000);
@@ -127,54 +133,24 @@ export default {
             if (this.pageCursor == 3) {
                 if (this.$store.getters.isEveryName) {
                     this.$store.commit('incrementPageCursor')
-                }
-                else if (this.$store.getters.emptyIndex != -1){
-                  this.$refs.thirdPage.onNextClick(this.$store.getters.emptyIndex)
+                } else if (this.$store.getters.emptyIndex != -1) {
+                    this.$refs.thirdPage.onNextClick(this.$store.getters.emptyIndex)
                 }
             } else if (this.pageCursor == 4) {
-                // let isEveryStep = this.$store.state.distribution.reduce(function (prevValue, curValue, curIdx, array) {
-                //     console.log(curValue)
-                //     return prevValue && (curValue.length > 0)
-                // }, true)
                 if (this.$store.getters.isEveryStep) {
                     this.$store.commit('incrementPageCursor')
-                }
-                else if (this.$store.getters.uncheckedIndex != -1) {
-                  this.$refs.fourthPage.onNextClick(this.$store.getters.uncheckedIndex)
+                } else if (this.$store.getters.uncheckedIndex != -1) {
+                    this.$refs.fourthPage.onNextClick(this.$store.getters.uncheckedIndex)
                 }
             } else {
                 this.$store.commit('incrementPageCursor')
             }
         },
-        // onStepChange: function (i) {
-        //     if (i > 0 && i < 6) {
-        //         if (this.currentMenu != null){
-        //             if(this.pageCursor == 3){
-        //                 console.log(this.pageCursor)
-        //                 if(this.$store.getters.isEveryName){
-        //                     this.$store.commit('setPageCursor', {
-        //                         pageCursor: i
-        //                     })
-        //                 }
-        //             } else if (this.pageCursor == 4){
-        //                 if(this.$store.getters.isEveryStep){
-        //                     this.$store.commit('setPageCursor', {
-        //                         pageCursor: i
-        //                     })
-        //                 }
-        //             } else {
-        //                this.$store.commit('setPageCursor', {
-        //                     pageCursor: i
-        //                 })
-        //             }
-        //         }
-        //     }
-        // },
         onFoodClick: function (food) {
             this.$store.commit('setCurrentMenu', food)
         },
-        moveScroll: function(top) {
-          window.scrollTo(0, top)
+        moveScroll: function (top) {
+            window.scrollTo(0, top)
         },
         toastOneDismiss: function () {
             this.toastOneDismissed = true;
@@ -196,6 +172,29 @@ export default {
 </script>
 
 <style scoped>
+.mainContents {
+    padding-top: 100px;
+}
+
+nav.navbar.navbar-default {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #3498db;
+    padding: 10px;
+}
+
+#cooky_logo {
+    color: white;
+    font-size: 2.5em;
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+}
+
+#cooky_logo:hover {
+    text-decoration: none;
+}
+
 .prevButton {
     width: 100%;
     height: 100%;
@@ -236,11 +235,11 @@ export default {
     text-align: center;
 }
 
-span#progress-buttons {
+.progress-buttons {
     display: inline-block;
     padding: 0;
     margin: 0;
-    width: 100%;
+    float: right;
 }
 
 footer {

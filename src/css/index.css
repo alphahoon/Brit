@@ -8,15 +8,6 @@ body {
     position: relative;
 }
 
-nav {
-    width: 100%;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    text-align: center;
-    vertical-align: middle;
-    background-color: #3498db;
-}
-
 .btn-primary {
     background: #3498db;
 }
@@ -81,75 +72,12 @@ nav {
     background: #A72012;
 }
 
-#cooky_logo {
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
-    display: inline-block;
-}
-
-#cooky_logo:hover {
-    text-decoration: none;
-}
-
-#cooky_back {
-    color: #3498db;
-    font-size: 2em;
-    font-weight: bold;
-    display: inline-block;
-    margin-left: 10%;
-    float: left;
-    font-size: 2.4em;
-}
-
-#cooky_back:focus,
-#cooky_back:hover {
-    color: #2980b9;
-    cursor: pointer;
-}
-
-#cooky_back:active,
-#cooky_back:active:hover {
-    color: #1067A0;
-}
-
-#cooky_next {
-    color: #3498db;
-    font-size: 2em;
-    font-weight: bold;
-    display: inline-block;
-    margin-right: 10%;
-    float: right;
-    font-size: 2.4em;
-}
-
-#cooky_next:focus,
-#cooky_next:hover {
-    color: #2980b9;
-    cursor: pointer;
-}
-
-#cooky_next:active,
-#cooky_next:active:hover {
-    color: #1067A0;
-}
-
 .sarajo {
     opacity: 0;
 }
 
 .app {
     min-height: 100%;
-}
-
-.container {
-    position: relative;
-    padding-bottom: 3em;
-}
-
-header {
-    padding-bottom: 1em;
-    margin-bottom: 2em;
 }
 
 .participant {

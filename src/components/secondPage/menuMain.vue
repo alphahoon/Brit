@@ -1,21 +1,25 @@
 <template>
 <div style="text-align:left;">
-    <div class="panel panel-default" style="padding-left:10px">
+    <div class="panel panel-default">
         <div class="panel-body">
-            <div class="row" style="width: 90%; padding-right: 10px;">
-                <h3>{{title}}</h3>
+            <div class="row">
+                <h3 class="foodTitle">{{title}}</h3>
             </div>
-            <div class="row" style="margin-bottom: 10px;">
-                <img v-bind:src=imageLink style="width: 90%">
+            <div class="row">
+                <img class="foodThumbnail" :src=imageLink>
             </div>
-            <div class="cardContent"> <img :src=levelSrc alt="" class="levelStar">
+            <div class="cardContent">
+                <div class="diffSection">
+                    <span class="difficulty">Difficulty</span>
+                    <img :src=levelSrc alt="" class="levelStar">
+                </div>
                 <div class="timeStr">
-                    <span class="glyphicon glyphicon-time"></span> <span class="lineline">{{time}} min</span>
+                    <span class="glyphicon glyphicon-time"></span>
+                    <span class="lineline">{{time}} min</span>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -45,11 +49,28 @@ export default {
 </script>
 
 <style scoped>
+.panel {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+img.foodThumbnail {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h3.foodTitle {
+    margin: 0px;
+    padding: 0px;
+}
+
 img.levelStar {
-    height: 2em;
+    height: 1.4em;
     border: None;
     vertical-align: middle;
     display: inline-block;
+    margin-left: 10px;
 }
 
 div.menuMain {
@@ -63,17 +84,19 @@ div.imageLink {
 
 h3 {
     margin-left: 10px;
-    font-weight:bold; 
-    font-size:2em; 
-    text-align:left;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: left;
     margin-top: 10px;
 }
 
 div.timeStr {
-    display:inline-block;
-    font-size: 1.2em;
-    float: right;
-    vertical-align: middle;
+    display: inline-block;
+    font-size: 1.4em;
+}
 
+div.diffSection {
+    display: inline-block;
+    font-size: 1.4em;
 }
 </style>

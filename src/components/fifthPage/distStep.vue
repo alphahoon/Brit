@@ -1,22 +1,22 @@
 <template>
 <tr :class="[isActive ? activeClass : '', errorClass]">
     <td class="stepNumber">{{index + 1}}</td>
-    <td class="firstPerson" v-if="participants.length >= 1">
+    <td class="firstPerson" :class="[isActive ? activeClass : '', errorClass]" v-if="participants.length >= 1">
         <div class="done" v-if="!oneFinished && isActive" @click="onDoneClicked(0, index)">
             <h3>Done!</h3></div>
         <span v-if="oneHasWork" :class="[oneFinished ? doneStep : '', undoneStep]">{{workList[index].text}}</span>
     </td>
-    <td class="secondPerson" v-if="participants.length >= 2">
+    <td class="secondPerson" :class="[isActive ? activeClass : '', errorClass]" v-if="participants.length >= 2">
         <div class="done" v-if="!twoFinished && isActive" @click="onDoneClicked(1, index)">
             <h3>Done!</h3></div>
         <span v-if="twoHasWork" :class="[twoFinished ? doneStep : '', undoneStep]">{{workList[index].text}}</span>
     </td>
-    <td class="thirdPerson" v-if="participants.length >= 3">
+    <td class="thirdPerson" :class="[isActive ? activeClass : '', errorClass]" v-if="participants.length >= 3">
         <div class="done" v-if="!threeFinished && isActive" @click="onDoneClicked(2, index)">
             <h3>Done!</h3></div>
         <span v-if="threeHasWork" :class="[threeFinished ? doneStep : '', undoneStep]">{{workList[index].text}}</span>
     </td>
-    <td class="fourthPerson" v-if="participants.length >= 4">
+    <td class="fourthPerson" :class="[isActive ? activeClass : '', errorClass]" v-if="participants.length >= 4">
         <div class="done" v-if="!fourFinished && isActive" @click="onDoneClicked(3, index)">
             <h3>Done!</h3></div>
         <span v-if="fourHasWork" :class="[fourFinished ? doneStep : '', undoneStep]">{{workList[index].text}}</span>
@@ -89,12 +89,36 @@ td.stepNumber {
 }
 
 tr.currentStep {
-    border: 4px solid red;
-    background: white;
+    border: 4px solid #e74c3c;
+    opacity: 1;
 }
 
 tr.disabledStep {
     opacity: 0.8;
+}
+
+td.firstPerson.currentStep,
+td.firstPerson.currentStep>span {
+    background: #2ecc71;
+    font-weight: bold;
+}
+
+td.secondPerson.currentStep,
+td.secondPerson.currentStep>span {
+    background: #3498db;
+    font-weight: bold;
+}
+
+td.thirdPerson.currentStep,
+td.thirdPerson.currentStep>span {
+    background: #f1c40f;
+    font-weight: bold;
+}
+
+td.fourthPerson.currentStep,
+td.fourthPerson.currentStep>span {
+    background: #e74c3c;
+    font-weight: bold;
 }
 
 h3 {
@@ -105,6 +129,7 @@ h3 {
 
 div.done {
     position: absolute;
+    color: white;
     opacity: 0;
     background: rgba(0, 0, 0, 0.6);
     width: 100%;
@@ -125,30 +150,6 @@ td {
     font-size: 1.2em;
     padding: 10px;
     position: relative;
-}
-
-.firstPerson>.done {
-    border: 4px solid #2ecc71;
-    /*color: #2ecc71;*/
-    color: white;
-}
-
-.secondPerson>.done {
-    border: 4px solid #3498db;
-    /*color: #3498db;*/
-    color: white;
-}
-
-.thirdPerson>.done {
-    border: 4px solid #f1c40f;
-    /*color: #f1c40f;*/
-    color: white;
-}
-
-.fourthPerson>.done {
-    border: 4px solid #e74c3c;
-    /*color: #e74c3c;*/
-    color: white;
 }
 
 .firstPerson {

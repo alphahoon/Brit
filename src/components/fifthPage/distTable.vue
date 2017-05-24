@@ -41,12 +41,10 @@ export default {
     },
     methods: {
         doneClicked: function (participantIndex, stepIndex) {
-            // console.log(participantIndex, stepIndex)
             this.remainList[stepIndex].splice(this.remainList[stepIndex].indexOf(participantIndex), 1)
             if (this.remainList[this.workCursor].length == 0) {
                 this.workCursor++;
             }
-            console.log(this.workCursor);
         }
     }
 }

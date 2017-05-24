@@ -1,16 +1,15 @@
 <template>
 <div class="row participant">
-    <div class="col-md-12">
+    <div class="formContainer">
         <form class="form-inline">
-            <span class="participantIndex">{{idx + 1}} </span>
             <span class="glyphicon glyphicon-user" :class="getColor"> </span>
-            <input ref="nameInput" @clicked="onNextClick" @keyup.enter="onEnterPressed" @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'My name' : 'Put your collaborator\'s name'"></input>
+            <input ref="nameInput" @clicked="onNextClick" @keyup.enter="onEnterPressed(idx)" @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'My name' : 'Put your collaborator\'s name'"></input>
             <div class="btn-group " role="group">
                 <button class="btn btn-lg btn-default" :class="person.level == 0 ? 'active ' : ''" @click.prevent="onLevelChange(0)">Beginner</button>
                 <button class="btn btn-lg btn-default" :class="person.level == 1 ? 'active' : ''" @click.prevent="onLevelChange(1)">Intermediate</button>
                 <button class="btn btn-lg btn-default" :class="person.level == 2 ? 'active' : ''" @click.prevent="onLevelChange(2)">Expert</button>
             </div>
-            <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove">
+            <button class="btn btn-danger" @click="onRemove">
                     <span class="glyphicon glyphicon-remove"></span>
             </button>
         </form>
@@ -58,28 +57,51 @@ export default {
                 this.$refs.nameInput.className = "nameInput empty-name"
             }
         },
-        onEnterPressed: function () {
-            this.$emit('enterPressed')
+        onEnterPressed: function (idx) {
+            this.$emit('enterPressed', idx)
+        },
+        focusInput: function () {
+            this.$refs.nameInput.focus()
         }
     }
 }
 </script>
 
 <style scoped>
+div.row.participant {
+    font-size: 2.4em;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 span.participantIndex {
     font-size: 1.5em;
 }
 
 span.glyphicon-user {
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 input {
-    width: 40%;
+    width: 15em;
     margin-left: 10px;
     margin-right: 10px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.btn-danger {
+    margin-left: 1em;
+}
+
+.formContainer {
+    display: inline-block
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
 }
 
 .empty-name::-webkit-input-placeholder {
@@ -93,13 +115,11 @@ input {
 }
 
 .empty-name::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
     color: rgb(234, 90, 74);
     opacity: 1;
 }
 
 .empty-name:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
     color: rgb(234, 90, 74);
 }
 

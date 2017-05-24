@@ -2,16 +2,13 @@
 <div id="foodCard">
     <div class="thumbnail"> <a href="#" @click="onFoodClick"><img :src="food.imageLink" :alt="food.title" ></a>
         <div class="caption"> <a href="#" class="menuname" @click="onFoodClick">{{food.title}}</a> </div>
-        <div class="cardContent"> 
-            <!--<button class="btn btn-sm" :class="bgColor">
-                {{difficulty}}
-            </button>-->
+        <div class="cardContent">
             <div class="linelineline">
-                <img class="stars" :src="imgSrc" :alt="difficulty"/>
+                Difficulty <img class="stars" :src="imgSrc" :alt="difficulty" />
                 <div class="timeStr">
                     <span class="glyphicon glyphicon-time"></span>
                     <span class="lineline">{{timeStr}}</span>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -37,12 +34,12 @@ export default {
                 return 'Hard'
             }
         },
-        imgSrc: function(){
-            if(this.food.level == 0){
+        imgSrc: function () {
+            if (this.food.level == 0) {
                 return 'assets/level1.png'
-            } else if(this.food.level == 1){
+            } else if (this.food.level == 1) {
                 return 'assets/level2.png'
-            } else if (this.food.level == 2){
+            } else if (this.food.level == 2) {
                 return 'assets/level3.png'
             }
         },
@@ -66,36 +63,22 @@ export default {
 
 <style scoped>
 #foodCard {
-	/*background: #fefefe;
-	border: 2px solid #fcfcfc;
-	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);*/
-	/*margin: 0 2px 15px;
-	padding: 15px;
-	padding-bottom: 10px;*/
-	/*transition: opacity .4s ease-in-out;*/
     display: inline-block;
 }
 
-/*#foodCard .thumbnail {
-	width: 100%; height: auto;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 15px;
-	margin-bottom: 5px;
-}*/
-
-.menuname{
+.menuname {
     font-size: 1.4rem;
-	color: #444;
+    color: #444;
     /*line-height: 1.5;*/
     /*margin-left: 10px;*/
-    font-weight:bold; 
-    text-align:left
+    font-weight: bold;
+    text-align: left
 }
 
-.difficulty{
+.difficulty {
     color: white;
-
 }
+
 .bg-success {
     background: #2ecc71;
 }
@@ -109,18 +92,16 @@ export default {
 }
 
 .stars {
+    height: 1em;
     width: 50px;
     border: None;
-    display:inline-block;
-    vertical-align:middle;
-}
-/*.linelineline{
+    display: inline-block;
     vertical-align: middle;
-}*/
+}
 
 .timeStr {
-    vertical-align:middle;
-    display:inline-block;
+    vertical-align: middle;
+    display: inline-block;
     float: right;
 }
 </style>

@@ -3,14 +3,14 @@
     <div class="col-md-4 col-sm-4" id="mainBox">
         <menu-main v-bind:title="recipe.title" v-bind:amount="numPeople" v-bind:imageLink="recipe.imageLink" :level="recipe.level" :time='recipe.time'></menu-main>
         <div class="amountSel">
-            <span style="font-size:1.2em; font-weight:bold"> Serving Amount : </span>
-            <button v-on:click="reduceAmount" class="btn btn-xs btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true" />
-            <span style="font-weight:bold;font-size:1.6em"> {{numPeople}} </span>
-            <button v-on:click="addAmount" class="btn btn-xs btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true" />
+            <span class="servingAmountTitle"> Serving Amount : </span>
+            <button v-on:click="reduceAmount" class="btn btn-sm btn-danger glyphicon glyphicon-minus servingAdjust" aria-hidden="true" />
+            <span class="servingAmountContents"> {{numPeople}} </span>
+            <button v-on:click="addAmount" class="btn btn-sm btn-danger glyphicon glyphicon-plus servingAdjust" aria-hidden="true" />
         </div>
         <div class="btn-group" role="group" aria-label="..." style="margin: 0 auto">
-            <button type="button" id="r_button" class="btn btn-default" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough</button>
-            <button type="button" class="btn btn-default" :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise</button>
+            <button type="button" id="r_button" class="btn btn-default btn-lg" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough</button>
+            <button type="button" class="btn btn-default btn-lg" :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise</button>
         </div>
     </div>
     <div class="col-md-8 col-sm-8">

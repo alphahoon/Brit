@@ -1,9 +1,10 @@
 <template>
 <div>
+    <h1>Participant List</h1>
     <participant v-for="(person, idx) in participants" ref="participant" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove" @enterPressed="onEnterPressed"></participant>
     <div class="row">
-        <div class="col-md-12 adjustParticipants">
-            <button v-if="participants.length < 4" currentKeyid="addParticipant" class="btn btn-default btn-lg" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        <div v-if="participants.length < 4" class="col-md-12 adjustParticipants">
+            <button currentKeyid="addParticipant" class="btn btn-primary btn-lg addButton" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </div>
     </div>
 </div>
@@ -56,9 +57,10 @@ export default {
         onNextClick: function (index) {
             this.$refs.participant[index].onNextClick()
         },
-        onEnterPressed: function () {
-            // console.log("enter")
-            if (this.participants.length < 4)
+        onEnterPressed: function (idx) {
+            if (this.participants.length > idx + 1)
+                this.$refs.participant[idx + 1].focusInput()
+            else if (this.participants.length == idx + 1 && this.participants.length < 4)
                 this.onAddParticipant()
         }
     }
@@ -66,9 +68,18 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
 div.adjustParticipants {
     margin-top: 20px;
     text-align: center;
+}
+
+.addButton {
+    width: 100px;
 }
 
 button.fullParticipants {
