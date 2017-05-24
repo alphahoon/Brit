@@ -4,7 +4,7 @@
         <form class="form-inline">
             <span class="participantIndex">{{idx + 1}} </span>
             <span class="glyphicon glyphicon-user" :class="getColor"> </span>
-            <input ref="nameInput" @clicked="onNextClick" @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'My name' : 'Put your collaborator\'s name'"></input>
+            <input ref="nameInput" @clicked="onNextClick" @keyup.enter="onEnterPressed" @input="onNameChange($event.target.value)" :value="person.name" :placeholder="person.key == 0 ? 'My name' : 'Put your collaborator\'s name'"></input>
             <div class="btn-group " role="group">
                 <button class="btn btn-lg btn-default" :class="person.level == 0 ? 'active ' : ''" @click.prevent="onLevelChange(0)">Beginner</button>
                 <button class="btn btn-lg btn-default" :class="person.level == 1 ? 'active' : ''" @click.prevent="onLevelChange(1)">Intermediate</button>
@@ -12,7 +12,7 @@
             </div>
             <button v-if="person.key != 0" class="btn btn-danger" @click="onRemove">
                     <span class="glyphicon glyphicon-remove"></span>
-                </button>
+            </button>
         </form>
     </div>
 </div>
@@ -52,11 +52,14 @@ export default {
         onRemove: function () {
             this.$emit('remove', this.idx)
         },
-        onNextClick: function() {
-          if (name === '') {
-            this.$refs.nameInput.focus()
-            this.$refs.nameInput.className = "nameInput empty-name"
-          }
+        onNextClick: function () {
+            if (name === '') {
+                this.$refs.nameInput.focus()
+                this.$refs.nameInput.className = "nameInput empty-name"
+            }
+        },
+        onEnterPressed: function () {
+            this.$emit('enterPressed')
         }
     }
 }
@@ -80,18 +83,24 @@ input {
 }
 
 .empty-name::-webkit-input-placeholder {
-    color: rgb(234,90,74);
+    color: rgb(234, 90, 74);
 }
-.empty-name::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    rgb(234,90,74);
-   opacity:  1;
+
+.empty-name::-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: rgb(234, 90, 74);
+    opacity: 1;
 }
-.empty-name::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    rgb(234,90,74);
-   opacity:  1;
+
+.empty-name::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: rgb(234, 90, 74);
+    opacity: 1;
 }
-.empty-name:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    rgb(234,90,74);
+
+.empty-name:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgb(234, 90, 74);
 }
 
 button.btn.btn-lg.btn-default:active,

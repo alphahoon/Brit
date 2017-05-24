@@ -1,10 +1,9 @@
 <template>
 <div>
-    <participant v-for="(person, idx) in participants" ref="participant" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove"></participant>
+    <participant v-for="(person, idx) in participants" ref="participant" :person="person" :key="person.key" :idx="idx" @nameChange="onNameChange" @levelChange="onLevelChange" @remove="onRemove" @enterPressed="onEnterPressed"></participant>
     <div class="row">
         <div class="col-md-12 adjustParticipants">
             <button v-if="participants.length < 4" currentKeyid="addParticipant" class="btn btn-default btn-lg" @click="onAddParticipant"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-            <!--<button v-if="participants.length == 4" class="btn btn-default btn-lg btn-success fullParticipants" @click="onNextClick">Next<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>-->
         </div>
     </div>
 </div>
@@ -36,10 +35,6 @@ export default {
                 key: this.currentKey
             })
             this.currentKey += 1
-            // this.$refs.participant[0].focus()
-            //     this.$nextTick(() => {
-            //     this.$refs.participant[this.participants.length-1].focus()
-            //   })
         },
         onNameChange: function (name, idx) {
             this.$store.commit('changeName', {
@@ -59,7 +54,12 @@ export default {
             })
         },
         onNextClick: function (index) {
-          this.$refs.participant[index].onNextClick()
+            this.$refs.participant[index].onNextClick()
+        },
+        onEnterPressed: function () {
+            // console.log("enter")
+            if (this.participants.length < 4)
+                this.onAddParticipant()
         }
     }
 }
