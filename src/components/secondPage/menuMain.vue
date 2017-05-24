@@ -13,6 +13,7 @@
                     <span class="difficulty">Difficulty</span>
                     <img :src=levelSrc alt="" class="levelStar">
                 </div>
+                <br>
                 <div class="timeStr">
                     <span class="glyphicon glyphicon-time"></span>
                     <span class="lineline">{{time}} min</span>
@@ -63,6 +64,7 @@ img.foodThumbnail {
 h3.foodTitle {
     margin: 0px;
     padding: 0px;
+    text-align: center;
 }
 
 img.levelStar {
