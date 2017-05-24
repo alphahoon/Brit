@@ -4,7 +4,6 @@
   "description": "KAIST CS374 HCI Project",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
@@ -23,7 +22,6 @@
   "license": "MIT",
   "homepage": "https://github.com/alphahoon/Brit#readme",
   "dependencies": {
-    "express": "^4.15.3",
     "vue": "^2.2.1",
     "vuex": "^2.3.1"
   },
