@@ -25,7 +25,9 @@ export default {
     }),
     methods: {
         goBackToHome: function () {
-            location.reload()
+            this.$store.commit('setPageCursor', {
+                pageCursor:1
+            });
         }
     }
 }
