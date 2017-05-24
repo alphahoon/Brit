@@ -64,10 +64,11 @@ export default {
 <style scoped>
 #foodCard {
     display: inline-block;
+    font-size: 2rem;
 }
 
 .menuname {
-    font-size: 1.4rem;
+    font-size: 2rem;
     color: #444;
     /*line-height: 1.5;*/
     /*margin-left: 10px;*/
@@ -77,6 +78,7 @@ export default {
 
 .difficulty {
     color: white;
+    font-size: 1.5rem;
 }
 
 .bg-success {

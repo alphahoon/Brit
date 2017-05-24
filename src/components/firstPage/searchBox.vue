@@ -68,6 +68,7 @@ export default {
 }
 
 .title {
+    font-size:2rem;
     font-weight: bold;
     text-align: left;
     margin-top: 10px
@@ -83,5 +84,9 @@ div.searchBtns {
 
 .time-slider {
     width: 100%;
+}
+
+.panel-heading {
+    font-size: 2.5rem;
 }
 </style>
