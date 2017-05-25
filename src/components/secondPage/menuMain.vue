@@ -6,12 +6,12 @@
                 <h3 class="foodTitle">{{title}}</h3>
             </div>
             <div class="row">
-                <img class="foodThumbnail" :src=imageLink>
+                <img class="foodThumbnail" :src=imageLink />
             </div>
             <div class="cardContent">
                 <div class="diffSection">
                     <span class="difficulty">Difficulty</span>
-                    <img :src=levelSrc alt="" class="levelStar">
+                    <img :src=levelSrc alt="" class="levelStar" />
                 </div>
                 <br>
                 <div class="timeStr">
@@ -21,6 +21,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
