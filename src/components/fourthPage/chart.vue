@@ -34,6 +34,7 @@
             </h4></div>
         <div v-if="participants.length >= 4" class="chart chartFour row" :style="{ width: chartFourWidth + '%'}">
             <h5>{{getPercentage(3)}}%</h5></div>
+        <span class="totalTime">Total Time : {{totalTime}} min <span class="saved">(You're saving {{savedTime}} min!)</span></span>
     </div>
 </div>
 </template>
@@ -53,6 +54,29 @@ export default {
                 total += (this.workList[step].difficulty + 1) * this.workList[step].time
             }
             return total
+        },
+        totalTime: function () {
+            var total = 0
+            for (var step in this.workList) {
+                if (this.distList[step].length == 0)
+                    total += this.workList[step].time
+                else
+                    total += Math.round((this.workList[step].time / this.distList[step].length) * 10) / 10
+            }
+            total = Math.round(total * 10) / 10
+            this.$store.commit('setTotalTime', {
+                totalTime: total
+            })
+            return total
+        },
+        savedTime: function () {
+            var saved = 0
+            var total = 0
+            var currentTime = this.totalTime
+            for (var step in this.workList)
+                total += this.workList[step].time
+            var saved = Math.round((total - currentTime) * 10 ) / 10
+            return saved
         },
         contribution: function () {
             var values = [0, 0, 0, 0];
@@ -160,5 +184,17 @@ h5 {
 
 .chartFour {
     background: #e74c3c;
+}
+
+.totalTime {
+    position: absolute;
+    bottom: -30px;
+    right: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.saved {
+    color: #1abc9c;
 }
 </style>

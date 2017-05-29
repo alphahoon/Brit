@@ -14,7 +14,8 @@ export default new Vuex.Store({
         recipes: recipes,
         currentMenu: null,
         pageCursor: 1,
-        distribution: []
+        distribution: [],
+        totalTime: 0
     },
     getters: {
         isEveryName: state => {
@@ -50,9 +51,11 @@ export default new Vuex.Store({
                 state.numPeople += 1
         },
         reduceAmount(state) {
-
             if (state.numPeople > 1)
                 state.numPeople -= 1
+        },
+        setTotalTime(state, payload) {
+            state.totalTime = payload.totalTime
         },
         setPageCursor(state, payload) {
             state.pageCursor = payload.pageCursor
