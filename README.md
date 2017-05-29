@@ -71,7 +71,7 @@ $ npm run dev
 
 #### One-line command
 
-The whols steps above can be executed at once with this one-line command:
+The whole steps above can be executed at once with this one-line command:
 ```
 $ git clone https://github.com/alphahoon/Brit.git && cd Brit && sudo npm i -g bower && npm i && bower i && npm run build
 ```
