@@ -29,7 +29,7 @@
 * **assets/, src/assets/**: the static asset files
 
 ### 04. Used Libraries and Frameworks 
-* [Node](https://nodejs.org/en/) with [NPM](https://www.npmjs.com/)
+* [Node](https://nodejs.org) with [NPM](https://www.npmjs.com/)
     * [Bower](https://bower.io/)
         * [jQuery](https://jquery.com/)
         * [Bootstrap](http://getbootstrap.com/)
@@ -41,9 +41,9 @@
 
 ### 05. Developing Environment Setting
 
-**Prerequisites: Node, NPM**
+**Prerequisites: [Node](https://nodejs.org), [NPM](https://www.npmjs.com)**
 
-#### 1. Install ower
+#### 1. Install Bower
 
 ```
 $ sudo npm install -g bower
@@ -75,3 +75,5 @@ The whole steps above can be executed at once with this one-line command:
 ```
 $ git clone https://github.com/alphahoon/Brit.git && cd Brit && sudo npm i -g bower && npm i && bower i && npm run build
 ```
+
+Thank you for reading, and please enjoy our application! :)
