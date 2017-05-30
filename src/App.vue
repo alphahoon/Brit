@@ -3,7 +3,7 @@
     <header>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-                <a id="cooky_logo" class="" href="#" @click="onLogoClick">Team Brit's Cooky</a>
+                <a id="cooky_logo" href="#" @click="onLogoClick">Team Brit's Cooky</a>
                 <progress-bar class="progress-buttons" :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar>
             </div>
         </nav>
