@@ -65,6 +65,10 @@ export default {
     font-size: 2rem;
 }
 
+.caption {
+    height: 4em;
+}
+
 .menuname {
     font-size: 2rem;
     color: #444;
@@ -93,7 +97,7 @@ export default {
 
 .stars {
     height: 1em;
-    width: 50px;
+    width: 60px;
     border: None;
     display: inline-block;
     vertical-align: middle;
