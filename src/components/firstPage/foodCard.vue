@@ -20,10 +20,8 @@ export default {
     props: ['food'],
     computed: {
         timeStr: function () {
-            let hour = this.food.time / 60
-            let min = this.food.time % 60
-            let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
-            return str
+            let min = this.food.time
+            return min.toString() + ' mins'
         },
         difficulty: function () {
             if (this.food.level == 0) {
