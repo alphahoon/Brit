@@ -4,7 +4,7 @@
         <div class="caption"> <a href="#" class="menuname" @click="onFoodClick">{{food.title}}</a> </div>
         <div class="cardContent">
             <div class="linelineline">
-                Difficulty <img class="stars" :src="imgSrc" :alt="difficulty" />
+                <img class="stars" :src="imgSrc" :alt="difficulty" />
                 <div class="timeStr">
                     <span class="glyphicon glyphicon-time"></span>
                     <span class="lineline">{{timeStr}}</span>
@@ -107,5 +107,6 @@ export default {
     vertical-align: middle;
     display: inline-block;
     float: right;
+    padding-top: 5px;
 }
 </style>
