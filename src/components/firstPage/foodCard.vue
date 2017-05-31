@@ -4,7 +4,7 @@
         <div class="caption"> <a href="#" class="menuname" @click="onFoodClick">{{food.title}}</a> </div>
         <div class="cardContent">
             <div class="linelineline">
-                Difficulty <img class="stars" :src="imgSrc" :alt="difficulty" />
+                <img class="stars" :src="imgSrc" :alt="difficulty" />
                 <div class="timeStr">
                     <span class="glyphicon glyphicon-time"></span>
                     <span class="lineline">{{timeStr}}</span>
@@ -20,10 +20,8 @@ export default {
     props: ['food'],
     computed: {
         timeStr: function () {
-            let hour = this.food.time / 60
-            let min = this.food.time % 60
-            let str = ((hour === 0) ? hour + ' hrs ' : '') + min + ' mins'
-            return str
+            let min = this.food.time
+            return min.toString() + ' mins'
         },
         difficulty: function () {
             if (this.food.level == 0) {
@@ -67,6 +65,10 @@ export default {
     font-size: 2rem;
 }
 
+.caption {
+    height: 4em;
+}
+
 .menuname {
     font-size: 2rem;
     color: #444;
@@ -95,7 +97,7 @@ export default {
 
 .stars {
     height: 1em;
-    width: 50px;
+    width: 60px;
     border: None;
     display: inline-block;
     vertical-align: middle;
@@ -105,5 +107,6 @@ export default {
     vertical-align: middle;
     display: inline-block;
     float: right;
+    padding-top: 5px;
 }
 </style>
