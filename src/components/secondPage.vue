@@ -1,5 +1,6 @@
 <template>
 <div class="row">
+    <h1>Adjust Serving Amounts &amp; Select Extra Ingredients!</h1>
     <div class="col-md-4 col-sm-4" id="mainBox">
         <menu-main v-bind:title="recipe.title" v-bind:amount="numPeople" v-bind:imageLink="recipe.imageLink" :level="recipe.level" :time='recipe.time'></menu-main>
         <div class="amountSel">
@@ -64,6 +65,11 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
 div.ingList {
     height: 300px;
     margin-top: 20px;

@@ -17,16 +17,19 @@
             <div class="searchBtns">
                 <div class="btn-group " id="filterButtons" role="group">
                     <button class="btn btn-sm" :class="difficulty == 3 ? 'btn-default active ' : 'btn-default'" @click="onDifficultyChange(3)">
-                        All
+                        <span class="diffStr all">All</span>
                     </button>
                     <button class="btn btn-sm" :class="difficulty == 0 ? 'btn-default active ' : 'btn-default'" @click="onDifficultyChange(0)">
-                        <img class="stars" src="assets/level1.png" alt="Easy" />
+                        <!--<img class="stars" src="assets/level1.png" alt="Easy" />-->
+                        <span class="diffStr easy">Easy</span>
                     </button>
                     <button class="btn btn-sm" :class="difficulty == 1 ? 'btn-default active ' : 'btn-default'" @click="onDifficultyChange(1)">
-                        <img class="stars" src="assets/level2.png" alt="Medium" />
+                        <!--<img class="stars" src="assets/level2.png" alt="Medium" />-->
+                        <span class="diffStr normal">Normal</span>
                     </button>
                     <button class="btn btn-sm" :class="difficulty == 2 ? 'btn-default active ' : 'btn-default'" @click="onDifficultyChange(2)">
-                        <img class="stars" src="assets/level3.png" alt="Hard" />
+                        <!--<img class="stars" src="assets/level3.png" alt="Hard" />-->
+                        <span class="diffStr hard">Hard</span>
                     </button>
                 </div>
             </div>
@@ -76,6 +79,28 @@ export default {
 
 .search {
     width: 100%;
+}
+
+.searchBtns > .btn-group > .btn {
+    padding: 10px;
+    text-align: center;
+}
+
+.diffStr {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.easy {
+    color: #27ae60;
+}
+
+.normal {
+    color: #f39c12;
+}
+
+.hard {
+    color: #e74c3c;
 }
 
 div.searchBtns {

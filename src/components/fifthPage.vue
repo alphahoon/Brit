@@ -1,6 +1,6 @@
 <template>
 <div class="tableContainer">
-    <h1>Result</h1>
+    <h1>Click-to-Done Your Current Works</h1>
     <span class="totalTime">Total Time : {{totalTime}} min</span>
     <distTable :participants="participants" :distList="distList" :workList="workList"></distTable>
     <div class="row">
@@ -39,7 +39,7 @@ export default {
 <style scoped>
 h1 {
     text-align: center;
-    margin: 0;
+    margin-bottom: 25px;
 }
 
 .row {

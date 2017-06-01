@@ -4,7 +4,8 @@
         <div class="caption"> <a href="#" class="menuname" @click="onFoodClick">{{food.title}}</a> </div>
         <div class="cardContent">
             <div class="linelineline">
-                <img class="stars" :src="imgSrc" :alt="difficulty" />
+                <!--<img class="stars" :src="imgSrc" :alt="difficulty" />-->
+                <span class="diffStr" :class="[difficulty == 'Easy' ? 'easy' : (difficulty == 'Normal' ? 'normal' : 'hard')]">{{difficulty}}</span>
                 <div class="timeStr">
                     <span class="glyphicon glyphicon-time"></span>
                     <span class="lineline">{{timeStr}}</span>
@@ -27,7 +28,7 @@ export default {
             if (this.food.level == 0) {
                 return 'Easy'
             } else if (this.food.level == 1) {
-                return 'Medium'
+                return 'Normal'
             } else if (this.food.level == 2) {
                 return 'Hard'
             }
@@ -101,6 +102,30 @@ export default {
     border: None;
     display: inline-block;
     vertical-align: middle;
+}
+
+.diffStr {
+    border: 2px solid grey;
+    border-radius: 10px;
+    padding: 5px 20px;
+}
+
+.easy {
+    color: white;
+    background: #27ae60;
+    border-color: #27ae60;
+}
+
+.normal {
+    color: white;
+    background: #f39c12;
+    border-color: #f39c12;
+}
+
+.hard {
+    color: white;
+    background: #e74c3c;
+    border-color: #e74c3c;
 }
 
 .timeStr {

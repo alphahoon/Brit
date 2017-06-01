@@ -1,6 +1,5 @@
 <template>
 <div id="distributeBlock">
-    <h1> Distribute Your Work!</h1>
     <div class="row">
         <workList ref="workList" :workList="workList" @moveScroll="moveScroll"></workList>
         <chart :participants="participants" :distList="distList" :workList="workList"></chart>

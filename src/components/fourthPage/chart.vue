@@ -114,10 +114,12 @@ export default {
 
 <style scoped>
 h1 {
+    text-align: center;
+    width: 45%;
     position: fixed;
     top: 14%;
     left: 50%;
-    padding-left: 2em;
+    margin-left: 25px;
 }
 
 .graphArea {
@@ -188,10 +190,10 @@ h5 {
 
 .totalTime {
     position: absolute;
-    bottom: -30px;
+    bottom: -40px;
     right: 10px;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.6em;
 }
 
 .saved {

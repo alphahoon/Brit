@@ -10,10 +10,10 @@
             </div>
             <div class="cardContent">
                 <div class="diffSection">
-                    <span class="difficulty">Difficulty</span>
-                    <img :src=levelSrc alt="" class="levelStar" />
+                    <span class="diffStr" :class="[difficulty == 'Easy' ? 'easy' : (difficulty == 'Normal' ? 'normal' : 'hard')]">{{difficulty}}</span>
+                    <!--<span class="difficulty">Difficulty</span>-->
+                    <!--<img :src=levelSrc alt="" class="levelStar" />-->
                 </div>
-                <br>
                 <div class="timeStr">
                     <span class="glyphicon glyphicon-time"></span>
                     <span class="lineline">{{time}} min</span>
@@ -32,7 +32,7 @@ export default {
             if (this.level == 0) {
                 return 'Easy'
             } else if (this.level == 1) {
-                return 'Medium'
+                return 'Normal'
             } else if (this.level == 2) {
                 return 'Hard'
             }
@@ -84,7 +84,6 @@ div.imageLink {
     margin-bottom: 10px;
 }
 
-
 h3 {
     margin-left: 10px;
     font-weight: bold;
@@ -93,8 +92,39 @@ h3 {
     margin-top: 10px;
 }
 
+.cardContent {
+  padding: 0;
+  margin-top: 15px;
+}
+
+.diffStr {
+    border: 2px solid grey;
+    border-radius: 10px;
+    padding: 5px 20px;
+    font-weight: bold;
+}
+
+.easy {
+    color: white;
+    background: #27ae60;
+    border-color: #27ae60;
+}
+
+.normal {
+    color: white;
+    background: #f39c12;
+    border-color: #f39c12;
+}
+
+.hard {
+    color: white;
+    background: #e74c3c;
+    border-color: #e74c3c;
+}
+
 div.timeStr {
     display: inline-block;
+    float: right;
     font-size: 1.4em;
 }
 
