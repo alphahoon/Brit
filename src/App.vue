@@ -4,7 +4,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <a id="cooky_logo" href="#" @click="onLogoClick">Team Brit's Cooky</a>
-                <progress-bar class="progress-buttons" :pageCursor="pageCursor" @stepChange="onStepChange"></progress-bar>
+                <progress-bar class="progress-buttons" :pageCursor="pageCursor" @stepChange="onStepChange" @helpClick="onHelpClick"></progress-bar>
             </div>
         </nav>
     </header>
@@ -166,6 +166,25 @@ export default {
         },
         toastFiveDismiss: function () {
             this.toastFiveDismissed = true;
+        }, 
+        onHelpClick: function () {
+            switch(this.pageCursor){
+                case 1:
+                this.toastOneDismissed = false
+                break
+                case 2:
+                this.toastTwoDismissed = false
+                break
+                case 3:
+                this.toastThreeDismissed = false
+                break
+                case 4:
+                this.toastFourDismissed = false
+                break
+                case 5:
+                this.toastFiveDismissed = false
+                break
+            }
         }
     }
 }

@@ -1,7 +1,10 @@
 <template>
-<div class="btn-group">
-    <a v-for="i in 5" class="progressbars" :class="pageCursor == i ? 'btn btn-primary navbar-btn' : 'btn btn-default navbar-btn'" :id="'step'+i">Step {{i}}</a>
-</div>
+    <div class="progressBar">
+        <div class="btn-group">
+            <a v-for="i in 5" class="progressbars" :class="pageCursor == i ? 'btn btn-primary navbar-btn' : 'btn btn-default navbar-btn'" :id="'step'+i">Step {{i}}</a>
+        </div>
+        <button class="btn btn-warning" @click="onHelpClick"><span class="glyphicon glyphicon-question-sign"></span></button>
+    </div>
 </template>
 
 <script>
@@ -10,6 +13,9 @@ export default {
     methods: {
         onStepClick: function (i) {
             this.$emit('stepChange', i)
+        },
+        onHelpClick: function () {
+            this.$emit('helpClick')
         }
     }
 }
