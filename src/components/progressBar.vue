@@ -3,7 +3,7 @@
         <div class="btn-group">
             <a v-for="i in 5" class="progressbars" :class="pageCursor == i ? 'btn btn-primary navbar-btn' : 'btn btn-default navbar-btn'" :id="'step'+i">Step {{i}}</a>
         </div>
-        <button class="btn btn-warning" @click="onHelpClick"><span class="glyphicon glyphicon-question-sign"></span></button>
+        <img @click="onHelpClick" style="width: 2em; border: 0; margin-left: 0.2em" src="assets/help.png">
     </div>
 </template>
 
