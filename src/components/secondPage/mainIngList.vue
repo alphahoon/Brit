@@ -46,7 +46,6 @@ export default {
 }
 .btn-group {
   margin-right: 20px;
-  padding: 0px;
     float: right;
 }
 
