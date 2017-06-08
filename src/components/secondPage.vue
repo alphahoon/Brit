@@ -3,10 +3,6 @@
     <h1>Adjust Serving Amounts &amp; Select Extra Ingredients!</h1>
     <div class="col-md-4 col-sm-4" id="mainBox">
         <menu-main v-bind:title="recipe.title" v-bind:amount="numPeople" v-bind:imageLink="recipe.imageLink" :level="recipe.level" :time='recipe.time'></menu-main>
-        <div class="btn-group" role="group" aria-label="..." style="margin: 0 auto">
-            <button type="button" id="r_button" class="btn btn-default btn-lg" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough</button>
-            <button type="button" class="btn btn-default btn-lg" :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise</button>
-        </div>
     </div>
     <div class="col-md-8 col-sm-8">
         <div class="amountSel">
@@ -17,8 +13,8 @@
             <span class="servingAmountTitle"> People</span>
         </div>
         <tool-list v-bind:tools="recipe.tools"></tool-list>
-        <main-ing-list v-bind:amount="numPeople" v-bind:main-ings="recipe.main" v-bind:mode="unitMode"></main-ing-list>
-        <sub-ing-list v-bind:amount="numPeople" v-bind:sub-ings="recipe.sub" v-bind:mode="unitMode"></sub-ing-list>
+        <main-ing-list v-bind:amount="numPeople" v-bind:main-ings="recipe.main"></main-ing-list>
+        <sub-ing-list v-bind:amount="numPeople" v-bind:sub-ings="recipe.sub"></sub-ing-list>
     </div>
 </div>
 </template>
@@ -37,11 +33,6 @@ export default {
         recipe: state => state.currentMenu,
         numPeople: state => state.numPeople
     }),
-    data: function () {
-        return {
-            unitMode: 'r'
-        }
-    },
     components: {
         menuMain,
         toolList,
@@ -49,12 +40,6 @@ export default {
         subIngList
     },
     methods: {
-        p_mode: function () {
-            this.unitMode = 'p';
-        },
-        r_mode: function () {
-            this.unitMode = 'r';
-        },
         addAmount: function () {
             this.$store.commit('addAmount')
         },

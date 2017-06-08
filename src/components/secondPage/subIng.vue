@@ -3,14 +3,14 @@
     <span class="hoverunit" v-on:click="changeButton">
       <img :src="selected? selectedSrc : unselectedSrc" alt="">
         {{ info.name }}
-        <span class="amount">{{info.ramount * amount}} {{ info.runit }}</span>
+        <span v-if="selected" class="amount">{{info.ramount * amount}} {{ info.runit }}</span>
     </span>
 </div>
 <div v-else>
     <span class="hoverunit" v-on:click="changeButton">
       <img :src="selected? selectedSrc : unselectedSrc" alt="">
         {{ info.name }}
-        <span class="amount">{{info.pamount * amount}} {{ info.punit }}</span>
+        <span v-if="selected" class="amount">{{info.pamount * amount}} {{ info.punit }}</span>
     </span>
 </div>
 </template>
