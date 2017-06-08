@@ -3,8 +3,8 @@
     <div class="panel-heading">
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span><span class="header"> Extra Ingredients</span>
         <div class="btn-group" role="group" aria-label="..." style="margin: 0 auto">
-            <button type="button" id="r_button" class="btn btn-default btn-lg" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough(cup)</button>
-            <button type="button" class="btn btn-default btn-lg" :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise(g)</button>
+            <button type="button" id="r_button" class="btn btn-default" :class="unitMode === 'r' ? 'active': ''" v-on:click="r_mode"><img src="assets/hand.png" style="width:25px; border: none;"> Rough(cup)</button>
+            <button type="button" class="btn btn-default" :class="unitMode === 'r' ? '': 'active'" v-on:click="p_mode"><img src="assets/beaker.png" style="width:25px; border: none;"> Precise(g)</button>
         </div>
     </div>
     <div class="panel-body">
@@ -51,5 +51,10 @@ export default {
 
 .btn-group {
   margin-right: 20px;
+float: right;
+}
+
+.btn-default {
+    padding: 2px 7px 2px 7px;
 }
 </style>
